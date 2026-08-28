@@ -1,0 +1,586 @@
+#主界面Title
+MainTitle: '§b>>> §dA Lengendary Home'
+CheckTitle: '§b>>> §dReturn To Your Friends'
+CreateTitle: '§b>>> §dCreate Your Fancy Home'
+ManageTitle: '§b>>> §dManager Extra Function 1'
+Manage2Title: '§b>>> §dManage Extra Function 2'
+VisitTitle: '§b>>> §dSelect To Teleport'
+InviteTitle: '§b>>> §dInvite SomeOne Join You'
+TrustTitle: '§b>>> §dTrust SomeOne Help You'
+DenyTitle: '§b>>> §dDeny SomeOne Touch You'
+# These titles used to be hard-coded in Java and could be neither translated nor restyled.
+# Remove a key, or leave it blank, to fall back to the built-in text.
+Manage3Title: '§b>>> §dManage Extra Function 3'
+BiomeTitle: '§b>>> §dChange Biome'
+RulesTitle: '§8>>> §6Home Rules'
+UpgradeTitle: '§8>>> §6Choose How To Upgrade'
+SetSpawnTitle: '§8>>> §6Move Home Centre'
+OwnedHomesTitle: '§8>>> §6Select A Home To Visit'
+CreateCostTitle: '§8>>> §6Create A Home - Choose Payment'
+ServiceCostTitle: '§8>>> §6Confirm Service Cost'
+ServiceCostDifficultyTitle: '§8>>> §6Change Difficulty - Confirm Cost'
+ServiceCostSetSpawnHereTitle: '§8>>> §6Set Centre (Here) - Confirm Cost'
+ServiceCostSetSpawnCoordsTitle: '§8>>> §6Set Centre (Coords) - Confirm Cost'
+# Menu row counts. These were hard-coded at 27/45/54 slots. Use 1-6 (rows), or a multiple of 9
+# up to 54. Remove a key to fall back to the built-in size. Buttons whose Index falls outside a
+# shrunken menu are skipped.
+MainSize: 5
+CheckSize: 5
+CreateSize: 5
+ManageSize: 5
+Manage2Size: 5
+Manage3Size: 5
+VisitSize: 6
+InviteSize: 6
+TrustSize: 6
+DenySize: 6
+BiomeSize: 6
+RulesSize: 5
+UpgradeSize: 3
+SetSpawnSize: 3
+OwnedHomesSize: 3
+CreateCostSize: 3
+ServiceCostSize: 3
+GiftSize: 5
+# Titles, button names and lore all accept MiniMessage, & codes and § codes, mixed freely.
+# e.g.  MainTitle: '<gradient:#ff5f6d:#ffc371>ErrorTown</gradient>'
+#
+# Besides the original Material / CustomName / Lores / Enchants / Index / SubID /
+# LeftInTo / RightInTo / KeepOpen, every button also accepts these optional keys:
+#   Material: 'myfurniture:oak_chair'   # a CraftEngine item id, when CraftEngine is installed
+#   Permission: 'ErrorTown.Nether'      # hide the button from players without this node. Display
+#                                       # only - the command it runs still checks permissions.
+#   Amount: 1
+#   CustomModelData: 10001
+#   ItemModel: 'mypack:home_icon'       # 1.21.4+ item_model component; ignored on older servers
+#   Glow: true                          # enchantment shimmer with no enchantment text
+#   Unbreakable: true
+#   HideAll: true
+#   ItemFlags: ['HIDE_ATTRIBUTES', 'HIDE_DYE']
+#   SkullOwner: '<viewer>'              # render as a player head; <viewer> = the menu's viewer
+Next: '§a>>> Next'
+NextMaterial: 'FEATHER'
+Prev: '§a<<< Prev'
+PrevMaterial: 'FEATHER'
+#是否启用默认玻璃板的模板
+EnableCheckGuiNormalPane: true
+EnableCreateGuiNormalPane: true
+EnableDenyGuiNormalPane: true
+EnableInviteGuiNormalPane: true
+EnableMainGuiNormalPane: true
+EnableManageGuiNormalPane: true
+EnableManageGui2NormalPane: true
+EnableTrustGuiNormalPane: true
+EnableInviteGuiNormalPane: true
+EnableVisitGuiNormalPane: true
+#玻璃板的材质, different versions of the material name are different.
+PaneMaterial: 'BLACK_STAINED_GLASS_PANE'
+#头颅是否显示皮肤:
+EnableSkullSkin: true
+#头颅的材质名, different versions of the material name are different.
+HeadMaterial: 'PLAYER_HEAD'
+#玻璃板的颜色ID
+GlassSubID: 15
+'Button1':
+  InMenu: 'Main'
+  CustomName: '§8[§a Manor System §8]'
+  Material: 'COMPASS'
+  SubID: 0
+  Index: 5
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§e Total number of homes: §a%ErrorTown_WorldAmount%'
+    - '§d left button -> § 6 Return to home or home you have joined'
+    - '§d right-click -> §6 Search for homes with permissions within the full server'
+  LeftInTo: 'sh home'
+  RightInTo: 'sh open check'
+  KeepOpen: true
+'Button2':
+  InMenu: 'Main'
+  CustomName: '§8[§aCreating a Home§8]'
+  Material: 'NETHER_STAR'
+  SubID: 0
+  Index: 21
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§d left button -> §6 Create your own home'
+  LeftInTo: 'sh open create'
+  RightInTo: ''
+  KeepOpen: true
+'Button3':
+  InMenu: 'Main'
+  CustomName: '§8[§aAdministering the Home§8]'
+  Material: 'BOOK'
+  SubID: 0
+  Index: 23
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§d List of states of the world in which you are currently located:'
+    - '§a host: §e %ErrorTown_World_OwnerName%'
+    - '§e Home Manager: §e %ErrorTown_World_ManagerList%'
+    - '§6 Home Trusters: §e %ErrorTown_World_TrustList%'
+    - '§c Home Blacklist: §e %ErrorTown_World_BlockList%'
+    - '§b Number of home equipment: §e %ErrorTown_World_Tile%'
+    - '§b Number of home entities: §e %ErrorTown_World_Entity%'
+    - '§b Home Drops: §e %ErrorTown_DropItem%'
+    - '§b Number of home levels: §e %ErrorTown_World_Level%'
+    - '§b Home PVP Status: §e %ErrorTown_World_PVP%'
+    - '§b Home Drop Status: §e %ErrorTown_World_Drop%'
+    - '§b Home Pickup Status: §e %ErrorTown_World_Pickup%'
+    - '§b home boundary size: §e %ErrorTown_World_Radius%'
+    - '§b Home Access Status: §e %ErrorTown_World_Public%'
+  LeftInTo: 'sh open manage'
+  RightInTo: ''
+  KeepOpen: true
+'Button4':
+  InMenu: 'Main'
+  CustomName: '§8[§aVisiting Home§8]'
+  Material: 'BEACON'
+  SubID: 0
+  Index: 25
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§e Number of homes loaded: §a%ErrorTown_LoadWorlds%'
+  LeftInTo: 'sh open visit'
+  RightInTo: ''
+  KeepOpen: true
+'Button5':
+  InMenu: 'Main'
+  CustomName: '§8[§aClose §8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 45
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh close'
+  RightInTo: ''
+  KeepOpen: false
+'Button6':
+  InMenu: 'Check'
+  CustomName: '§8[§aReturn §8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 41
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open main'
+  RightInTo: ''
+  KeepOpen: true
+'Button7':
+  InMenu: 'Create'
+  CustomName: '§8[§aDefault Survival Terrain§8]'
+  Material: 'GRASS_BLOCK'
+  SubID: 0
+  Index: 21
+  Enchants: []
+  Lores:
+  - '§c Tips -> Terrain cannot be changed after creating a home'
+  - '§6 The number of times you have reset your home so far is: §c%ErrorTown_WholeDelete%§b/§c%ErrorTown_WholeMaxDelete%'
+  LeftInTo: 'sh create 1'
+  RightInTo: ''
+  KeepOpen: false
+'Button8':
+  InMenu: 'Create'
+  CustomName: '§8[§a ultra-flat terrain§8]'
+  Material: 'DIRT'
+  SubID: 0
+  Index: 23
+  Enchants: []
+  Lores:
+  - '§c Tips -> Terrain cannot be changed after creating a home'
+  - '§6 The number of times you have reset your home so far is: §c%ErrorTown_WholeDelete%§b/§c%ErrorTown_WholeMaxDelete%'
+  LeftInTo: 'sh create 2'
+  RightInTo: ''
+  KeepOpen: false
+'Button9':
+  InMenu: 'Create'
+  CustomName: '§8[§aEmpty Island§8]'
+  Material: 'OAK_SAPLING'
+  SubID: 0
+  Index: 25
+  Enchants: []
+  Lores:
+  - '§c Tips -> Terrain cannot be changed after creating a home'
+  - '§6 The number of times you have reset your home so far is: §c%ErrorTown_WholeDelete%§b/§c%ErrorTown_WholeMaxDelete%'
+  LeftInTo: 'sh create airland'
+  RightInTo: ''
+  KeepOpen: false
+'Button10':
+  InMenu: 'Create'
+  CustomName: '§8[§aReturn §8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 41
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open main'
+  RightInTo: ''
+  KeepOpen: true
+'Button11':
+  InMenu: 'Manage'
+  CustomName: '§8[§a invites players §8]'
+  Material: 'DIAMOND_HELMET'
+  SubID: 0
+  Index: 12
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d Home Manager: %ErrorTown_ManagerList%'
+  LeftInTo: 'sh open invite'
+  RightInTo: ''
+  KeepOpen: true
+'Button12':
+  InMenu: 'Manage'
+  CustomName: '§8[§aTrust Player§8]'
+  Material: 'IRON_HELMET'
+  SubID: 0
+  Index: 14
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d Home Trust List: %ErrorTown_TrustList%'
+  LeftInTo: 'sh open trust'
+  RightInTo: ''
+  KeepOpen: true
+'Button13':
+  InMenu: 'Manage'
+  CustomName: '§8[§aBlocking Player§8]'
+  Material: 'LEATHER_HELMET'
+  SubID: 0
+  Index: 16
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d Home Blacklist: %ErrorTown_BlockList%'
+  LeftInTo: 'sh open Deny'
+  RightInTo: ''
+  KeepOpen: true
+'Button14':
+  InMenu: 'Manage'
+  CustomName: '§8[§aSetting Transfer Point§8]'
+  Material: 'BEACON'
+  SubID: 0
+  Index: 21
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d transfer point: %ErrorTown_World_TeleportLocation%'
+  LeftInTo: 'sh tpset'
+  RightInTo: ''
+  KeepOpen: false
+'Button15':
+  InMenu: 'Manage'
+  CustomName: '§8[§aSwitch Access §8]'
+  Material: 'NETHER_STAR'
+  SubID: 0
+  Index: 23
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d Transfer Point: %ErrorTown_Public%'
+  LeftInTo: 'sh public'
+  RightInTo: ''
+  KeepOpen: false
+'Button16':
+  InMenu: 'Manage'
+  CustomName: '§8[§aSwitch Access§8]'
+  Material: 'DIAMOND_SWORD'
+  SubID: 0
+  Index: 25
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d switching state: §a%ErrorTown_pvp%'
+  LeftInTo: 'sh pvp'
+  RightInTo: ''
+  KeepOpen: false
+'Button17':
+  InMenu: 'Manage'
+  CustomName: '§8[§aToggle discard privilege§8]'
+  Material: 'GLOWSTONE_DUST'
+  SubID: 0
+  Index: 30
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d switching state: §a%ErrorTown_Drop%'
+  LeftInTo: 'sh Drop'
+  RightInTo: ''
+  KeepOpen: false
+'Button18':
+  InMenu: 'Manage'
+  CustomName: '§8[§aToggle pick permission§8]'
+  Material: 'HOPPER'
+  SubID: 0
+  Index: 32
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d switching state: §a%ErrorTown_Pickup%'
+  LeftInTo: 'sh Pickup'
+  KeepOpen: false
+  RightInTo: ''
+'Button19':
+  InMenu: 'Manage'
+  CustomName: '§8[§aUpgrade Home§8]'
+  Material: 'SUGAR'
+  SubID: 0
+  Index: 34
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d Current Level: §a%ErrorTown_Level%/%ErrorTown_MaxLevel%'
+  - '§d Gold required to upgrade: %ErrorTown_UpdateMoney%'
+  - '§d Bonds required for upgrade: %ErrorTown_UpdatePoints%'
+  - '§d Upgrade Required: %ErrorTown_UpdateItems%'
+  - '§d Chinese required for upgrade: %ErrorTown_UpdateItemsChineseName%'
+  - '§d Number of upgrades required: %ErrorTown_UpdateItemsAmount%'
+  LeftInTo: 'sh update'
+  RightInTo: ''
+  KeepOpen: false
+'Button20':
+  InMenu: 'Manage'
+  CustomName: '§8[§aNext§8]'
+  Material: 'STRING'
+  SubID: 0
+  Index: 45
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open manage2'
+  RightInTo: ''
+  KeepOpen: true
+'Button21':
+  InMenu: 'Manage'
+  CustomName: '§8[§aReturn §8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 41
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open main'
+  RightInTo: ''
+  KeepOpen: true
+'Button22':
+  InMenu: 'Manage2'
+  CustomName: '§8[§aLock Weather§8]'
+  Material: 'BLUE_ICE'
+  SubID: 1
+  Index: 12
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d switching status: §a%ErrorTown_LockWeather%'
+  - '§c Special Permissions Required: §d<SefHome.LockWeather>'
+  LeftInTo: 'sh lockweather'
+  RightInTo: ''
+  KeepOpen: false
+'Button23':
+  InMenu: 'Manage2'
+  CustomName: '§8[§aLocktime§8]'
+  Material: 'CLOCK'
+  SubID: 2
+  Index: 14
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d switching state: §a%ErrorTown_locktime%'
+  - '§c Special permissions required: §d<SefHome.LockTime>'
+  LeftInTo: 'sh locktime'
+  RightInTo: ''
+  KeepOpen: false
+'Button24':
+  InMenu: 'Manage2'
+  CustomName: '§8[§a switches to daytime§8]'
+  Material: 'SUNFLOWER'
+  SubID: 3
+  Index: 16
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§c Special permissions required: §d<SefHome.Day>'
+  LeftInTo: 'sh Day'
+  RightInTo: ''
+  KeepOpen: false
+'Button25':
+  InMenu: 'Manage2'
+  CustomName: '§8[§a switches to night§8]'
+  Material: 'RED_BED'
+  SubID: 4
+  Index: 21
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§c Special Permissions Required: §d<SefHome.Night>'
+  LeftInTo: 'sh Night'
+  RightInTo: ''
+  KeepOpen: false
+'Button26':
+  InMenu: 'Manage2'
+  CustomName: '§8[§a switches to rainy days§8]'
+  Material: 'WATER_BUCKET'
+  SubID: 5
+  Index: 23
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§c Special permissions required: §d<SefHome.Rain>'
+  LeftInTo: 'sh Rain'
+  RightInTo: ''
+  KeepOpen: false
+'Button27':
+  InMenu: 'Manage2'
+  CustomName: '§8[§a switch to sunny §8]'
+  Material: 'GLOWSTONE'
+  SubID: 6
+  Index: 25
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§c Special Permissions Required: §d<SefHome.Sun>'
+  LeftInTo: 'sh Sun'
+  RightInTo: ''
+  KeepOpen: false
+'Button28':
+  InMenu: 'Manage2'
+  CustomName: '§8[§a setting the center of the boundary§8]'
+  Material: 'LODESTONE'
+  SubID: 9
+  Index: 30
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§c set the center of the home to your current coordinates [boundary move]'
+    - '§c Special permissions required: §d<SefHome.SetSpawn>'
+  LeftInTo: 'sh SetSpawn'
+  RightInTo: ''
+  KeepOpen: false
+'Button29':
+  InMenu: 'Manage2'
+  CustomName: '§8 [§a quit the home to join§8]'
+  Material: 'OAK_DOOR'
+  SubID: 7
+  Index: 32
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§c Are You Really Going to Leave Your Home (Crying >_<)'
+  LeftInTo: 'sh Quit'
+  RightInTo: ''
+  KeepOpen: false
+'Button30':
+  InMenu: 'Manage2'
+  CustomName: '§8[§aDelete Home§8]'
+  Material: 'BARRIER'
+  SubID: 8
+  Index: 34
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - "§c Do you really want to delete the home (cry chirp>_<)' - '§c tips -> The terrain cannot be changed after the home is created"
+    - '§6 The number of times you have reset your home so far is: §c%ErrorTown_WholeDelete%§b/§c%ErrorTown_WholeMaxDelete%'
+  LeftInTo: 'sh WholeDelete'
+  RightInTo: ''
+  KeepOpen: false
+'Button31':
+  InMenu: 'Manage2'
+  CustomName: '§8[§aReturn §8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 41
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open main'
+  RightInTo: ''
+  KeepOpen: true
+'Button32':
+  InMenu: 'Manage2'
+  CustomName: '§8[§aPrevious§8]'
+  Material: 'STRING'
+  SubID: 0
+  Index: 37
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open manage'
+  RightInTo: ''
+  KeepOpen: true
+'Button33':
+  InMenu: 'Visit'
+  CustomName: '§8[§aReturn §8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 50
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open main'
+  RightInTo: ''
+  KeepOpen: true
+'Button34':
+  InMenu: 'Invite'
+  CustomName: '§8[§aReturn §8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 50
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open manage'
+  RightInTo: ''
+  KeepOpen: true
+'Button35':
+  InMenu: 'Trust'
+  CustomName: '§8[§aReturn §8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 50
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open manage'
+  RightInTo: ''
+  KeepOpen: true
+'Button36':
+  InMenu: 'Deny'
+  CustomName: '§8[§aReturn §8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 50
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open manage'
+  RightInTo: ''
+  KeepOpen: true
+'Button37':
+  InMenu: 'Visit'
+  CustomName: '§8[§c Public Hell §8]'
+  Material: 'NETHERRACK'
+  SubID: 0
+  Index: 11
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh nether'
+  RightInTo: ''
+'Button38':
+  InMenu: 'Visit'
+  CustomName: '§8[§cPublic End§8]'
+  Material: 'END_STONE'
+  SubID: 0
+  Index: 12
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh end'
+  RightInTo: ''

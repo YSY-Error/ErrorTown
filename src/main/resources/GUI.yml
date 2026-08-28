@@ -1,0 +1,880 @@
+#主界面Title
+MainTitle: '§b>>> §d错误庄园'
+CheckTitle: '§b>>> §d返回伙伴的庄园'
+CreateTitle: '§b>>> §d创建你的专属庄园'
+ManageTitle: '§b>>> §d庄园管理 · 一'
+Manage2Title: '§b>>> §d庄园管理 · 二'
+Manage3Title: '§b>>> §d庄园管理 · 三'
+VisitTitle: '§b>>> §d选择要前往的庄园'
+InviteTitle: '§b>>> §d邀请伙伴加入庄园'
+TrustTitle: '§b>>> §d信任伙伴协助管理'
+DenyTitle: '§b>>> §d设置庄园黑名单'
+# 以下这些标题过去写死在代码里,无法翻译也无法改样式,现在都可以改了。
+# 留空或删掉某一项 = 使用内置默认文本。
+BiomeTitle: '§b>>> §d群系修改'
+RulesTitle: '§8>>> §6庄园规则设置'
+UpgradeTitle: '§8>>> §6升级方式选择'
+SetSpawnTitle: '§8>>> §6移动庄园中心'
+OwnedHomesTitle: '§8>>> §6选择要前往的庄园'
+CreateCostTitle: '§8>>> §6创建庄园 - 选择付费方式'
+ServiceCostTitle: '§8>>> §6服务费用确认'
+ServiceCostDifficultyTitle: '§8>>> §6调整难度 - 费用确认'
+ServiceCostSetSpawnHereTitle: '§8>>> §6设置中心(当前) - 费用确认'
+ServiceCostSetSpawnCoordsTitle: '§8>>> §6设置中心(坐标) - 费用确认'
+# 菜单行数。过去 27/45/54 写死在代码里,现在可改。填 1-6(行),或直接填 9 的倍数(最大 54)。
+# 删掉某一项 = 用内置默认值。注意:改小之后超出范围的按钮 Index 会被跳过。
+MainSize: 5
+CheckSize: 5
+CreateSize: 5
+ManageSize: 5
+Manage2Size: 5
+Manage3Size: 5
+VisitSize: 6
+InviteSize: 6
+TrustSize: 6
+DenySize: 6
+BiomeSize: 6
+RulesSize: 5
+UpgradeSize: 3
+SetSpawnSize: 3
+OwnedHomesSize: 3
+CreateCostSize: 3
+ServiceCostSize: 3
+GiftSize: 5
+# 所有标题、按钮名称与 Lore 都支持 MiniMessage / & 颜色码 / § 颜色码,可混用。
+# 例:  MainTitle: '<gradient:#ff5f6d:#ffc371>错误庄园</gradient>'
+#
+# 每个按钮除了原有的 Material / CustomName / Lores / Enchants / Index / SubID /
+# LeftInTo / RightInTo / KeepOpen 之外,还支持下面这些可选键(不写就不生效):
+#   Material: 'myfurniture:oak_chair'   # 装了 CraftEngine 时可直接填自定义物品 ID
+#   Permission: 'ErrorTown.Nether'      # 没有该权限的玩家看不到这个按钮(纯显示控制,
+#                                       # 按钮执行的指令本身仍会各自校验权限)
+#   Amount: 1                           # 显示的堆叠数量
+#   CustomModelData: 10001              # 资源包 CustomModelData
+#   ItemModel: 'mypack:home_icon'       # 1.21.4+ 的 item_model 组件(旧版本自动忽略)
+#   Glow: true                          # 附魔光效,且不显示附魔文字
+#   Unbreakable: true
+#   HideAll: true                       # 隐藏全部物品信息(属性/附魔/染色等)
+#   ItemFlags: ['HIDE_ATTRIBUTES', 'HIDE_DYE']
+#   SkullOwner: '<viewer>'              # 渲染成玩家头颅,<viewer> = 打开菜单的玩家
+Next: '§a>>> 下一页'
+NextMaterial: 'FEATHER'
+Prev: '§a<<< 上一页'
+PrevMaterial: 'FEATHER'
+#是否启用默认玻璃板的模板
+EnableCheckGuiNormalPane: true
+EnableCreateGuiNormalPane: true
+EnableDenyGuiNormalPane: true
+EnableInviteGuiNormalPane: true
+EnableMainGuiNormalPane: true
+EnableManageGuiNormalPane: true
+EnableManageGui2NormalPane: true
+EnableManageGui3NormalPane: true
+EnableTrustGuiNormalPane: true
+EnableInviteGuiNormalPane: true
+EnableVisitGuiNormalPane: true
+#玻璃板的材质,不同版本的材质名不同.(1.21 使用带颜色的具体材质名)
+PaneMaterial: 'BLACK_STAINED_GLASS_PANE'
+#头颅是否显示皮肤:
+EnableSkullSkin: true
+#头颅的材质名,不同版本的材质名不同.(1.13+ 为 PLAYER_HEAD)
+HeadMaterial: 'PLAYER_HEAD'
+#玻璃板的颜色ID
+GlassSubID: 15
+
+#VISITGUI统一的LORE标签:
+#不设置Lore的话请更改为:
+#VisitGuiLores: []
+VisitGuiLores:
+  - '§d§l§m---------------%ErrorTown_World_Name_<Name>%§d§l§m---------------'
+  - '§8鲜花数: §6%ErrorTown_World_Flower_<Name>%'
+  - '§8人气值: §6%ErrorTown_World_Popularity_<Name>%'
+  - '§8热度指数: §6%ErrorTown_World_Calc_<Name>%'
+  - ''
+  - '§8管理员: §6%ErrorTown_World_ManageList_<Name>%'
+  - '§8信任列表: §6%ErrorTown_World_TrustList_<Name>%'
+  - '§8黑名单: §6%ErrorTown_World_BlackList_<Name>%'
+  - ''
+  - '§8家园等级: §6%ErrorTown_World_Level_<Name>%'
+  - '§8家园类型: §6%ErrorTown_World_Type_<Name>%'
+  - '§7点击即可前往'
+  - ''
+  - '§d§l§m---------------%ErrorTown_World_Name_<Name>%§d§l§m---------------'
+#是否开启玩家自定义的标语/sh info 内容[逗号为分隔符]
+VisitSlogan: true
+
+'Button1':
+  InMenu: 'Main'
+  CustomName: '§8[§a错误庄园§8]'
+  Material: 'COMPASS'
+  SubID: 0
+  Index: 5
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§e总庄园数量: §a%ErrorTown_WorldAmount% 个'
+    - '§d左键 -> §6回到自己的庄园 / 已加入庄园'
+    - '§d右键 -> §6查看你有权限进入的全部庄园'
+  LeftInTo: 'sh home'
+  RightInTo: 'sh open check'
+  KeepOpen: true
+'Button2':
+  InMenu: 'Main'
+  CustomName: '§8[§a创建家园§8]'
+  Material: 'NETHER_STAR'
+  SubID: 0
+  Index: 21
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§d左键 -> §6打开庄园创建菜单'
+  LeftInTo: 'sh open create'
+  RightInTo: ''
+  KeepOpen: true
+'Button3':
+  InMenu: 'Main'
+  CustomName: '§8[§a管理家园§8]'
+  Material: 'BOOK'
+  SubID: 0
+  Index: 23
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§d查看当前庄园的管理与规则状态'
+    - '§a主人: §e%ErrorTown_World_OwnerName%'
+    - '§e管理员: §e%ErrorTown_World_ManagerList%'
+    - '§6信任列表: §e%ErrorTown_World_TrustList%'
+    - '§c黑名单: §e%ErrorTown_World_BlackList%'
+    - '§b方块实体: §e%ErrorTown_World_Tile%'
+    - '§b生物实体: §e%ErrorTown_World_Entity%'
+    - '§b掉落物: §e%ErrorTown_World_DropItem%'
+    - '§b庄园等级: §e%ErrorTown_World_Level%'
+    - '§bPVP状态: §e%ErrorTown_World_PVP%'
+    - '§b丢弃权限: §e%ErrorTown_World_Drop%'
+    - '§b拾取权限: §e%ErrorTown_World_Pickup%'
+    - '§b建设范围: §e%ErrorTown_World_Radius%×%ErrorTown_World_Radius% §7格'
+    - '§b访问状态: §e%ErrorTown_World_Public%'
+  LeftInTo: 'sh open manage'
+  RightInTo: ''
+  KeepOpen: true
+'Button4':
+  InMenu: 'Main'
+  CustomName: '§8[§a访问家园§8]'
+  Material: 'BEACON'
+  SubID: 0
+  Index: 25
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§e当前已加载庄园数: §a%ErrorTown_LoadWorlds% 个'
+  LeftInTo: 'sh open visit'
+  RightInTo: ''
+  KeepOpen: true
+'Button5':
+  InMenu: 'Main'
+  CustomName: '§8[§a关闭§8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 45
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh close'
+  RightInTo: ''
+  KeepOpen: false
+'Button6':
+  InMenu: 'Check'
+  CustomName: '§8[§a返回§8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 41
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open main'
+  RightInTo: ''
+  KeepOpen: true
+'Button7':
+  InMenu: 'Create'
+  CustomName: '§8[§a普通世界§8]'
+  Material: 'GRASS_BLOCK'
+  SubID: 0
+  Index: 21
+  Enchants: []
+  Lores:
+  - '§c创建后地形类型无法直接更改'
+  - '§6当前已拥有庄园: §c%ErrorTown_WholeDelete%§b/§c%ErrorTown_WholeMaxDelete%'
+  - '§a左键 §7= §e随机种子创建'
+  - '§b右键 §7= §e指定种子创建'
+  LeftInTo: 'sh create 1'
+  RightInTo: ''
+  KeepOpen: false
+'Button8':
+  InMenu: 'Create'
+  CustomName: '§8[§a超平坦地形§8]'
+  Material: 'DIRT'
+  SubID: 0
+  Index: 23
+  Enchants: []
+  Lores:
+  - '§c创建后地形类型无法直接更改'
+  - '§6当前已拥有庄园: §c%ErrorTown_WholeDelete%§b/§c%ErrorTown_WholeMaxDelete%'
+  - '§a点击 §7= §e直接创建'
+  LeftInTo: 'sh create 2'
+  RightInTo: ''
+  KeepOpen: false
+'Button9':
+  InMenu: 'Create'
+  CustomName: '§8[§a空岛§8]'
+  Material: 'OAK_SAPLING'
+  SubID: 0
+  Index: 25
+  Enchants: []
+  Lores:
+  - '§c创建后地形类型无法直接更改'
+  - '§6当前已拥有庄园: §c%ErrorTown_WholeDelete%§b/§c%ErrorTown_WholeMaxDelete%'
+  - '§a左键 §7= §e随机种子创建'
+  - '§b右键 §7= §e指定种子创建'
+  LeftInTo: 'sh create airland'
+  RightInTo: ''
+  KeepOpen: false
+'Button10':
+  InMenu: 'Create'
+  CustomName: '§8[§a返回§8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 41
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open main'
+  RightInTo: ''
+  KeepOpen: true
+'Button11':
+  InMenu: 'Manage'
+  CustomName: '§8[§a邀请玩家§8]'
+  Material: 'DIAMOND_HELMET'
+  SubID: 0
+  Index: 12
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d当前管理员: §e%ErrorTown_ManagerList%'
+  - '§7邀请成功后，对方会获得庄园管理员权限'
+  LeftInTo: 'sh open invite'
+  RightInTo: ''
+  KeepOpen: true
+'Button12':
+  InMenu: 'Manage'
+  CustomName: '§8[§a信任玩家§8]'
+  Material: 'IRON_HELMET'
+  SubID: 0
+  Index: 14
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d当前信任列表: §e%ErrorTown_TrustList%'
+  - '§7信任玩家可进入庄园并协助基础操作'
+  LeftInTo: 'sh open trust'
+  RightInTo: ''
+  KeepOpen: true
+'Button13':
+  InMenu: 'Manage'
+  CustomName: '§8[§a拉黑玩家§8]'
+  Material: 'LEATHER_HELMET'
+  SubID: 0
+  Index: 16
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d当前黑名单: §e%ErrorTown_BlockList%'
+  - '§7被拉黑玩家将无法进入你的庄园'
+  LeftInTo: 'sh open Deny'
+  RightInTo: ''
+  KeepOpen: true
+'Button14':
+  InMenu: 'Manage'
+  CustomName: '§8[§a设置传送点§8]'
+  Material: 'ENDER_PEARL'
+  SubID: 0
+  Index: 21
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d当前传送点: §e%ErrorTown_World_TeleportLocation%'
+  - '§7点击后把你脚下设置为庄园传送点'
+  LeftInTo: 'sh tpset'
+  RightInTo: ''
+  KeepOpen: false
+'Button15':
+  InMenu: 'Manage'
+  CustomName: '§8[§a切换访问权限§8]'
+  Material: 'OAK_DOOR'
+  SubID: 0
+  Index: 23
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d当前访问状态: §e%ErrorTown_Public%'
+  - '§7控制陌生玩家能否直接进入庄园'
+  LeftInTo: 'sh public'
+  RightInTo: ''
+  KeepOpen: true
+'Button16':
+  InMenu: 'Manage'
+  CustomName: '§8[§a切换 PVP 权限§8]'
+  Material: 'DIAMOND_SWORD'
+  SubID: 0
+  Index: 25
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d当前状态: §a%ErrorTown_pvp%'
+  - '§7控制庄园内是否允许玩家互相攻击'
+  LeftInTo: 'sh pvp'
+  RightInTo: ''
+  KeepOpen: true
+'Button17':
+  InMenu: 'Manage'
+  CustomName: '§8[§a切换丢弃权限§8]'
+  Material: 'TNT'
+  SubID: 0
+  Index: 30
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d当前状态: §a%ErrorTown_Drop%'
+  - '§7控制是否允许玩家在庄园内丢弃物品'
+  LeftInTo: 'sh Drop'
+  RightInTo: ''
+  KeepOpen: true
+'Button18':
+  InMenu: 'Manage'
+  CustomName: '§8[§a切换拾取权限§8]'
+  Material: 'HOPPER'
+  SubID: 0
+  Index: 32
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d当前状态: §a%ErrorTown_Pickup%'
+  - '§7控制是否允许玩家在庄园内拾取物品'
+  LeftInTo: 'sh Pickup'
+  KeepOpen: true
+  RightInTo: ''
+'Button19':
+  InMenu: 'Manage'
+  CustomName: '§8[§a升级家园§8]'
+  Material: 'ANVIL'
+  SubID: 0
+  Index: 34
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+  - '§d当前等级: §a%ErrorTown_Level%/%ErrorTown_MaxLevel%'
+  - '§8当前 §e%ErrorTown_World_Radius%格 §7→ 升级后 §e%ErrorTown_World_NextRadius%格'
+  - '§7点击后选择升级方式'
+  LeftInTo: 'sh open upgrade'
+  RightInTo: ''
+  KeepOpen: false
+'Button20':
+  InMenu: 'Manage'
+  CustomName: '§8[§a下一页§8]'
+  Material: 'ARROW'
+  SubID: 0
+  Index: 45
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open manage2'
+  RightInTo: ''
+  KeepOpen: true
+'Button21':
+  InMenu: 'Manage'
+  CustomName: '§8[§a返回§8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 41
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open main'
+  RightInTo: ''
+  KeepOpen: true
+'Button22':
+  InMenu: 'Manage2'
+  CustomName: '§8[§a锁定天气§8]'
+  Material: 'BLUE_ICE'
+  SubID: 0
+  Index: 12
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§d当前状态: §a%ErrorTown_LockWeather%'
+    - '§7开启后将锁定当前天气'
+    - '§7家园达到3级后自动解锁'
+  LeftInTo: 'sh lockweather'
+  RightInTo: ''
+  KeepOpen: true
+'Button23':
+  InMenu: 'Manage2'
+  CustomName: '§8[§a锁定时间§8]'
+  Material: 'CLOCK'
+  SubID: 0
+  Index: 14
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§d当前状态: §a%ErrorTown_locktime%'
+    - '§7开启后将锁定当前时间'
+    - '§7家园达到3级后自动解锁'
+  LeftInTo: 'sh locktime'
+  RightInTo: ''
+  KeepOpen: true
+'Button24':
+  InMenu: 'Disabled'
+  CustomName: '§8[§a切换为白天§8]'
+  Material: 'SUNFLOWER'
+  SubID: 0
+  Index: 16
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§7将家园时间切换为白天'
+  LeftInTo: 'sh Day'
+  RightInTo: ''
+  KeepOpen: false
+'Button25':
+  InMenu: 'Disabled'
+  CustomName: '§8[§a切换为黑夜§8]'
+  Material: 'RED_BED'
+  SubID: 0
+  Index: 21
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§7将家园时间切换为黑夜'
+  LeftInTo: 'sh Night'
+  RightInTo: ''
+  KeepOpen: false
+'Button26':
+  InMenu: 'Disabled'
+  CustomName: '§8[§a切换为雨天§8]'
+  Material: 'WATER_BUCKET'
+  SubID: 0
+  Index: 23
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§7将家园天气切换为雨天'
+  LeftInTo: 'sh Rain'
+  RightInTo: ''
+  KeepOpen: false
+'Button27':
+  InMenu: 'Disabled'
+  CustomName: '§8[§a切换为晴天§8]'
+  Material: 'GLOWSTONE'
+  SubID: 0
+  Index: 25
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§7将家园天气切换为晴天'
+  LeftInTo: 'sh Sun'
+  RightInTo: ''
+  KeepOpen: false
+'Button28':
+  InMenu: 'Manage2'
+  CustomName: '§8[§a设置边界中心§8]'
+  Material: 'LODESTONE'
+  SubID: 0
+  Index: 16
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§7打开边界中心迁移菜单'
+    - '§e可选择脚下坐标 或 手动输入坐标'
+    - '§d费用: §62000 金币'
+    - '§724小时冷却'
+  LeftInTo: 'sh Open SetSpawn'
+  RightInTo: ''
+  KeepOpen: false
+'Button29':
+  InMenu: 'Manage2'
+  CustomName: '§8[§a退出加入的家园§8]'
+  Material: 'OAK_DOOR'
+  SubID: 0
+  Index: 22
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§c你真的要离开家园吗(哭唧唧>_<)'
+  LeftInTo: 'sh Quit'
+  RightInTo: ''
+  KeepOpen: false
+'Button30':
+  InMenu: 'Manage2'
+  CustomName: '§8[§a删除家园§8]'
+  Material: 'BARRIER'
+  SubID: 0
+  Index: 24
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§c你真的要删除家园吗(哭唧唧>_<)'
+    - '§c温馨提示 -> 创建家园后地形无法更改'
+    - '§6您当前已拥有的庄园数: §c%ErrorTown_WholeDelete%§b/§c%ErrorTown_WholeMaxDelete%'
+  LeftInTo: 'sh WholeDelete'
+  RightInTo: ''
+  KeepOpen: false
+'Button31':
+  InMenu: 'Manage2'
+  CustomName: '§8[§a返回§8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 41
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open main'
+  RightInTo: ''
+  KeepOpen: true
+'Button32':
+  InMenu: 'Manage2'
+  CustomName: '§8[§a上一页§8]'
+  Material: 'ARROW'
+  SubID: 0
+  Index: 37
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open manage'
+  RightInTo: ''
+  KeepOpen: true
+'Button50':
+  InMenu: 'Manage2'
+  CustomName: '§8[§a下一页§8]'
+  Material: 'ARROW'
+  SubID: 0
+  Index: 45
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open manage3'
+  RightInTo: ''
+  KeepOpen: true
+# ============ Manage3 第三页 ============
+'Button51':
+  InMenu: 'Manage3'
+  CustomName: '§8[§a群系修改§8]'
+  Material: 'GRASS_BLOCK'
+  SubID: 0
+  Index: 11
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§7修改家园的群系类型'
+    - '§d单区块费用: §6500 金币'
+    - '§d全部区块费用: §65000 金币'
+  LeftInTo: 'sh open biome'
+  RightInTo: ''
+  KeepOpen: true
+'Button52':
+  InMenu: 'Manage3'
+  CustomName: '§8[§a难度设置§8]'
+  Material: 'COMMAND_BLOCK'
+  SubID: 0
+  Index: 13
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§d当前难度: §a%ErrorTown_World_Difficulty%'
+    - '§e点击后先选择货币，再聊天输入数字'
+    - '§71=和平 2=简单 3=普通 4=困难'
+    - '§d费用: §63000 金币 §7/ §b30 点券'
+  LeftInTo: 'sh cicdifficulty'
+  RightInTo: ''
+  KeepOpen: false
+'Button53':
+  InMenu: 'Manage3'
+  CustomName: '§8[§a扩容成员§8]'
+  Material: 'EMERALD'
+  SubID: 0
+  Index: 15
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§d当前最大成员数: §a%ErrorTown_MaxJoin%'
+    - '§e左键: §7花费1000金币+1成员'
+    - '§6右键: §7查看所有扩容方案'
+  LeftInTo: 'sh upgrademember 1'
+  RightInTo: 'sh upgrademember list'
+  KeepOpen: true
+'Button54':
+  InMenu: 'Manage3'
+  CustomName: '§8[§a创建下界§8]'
+  Material: 'NETHERRACK'
+  SubID: 0
+  Index: 20
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§7创建家园专属下界维度'
+    - '§d费用: §610000 金币'
+  LeftInTo: 'sh createNether'
+  RightInTo: ''
+  KeepOpen: false
+'Button55':
+  InMenu: 'Disabled'
+  CustomName: '§8[§a创建末地§8]'
+  Material: 'END_STONE'
+  SubID: 0
+  Index: 22
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§7创建家园专属末地维度'
+    - '§d费用: §610000 金币'
+  LeftInTo: 'sh createEnd'
+  RightInTo: ''
+  KeepOpen: false
+'Button56':
+  InMenu: 'Manage3'
+  CustomName: '§8[§a重置主世界§8]'
+  Material: 'GRASS_BLOCK'
+  SubID: 0
+  Index: 29
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§c重置后地形将完全重置!'
+    - '§d费用: §620000 金币'
+    - '§e左键: §7随机种子重置'
+    - '§6右键: §7自定义种子(+5000)'
+  LeftInTo: 'sh resetOverworld'
+  RightInTo: 'sh resetOverworld custom'
+  KeepOpen: false
+'Button57':
+  InMenu: 'Manage3'
+  CustomName: '§8[§a重置下界§8]'
+  Material: 'NETHERRACK'
+  SubID: 0
+  Index: 22
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§c重置后下界将完全重置!'
+    - '§d费用: §610000 金币'
+  LeftInTo: 'sh resetNether'
+  RightInTo: ''
+  KeepOpen: false
+'Button58':
+  InMenu: 'Disabled'
+  CustomName: '§8[§a重置末地§8]'
+  Material: 'END_STONE'
+  SubID: 0
+  Index: 33
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§c重置后末地将完全重置!'
+    - '§d费用: §610000 金币'
+  LeftInTo: 'sh resetEnd'
+  RightInTo: ''
+  KeepOpen: false
+'Button59':
+  InMenu: 'Manage3'
+  CustomName: '§8[§a设置标题§8]'
+  Material: 'NAME_TAG'
+  SubID: 0
+  Index: 24
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§7自定义庄园名与庄园描述'
+    - '§e左键: §7设置庄园名'
+    - '§6右键: §7设置庄园描述'
+  LeftInTo: 'sh titleinput'
+  RightInTo: 'sh descinput'
+  KeepOpen: false
+'Button60':
+  InMenu: 'Manage3'
+  CustomName: '§8[§a天气控制§8]'
+  Material: 'BLUE_ICE'
+  SubID: 0
+  Index: 26
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§7家园达到3级后可用'
+    - '§e左键: §7设置晴天'
+    - '§6右键: §7设置雨天'
+  LeftInTo: 'sh Sun'
+  RightInTo: 'sh Rain'
+  KeepOpen: true
+'Button61':
+  InMenu: 'Manage3'
+  CustomName: '§8[§a时间控制§8]'
+  Material: 'CLOCK'
+  SubID: 0
+  Index: 31
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§7家园达到3级后可用'
+    - '§e左键: §7设置白天'
+    - '§6右键: §7设置黑夜'
+  LeftInTo: 'sh Day'
+  RightInTo: 'sh Night'
+  KeepOpen: true
+'Button62':
+  InMenu: 'Disabled'
+  CustomName: '§8[§a设置出生点§8]'
+  Material: 'LODESTONE'
+  SubID: 0
+  Index: 40
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§7将家园传送点设置为当前坐标'
+  LeftInTo: 'sh tpset'
+  RightInTo: ''
+  KeepOpen: false
+'Button63':
+  InMenu: 'Manage3'
+  CustomName: '§8[§a上一页§8]'
+  Material: 'ARROW'
+  SubID: 0
+  Index: 37
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open manage2'
+  RightInTo: ''
+  KeepOpen: true
+'Button64':
+  InMenu: 'Manage3'
+  CustomName: '§8[§a返回§8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 41
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open main'
+  RightInTo: ''
+  KeepOpen: true
+'Button33':
+  InMenu: 'Visit'
+  CustomName: '§8[§a返回§8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 50
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open main'
+  RightInTo: ''
+  KeepOpen: true
+'Button34':
+  InMenu: 'Invite'
+  CustomName: '§8[§a返回§8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 50
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open manage'
+  RightInTo: ''
+  KeepOpen: true
+'Button35':
+  InMenu: 'Trust'
+  CustomName: '§8[§a返回§8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 50
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open manage'
+  RightInTo: ''
+  KeepOpen: true
+'Button36':
+  InMenu: 'Deny'
+  CustomName: '§8[§a返回§8]'
+  Material: 'FEATHER'
+  SubID: 0
+  Index: 50
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores: []
+  LeftInTo: 'sh open manage'
+  RightInTo: ''
+  KeepOpen: true
+'Button37':
+  InMenu: 'Visit'
+  CustomName: '§8[§c公共地狱§8]'
+  Material: 'NETHERRACK'
+  SubID: 0
+  Index: 11
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§7传送到服务器公共地狱'
+  LeftInTo: 'sh nether'
+  RightInTo: ''
+'Button38':
+  InMenu: 'Visit'
+  CustomName: '§8[§c公共末地§8]'
+  Material: 'END_STONE'
+  SubID: 0
+  Index: 12
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§7传送到服务器公共末地'
+  LeftInTo: 'sh end'
+  RightInTo: ''
+# ---- 返回主城按钮 (Main 菜单底行中间, slot 40) ----
+'Button65':
+  InMenu: 'Main'
+  CustomName: '§8[§a返回主城§8]'
+  Material: 'EMERALD'
+  SubID: 0
+  Index: 41
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§d点击传送到主城服务器'
+  LeftInTo: 'server zhucheng'
+  RightInTo: ''
+  KeepOpen: false
+'Button67':
+  InMenu: 'Main'
+  CustomName: '§8[§a仓库§8]'
+  Material: 'CHEST'
+  SubID: 0
+  Index: 37
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§7打开你的个人仓库'
+  LeftInTo: 'playerinv'
+  RightInTo: ''
+  KeepOpen: false
+# ---- 规则设置按钮 (Manage3 菜单) ----
+'Button66':
+  InMenu: 'Manage3'
+  CustomName: '§8[§a规则设置§8]'
+  Material: 'COMMAND_BLOCK'
+  SubID: 0
+  Index: 33
+  Enchants:
+    - 'ARROW_DAMAGE,1'
+  Lores:
+    - '§7爆炸保护 / 火势蔓延 / 怪物生成上限'
+    - '§e点击打开详细规则菜单'
+  LeftInTo: 'sh open rules'
+  RightInTo: ''
+  KeepOpen: true

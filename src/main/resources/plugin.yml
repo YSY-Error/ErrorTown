@@ -1,0 +1,367 @@
+name: ErrorTown
+main: com.ErrorTown.Main
+# 1.13 is the *minimum* API level, not the target: a higher api-version makes older servers
+# refuse the plugin outright. ErrorTown is compiled against the Spigot 1.21 API and verified
+# against Spigot 26.2 and Paper 26.2, so one jar covers Spigot / Paper / Purpur / Leaves on
+# Minecraft 1.21 through 26.2. Folia is NOT supported - see README.
+api-version: '1.13'
+author: YSYError
+version: '${version}'
+description: 错误小镇(YSYError) - 错误庄园系统
+depend: [Vault, NBTAPI]
+softdepend: [PlaceholderAPI,Multiverse-Core,FastAsyncWorldEdit,WorldEdit,PlayerPoints,HolographicDisplays,ProtocolLib,RealisticSeasons]
+commands:
+  st:
+    description: 错误庄园系统主命令
+    aliases: [sh]
+    permission-message: 你没有权限使用该命令
+
+permissions:
+  ErrorTown.command.user:
+    description: 基础用户权限(创建/管理/访问家园)
+    default: true
+    children:
+      ErrorTown.Create.1: true
+      ErrorTown.Create.2: true
+      ErrorTown.Create.airland: true
+      ErrorTown.Visit: true
+      ErrorTown.Update: true
+      ErrorTown.Look: true
+      ErrorTown.Public: true
+      ErrorTown.PVP: true
+      ErrorTown.PickUp: true
+      ErrorTown.Drop: true
+      ErrorTown.Rank: true
+      ErrorTown.Flowers: true
+      ErrorTown.Trust: true
+      ErrorTown.Deny: true
+      ErrorTown.Invite: true
+      ErrorTown.Quit: true
+      ErrorTown.check: true
+      ErrorTown.tpset: true
+      ErrorTown.WholeDelete: true
+  ErrorTown.Create.1:
+    description: 创建普通世界家园
+    default: true
+  ErrorTown.Create.2:
+    description: 创建超平坦家园
+    default: true
+  ErrorTown.Create.airland:
+    description: 创建空岛家园
+    default: true
+  ErrorTown.Create.*:
+    description: 所有类型家园创建权限
+    default: false
+  ErrorTown.Visit:
+    description: 访问他人家园
+    default: true
+  ErrorTown.SetSpawn:
+    description: 设置家园中心点/传送点
+    default: false
+  ErrorTown.Public:
+    description: 切换家园公开状态
+    default: true
+  ErrorTown.PVP:
+    description: 切换PVP状态
+    default: true
+  ErrorTown.PickUp:
+    description: 切换拾取权限
+    default: true
+  ErrorTown.Drop:
+    description: 切换丢弃权限
+    default: true
+  ErrorTown.Update:
+    description: 升级家园
+    default: true
+  ErrorTown.Look:
+    description: 查看家园信息
+    default: true
+  ErrorTown.locktime:
+    description: 锁定家园时间
+    default: false
+  ErrorTown.lockweather:
+    description: 锁定家园天气
+    default: false
+  ErrorTown.Day:
+    description: 设置白天
+    default: false
+  ErrorTown.Night:
+    description: 设置黑夜
+    default: false
+  ErrorTown.Rain:
+    description: 设置雨天
+    default: false
+  ErrorTown.Sun:
+    description: 设置晴天
+    default: false
+  ErrorTown.Nether:
+    description: 传送至公共地狱
+    default: false
+  ErrorTown.End:
+    description: 传送至公共末地
+    default: false
+  ErrorTown.Biome:
+    description: 修改家园群系
+    default: false
+  ErrorTown.Admin:
+    description: 错误庄园管理员权限
+    default: op
+    children:
+      ErrorTown.Admin.SetLevel: true
+      ErrorTown.Admin.AddLevel: true
+      ErrorTown.Admin.Create: true
+      ErrorTown.Admin.Delete: true
+      ErrorTown.Admin.TP: true
+      ErrorTown.Admin.Reload: true
+      ErrorTown.Admin.TP.*: true
+  ErrorTown.Admin.SetLevel:
+    description: 管理员设置家园等级
+    default: op
+  ErrorTown.Admin.AddLevel:
+    description: 管理员增加家园等级
+    default: op
+  ErrorTown.Admin.Create:
+    description: 管理员为玩家创建家园
+    default: op
+  ErrorTown.Admin.Delete:
+    description: 管理员删除家园
+    default: op
+  ErrorTown.Admin.TP:
+    description: 管理员传送到玩家家园
+    default: op
+  ErrorTown.Admin.TP.*:
+    description: 管理员传送至所有家园
+    default: op
+  ErrorTown.Admin.Reload:
+    description: 管理员重载插件
+    default: op
+  ErrorTown.forcetp:
+    description: 强制传送至家园(无视权限)
+    default: false
+  ErrorTown.Rank:
+    description: 查看排行榜
+    default: true
+  ErrorTown.Flowers:
+    description: 投递鲜花
+    default: true
+    children:
+      ErrorTown.Flowers.1: true
+      ErrorTown.Flowers.2: true
+      ErrorTown.Flowers.3: true
+      ErrorTown.Flowers.4: true
+      ErrorTown.Flowers.5: true
+      ErrorTown.Flowers.6: true
+      ErrorTown.Flowers.7: true
+      ErrorTown.Flowers.8: true
+      ErrorTown.Flowers.9: true
+      ErrorTown.Flowers.10: true
+  ErrorTown.Fly:
+    description: 家园内飞行
+    default: false
+  ErrorTown.Refresh:
+    description: 刷新家园边界
+    default: false
+  ErrorTown.Trust:
+    description: 添加信任成员
+    default: true
+  ErrorTown.Deny:
+    description: 黑名单玩家
+    default: true
+  ErrorTown.Invite:
+    description: 邀请加入家园
+    default: true
+  ErrorTown.Quit:
+    description: 离开家园
+    default: true
+  ErrorTown.Icon:
+    description: 设置家园图标
+    default: false
+  ErrorTown.info:
+    description: 设置家园信息
+    default: false
+  ErrorTown.Info.Color:
+    description: 设置彩色家园信息
+    default: false
+  ErrorTown.Gift.Send:
+    description: 发送礼物
+    default: true
+  ErrorTown.Gift.Open:
+    description: 打开礼物
+    default: true
+  ErrorTown.Gift.Inv:
+    description: 查看礼物仓库
+    default: false
+  ErrorTown.Calc:
+    description: 计算功能
+    default: false
+  ErrorTown.WholeDelete:
+    description: 整体删除家园
+    default: true
+  ErrorTown.tpset:
+    description: 设置传送点
+    default: true
+  ErrorTown.check:
+    description: 检查家园列表
+    default: true
+  ErrorTown.Togglecc:
+    description: 切换控制中心
+    default: false
+  ErrorTown.Seed:
+    description: 种子相关功能
+    default: false
+  ErrorTown.MobSpawn:
+    description: 家园内生物生成
+    default: false
+  ErrorTown.GAMEMODE.EASY:
+    description: 简单难度
+    default: false
+  ErrorTown.GAMEMODE.HARD:
+    description: 困难难度
+    default: false
+  ErrorTown.GAMEMODE.PEACEFUL:
+    description: 和平难度
+    default: false
+  ErrorTown.Popularity:
+    description: 人气功能
+    default: false
+  ErrorTown.Level.1:
+    description: 家园等级1
+    default: false
+  ErrorTown.Level.2:
+    description: 家园等级2
+    default: false
+  ErrorTown.Level.3:
+    description: 家园等级3
+    default: false
+  ErrorTown.Level.4:
+    description: 家园等级4
+    default: false
+  ErrorTown.Level.5:
+    description: 家园等级5
+    default: false
+  ErrorTown.Level.6:
+    description: 家园等级6
+    default: false
+  ErrorTown.Level.7:
+    description: 家园等级7
+    default: false
+  ErrorTown.Level.8:
+    description: 家园等级8
+    default: false
+  ErrorTown.Level.9:
+    description: 家园等级9
+    default: false
+  ErrorTown.Level.10:
+    description: 家园等级10
+    default: false
+  ErrorTown.Level.15:
+    description: 家园等级15
+    default: false
+  ErrorTown.Level.20:
+    description: 家园等级20
+    default: false
+  ErrorTown.Level.25:
+    description: 家园等级25
+    default: false
+  ErrorTown.Level.30:
+    description: 家园等级30
+    default: false
+  ErrorTown.Level.35:
+    description: 家园等级35
+    default: false
+  ErrorTown.Level.40:
+    description: 家园等级40
+    default: false
+  ErrorTown.Level.45:
+    description: 家园等级45
+    default: false
+  ErrorTown.Level.50:
+    description: 家园等级50
+    default: false
+  ErrorTown.MaxOP.1:
+    description: 家园最多1个管理员
+    default: false
+  ErrorTown.MaxOP.2:
+    description: 家园最多2个管理员
+    default: false
+  ErrorTown.MaxOP.3:
+    description: 家园最多3个管理员
+    default: false
+  ErrorTown.MaxOP.4:
+    description: 家园最多4个管理员
+    default: false
+  ErrorTown.MaxOP.5:
+    description: 家园最多5个管理员
+    default: false
+  ErrorTown.MaxOP.6:
+    description: 家园最多6个管理员
+    default: false
+  ErrorTown.MaxOP.7:
+    description: 家园最多7个管理员
+    default: false
+  ErrorTown.MaxOP.8:
+    description: 家园最多8个管理员
+    default: false
+  ErrorTown.MaxOP.9:
+    description: 家园最多9个管理员
+    default: false
+  ErrorTown.MaxOP.10:
+    description: 家园最多10个管理员
+    default: false
+  ErrorTown.MaxJoin.1:
+    description: 家园最多1个成员
+    default: false
+  ErrorTown.MaxJoin.2:
+    description: 家园最多2个成员
+    default: false
+  ErrorTown.MaxJoin.3:
+    description: 家园最多3个成员
+    default: false
+  ErrorTown.MaxJoin.4:
+    description: 家园最多4个成员
+    default: false
+  ErrorTown.MaxJoin.5:
+    description: 家园最多5个成员
+    default: false
+  ErrorTown.MaxJoin.6:
+    description: 家园最多6个成员
+    default: false
+  ErrorTown.MaxJoin.7:
+    description: 家园最多7个成员
+    default: false
+  ErrorTown.MaxJoin.8:
+    description: 家园最多8个成员
+    default: false
+  ErrorTown.MaxJoin.9:
+    description: 家园最多9个成员
+    default: false
+  ErrorTown.MaxJoin.10:
+    description: 家园最多10个成员
+    default: false
+  ErrorTown.MaxJoin.15:
+    description: 家园最多15个成员
+    default: false
+  ErrorTown.MaxJoin.20:
+    description: 家园最多20个成员
+    default: false
+  ErrorTown.MaxJoin.25:
+    description: 家园最多25个成员
+    default: false
+  ErrorTown.MaxJoin.30:
+    description: 家园最多30个成员
+    default: false
+  ErrorTown.MaxJoin.35:
+    description: 家园最多35个成员
+    default: false
+  ErrorTown.MaxJoin.40:
+    description: 家园最多40个成员
+    default: false
+  ErrorTown.MaxJoin.45:
+    description: 家园最多45个成员
+    default: false
+  ErrorTown.MaxJoin.50:
+    description: 家园最多50个成员
+    default: false
+  ErrorTown.command.admin:
+    description: 管理员基础权限
+    default: op

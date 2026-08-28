@@ -1,0 +1,660 @@
+# 配置文件版本:
+Version: 2.1
+
+# 汉化语言文本:
+# Chinese、Chinese_TW、English
+Language: Chinese
+
+
+# 是否开启BungeeCord数据库同步模式:
+BungeeCord: false
+# Database setting.
+Type: MySQL
+Host: localhost
+Port: 3306
+Database: root
+Username: root
+Password: root
+
+HikariCP:
+  connectionTimeout: 30000
+  # 连接超时时间 默认值：30000（30秒）
+  minimumIdle: 50
+  # 最小空闲连接数
+  maximumPoolSize: 30
+# 池允许达到的最大大小，包括空闲和正在使用的连接
+
+
+# 随机地图模板列表配置,对应指令/sh create random:
+Random:
+- '1'
+- '2'
+
+
+# 在不需要该家园功能的子服,但是需要快捷传送的子服内将其改为true
+DisableFunctionButTeleport: false
+
+# 是否开启均衡负载,在人数少的服务器创建家园?
+AutoReCreateInLowerLagHome: true
+# 均衡负载根据什么？Player还是TPS,Player即指玩家少的服务器,TPS则指三次tps均值最高的那个服务器，如果是TPS需要提前安装Server的papi拓展,/papi ecloud download Server.
+DecideBy: Player
+# 是否开启加载家园存档根据DecideBy进行转移加载?.
+AutoMoveWorldFilesToOther: false
+# 是否只有地图被卸载关闭了才能进行存档转移操作?(此功能看需特殊开启,大部分人不需要用到,改为false即可)
+MoveWorldAfterUnLoad: false
+
+# 是否启用异步家园形状创建?:
+FaweSwitch: false
+# 边界形状材质,默认基岩.
+BorderMaterial: BEDROCK
+# 边界形状,Square代表矩形,Circle代表球体.
+BorderShape: Square
+# 升级边界的时候是否清空老的边界.
+UpdateClearOld: false
+
+# 耕地材质选择,1.13+ (含1.21) 填写 FARMLAND, 1.12.2及以下填写 SOIL
+SoilType: FARMLAND
+
+# 是否开启高度限制
+EnableHeightLimit: true
+# 最高
+MaxHeight: 255
+
+# 服务器名字,不同子服要求设置的不一样才可以.
+Server: 家园一区
+# 插件前缀:
+Prefix: §b[§d错误庄园§b]
+# 右键打开菜单的物品材质:
+Material: COMPASS
+
+# 是否开启家园聊天前缀自动在玩家聊天时显示（聊天不支持papi时开启本功能,如ESS)(若您有MiaoChat等聊天插件,可以用Papi变量)(兼容多世界变量)
+EnableChatPrefix: true
+
+# 违法名字禁止使用本插件,如多世界的名字.
+IlleagalName:
+- zc
+- world
+
+# 创建家园前是否清空背包.
+ClearInventoryBeforeCreate: false
+
+# 创建家园后执行的指令[后台执行]:
+# DispathCommand:
+#  - '[console]kit xinshou give <Name>'
+#  - '[player]kit xinshou'
+DispathCommand: []
+# 删除家园后执行
+AfterDeleteDispathCommand: []
+# 升级后执行
+AfterUpdateDispathCommand: []
+# 是否开启删除的二次确认
+EnableConfirmDelete: true
+
+InviteAccess:
+  MaxTotalHomes: 3
+
+
+# 默认创建的家园世界/SH create 2 [设置为0则禁用]
+NormalType: 1
+
+HomeTerrain:
+  Enabled: true
+  GenerateStructures: false
+  PermanentDay: true
+  DayTime: 6000
+
+HomeCreationQueue:
+  MaxConcurrent: 2
+
+HomeTravel:
+  AllowNetherEnd: false
+
+HomeUpgrade:
+  LevelSizes: [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96]
+# 是否自定义种子,为0则不启用自定义种子.
+Seed: 0
+
+# ========== 创建家园收费 ==========
+# 开启后玩家创建家园需要付费 (左键=随机种子, 右键=指定种子)
+CreateCost:
+  Enable: true
+  # 随机种子 (左键创建)
+  RandomSeed:
+    Money: 59999
+    Points: 520
+  # 指定种子 (右键创建)
+  CustomSeed:
+    Money: 99999
+    Points: 999
+
+# ========== 创建世界模板加速 ==========
+# 为普通地形/超平坦指定一个已预生成好的模板世界目录名或绝对路径。
+# 开启后 /sh create 1/2 会优先复制模板，再加载世界，通常比实时自然生成更稳。
+CreateTemplate:
+  EnableNormal: false
+  NormalWorld: ''
+  EnableFlat: false
+  FlatWorld: ''
+
+# 是否开启家园出生点检测,如果为虚空则为玩家搭一个草方块防止掉进虚空[可选开启,空岛推荐]
+EnableSpawnProtection: true
+
+# 是否开启高版本的原版边界,低版本关闭就行,因为低版本无原版边界.
+BorderSwitch: true
+# 是否自定义边界插件,指令为:(留空即不开启)<Radius> <Player> <X> <Y> <Z><不推荐><建议用插件自带的>
+# CustomBorder: 'wb <Player> set <Radius> <X> <Z>'
+CustomBorder: ''
+# 家园的初始边界范围
+WorldBoard: 8
+# 升级一次的半径大小
+UpdateRadius: 8
+# 是否开启边界显示全息提示.
+HDSwitch: true
+# 是否监听玩家移动走出边界后给予缓慢100,失明100的BUFF,走回恢复.
+EnableMoveListener: false
+# 超出一定的边界后执行什么指令,留空为''则不执行:
+BorderCommand: ''
+# 超出边界是否开启该人冒险家模式.
+EnableAdventureMode: true
+# 移动到边界时是否击退玩家.
+PlayerMoveOverBorderHit: false
+# 移动到边界时是否给予缓慢BUFF
+PlayerMoveOverBorderBuff: true
+
+# 最大家园管理员数
+MaxOP: 2
+# 最大成员数
+MaxJoin: 10
+# 最大家园可升级的等级
+MaxLevel: 12
+MaxOwnedHomes: 3
+# 升级方式开关 — 控制升级子菜单显示哪些选项
+# EnableMoney: true  → 显示"金币升级"按钮 (仅扣金币, 不需要点券/物品)
+# EnablePoints: true → 显示"点券升级"按钮 (仅扣点券, 不需要金币/物品)
+# EnableItems: false → 显示"物品升级"按钮 (仅消耗物品, 保留原逻辑)
+Upgrade:
+  EnableMoney: false
+  EnablePoints: false
+  EnableItems: true
+
+# 升级家园所需金币
+MoneyNeed:
+- 5000
+- 5000
+- 5000
+- 8000
+- 8000
+- 10000
+- 10000
+- 12000
+- 12000
+- 15000
+- 18000
+# 升级家园所需点券
+PointsNeed:
+- 100
+- 100
+- 100
+- 160
+- 160
+- 200
+- 200
+- 240
+- 240
+- 300
+- 360
+# 升级家园所需材料,数量,自定义物品lore名[可选].
+ItemsNeed:
+- DIAMOND,16
+- DIAMOND,32
+- DIAMOND,64
+- DIAMOND,64
+- DIAMOND,64
+- DIAMOND,64
+- DIAMOND,64
+- DIAMOND,64
+- DIAMOND,64
+- DIAMOND,64
+- DIAMOND,64,§a钻石
+# 升级家园所需物品中文名字,显示在papi变量上.
+ItemsChineseName:
+- 钻石
+- 钻石
+- 钻石
+- 钻石
+- 钻石
+- 钻石
+- 钻石
+- 钻石
+- 钻石
+- 钻石
+- 钻石
+# 最大可以删除家园的次数
+MaxDelete: 3
+
+# 家园警告的Tile数量
+MaxTiles: 30000
+# 家园封锁的Tile数量
+UnLoadTiles: 50000
+# 家园最大物品掉落物数量
+DeleteItems: 500
+# 家园最大实体总数.
+DeleteEntities: 2000
+# 家园检查的频率:[秒][0为禁用]
+CheckTime: 600
+WhiteEntities:
+- VILLAGE
+- PLAYER
+- ICEANDFIRE
+- ASTRALSORCERY
+# 盔甲架实体限制,防止过多卡服[-1不启用]
+ArmorStand: -1
+
+# 家园自动保存地图时间（秒)[0为禁用]
+SaveTime: 300
+# 是否跳过一些世界不进行保存[在开启Windows存档映射时,或者其他特殊需求可以设置一下]
+UnAutoSaveWorlds:
+- DIM34676
+
+
+
+# 家园自动备份地图时间（秒)[默认36000秒][0为禁用][建议5分钟以上,否则报错勿扰]
+AutoBackup: 0
+# 多少天家园未被访问取消自动备份(天)[BC模式下同样有效]
+NoBackup: 3
+# 是否开启自定义备份路径？,若开启,则填写路径,例如:E:\,如果不想自定义,填写为''空.
+# CustomBackupLocation: 'E:\'
+CustomBackupLocation: ''
+
+
+# 若出现生成大量DIM文件或玩家家园维度id变更，请关闭此优化项以及停用其他类似功能的插件
+# 是本插件导致的,模组服不建议世界卸载或者区块卸载进行优化的效果.
+
+# 优化类型[1为卸载世界,2为卸载区块]
+OptimizeType: 0
+# 优化时间[秒][0为禁用]
+OptimizeTime: 0
+# 优化白名单.
+UnOptimizeWorlds:
+- ZC
+
+# 是否开启背包不掉落:
+KeepInventory: true
+# 是否开启不刷怪,false不刷怪,true刷怪
+doMobSpawning: true
+# 是否开启防爆功能,false为开启,true为关闭.
+mobGriefing: true
+# 是否关闭火势蔓延功能,false为开启,true为关闭
+doFireTick: false
+# 创建家园时的默认设置
+NormalPublic: false
+NormalPVP: false
+NormalPickup: true
+NormalDrop: true
+# 被踢出时后台执行的指令:
+BeKickedCommand: spawn <Name>
+
+# 是否开启CustomTileMax
+CustomTileMax: false
+TileList:
+- chunk|TORCHERINO_TILE|1
+- world|ASTRALSORCERY:TILERITUALLINK|8
+- world|METS:GEOMAGNETIC_GENERATOR|8
+- world|BOTANIA_STARFIELD|0
+# 高等级限制
+# nbt|等级|数量
+AnotherChunkLimit:
+- BOTANIA_STARFIELD|3|18
+- BOTANIA_STARFIELD|2|9
+- BOTANIA_STARFIELD|1|4
+# 是否在检测到放置上限后清空掉已放置的多余的方块?
+EnableClearExtraBlocks: false
+
+
+# 是否开启CustomEntityMax,动物统一为Animals
+CustomEntityMax: false
+# 限制列表.
+EntityList:
+- ZOMBIE|8
+# 检测实体秒数.
+CheckEntityInterval: 60
+
+# 是否开启生物黑名单功能
+EnableBlackEntities: false
+# 防止村民养殖和出现逆天村民,列入黑名单.
+BlackEntitiesList:
+- VILLAGER
+
+# 是否禁止指定物品在无权限的家园中使用:
+EnableBlackItemsUseInNoPermission: false
+# 黑名单物品列表
+BlackItems:
+- DIAMOND_SWORD
+
+
+
+# 默认的世界模式选择,(设置为''则禁用)
+Difficulty: Easy
+# 文本格式化。作用于全部提示消息、GUI 按钮名称与 Lore。
+# Mode:
+#   auto        - 默认。只有含 <标签> 的文本才走 MiniMessage,其余保持原样,零开销、零风险。
+#   minimessage - 所有文本都按 MiniMessage 解析。转义规则更严格,改前请通读 MiniMessage 文档。
+#   legacy      - 完全关闭 MiniMessage,只认颜色码。
+# MiniMessage 示例:
+#   "<gradient:#ff5f6d:#ffc371>错误庄园</gradient>"
+#   "<bold><#55FF55>家园创建成功"
+#   "<rainbow>欢迎回家"
+# TranslateAmpersand: 是否把 &a / &l / &#RRGGBB 也当作颜色码(§ 码始终有效)。
+# 若你的消息里需要出现字面量 & 后跟字母,把它关掉。
+Formatting:
+  Mode: auto
+  TranslateAmpersand: true
+
+# CraftEngine 自定义方块的限额。默认关闭。
+# 为什么要单独一项:原有的 TileList 限额是数 Chunk.getTileEntities(),而 CraftEngine 的自定义
+# 方块大多不是 block entity,根本不会出现在那个列表里,所以过去完全不受 TileList 约束。
+# 为什么默认关闭:正因为不是 block entity,没有现成的列表可数,只能实际去看方块。整块区块约
+# 9.8 万个方块,每次放置都扫一遍不可接受,所以这里只扫放置点周围一个立方体 —— 也就是说限额是
+# "局部的"而不是"整块区块的"。这是刻意的取舍,请自行决定是否接受。
+# 规则写在 TileList 里,匹配串加 ce: 前缀,例如:
+#   TileList:
+#   - 'chunk|ce:myfurniture:oak_chair|4'
+# 不带 ce: 前缀的条目仍然走原来的 NBT 匹配,行为不变。
+CraftEngineBlockLimit:
+  Enabled: false
+  # 扫描半径(方块)。1-17,默认 6(即 13x13x13)。调大会显著增加每次放置的开销。
+  ScanRadius: 6
+
+# 是否生成家园里的自然建筑:
+generateStructures: false
+# 超平坦家园(create 2)的地层设置。留空即使用内置预设:基岩1层 + 泥土2层 + 草方块1层,平原群系。
+# 这里填的是原版 flat_level_generator_settings 的 JSON,必须包含 layers。
+# 早期版本没有设置这一项,导致每次创建超平坦家园都会在控制台打印
+# "No key layers in MapLike[{}]" 并回落到原版默认预设。
+# 示例(全石头): '{"biome":"minecraft:plains","layers":[{"block":"minecraft:stone","height":64}]}'
+Superflat:
+  GeneratorSettings: ''
+# 世界最大生成怪物数量:(-1为禁用)
+MaxSpawnMonstersAmount: -1
+# 世界最大生成动物数量:(-1为禁用)
+MaxSpawnAnimalsAmount: -1
+# 是否开启公共下界地狱的传送:/SH Nether,需自行开启服务端的地狱生成功能.
+EnableNetherTeleport: false
+# 指定一个您服务器的地狱世界名字:
+NetherWorldName: DIM-1
+# 开启哪些规则:
+NeitherGameRules:
+- keepInventory,true
+- doMobSpawning,true
+- mobGriefing,false
+- doFireTick,false
+# 是否开启公共末地的传送:/SH End,需自行开启服务端的末地生成功能.
+EnableEndTeleport: false
+# 指定一个您服务器的末地世界名字:
+EndWorldName: DIM1
+# 开启哪些规则:
+EndGameRules:
+- keepInventory,true
+- doMobSpawning,true
+- mobGriefing,false
+- doFireTick,false
+# 是否开启在线世界延迟统计前N名
+EnableTilesAndChunksAndDropItemsStatisticsTop: true
+# 显示的排名个数,5->代表前五
+ShowAmount: 5
+# 每多少秒提示一次
+ShowTimes: 600
+# 权重
+OneTileTick: 0.005
+OneEntityTick: 0.005
+OneChunkTick: 0
+OneDropTick: 1.0E-4
+# 显示的小数位,默认2位小数
+FormatInfo: '%.2f'
+# 置顶
+StatisticsTop:
+- §7当前服务器玩家世界占用情况：
+- §8§m————————————————————————————————————————————————————————
+# 格式
+ShowFormat: §6§l#<index> §a<world> §e的世界 §7<tile> §eTiles §7<chunk> §e区块 §7<entity>
+  §e实体 §7<drop> §e掉落物 §e每Tick耗时 §7<tps> §eMs
+# 置底
+StatisticsEnd:
+- §8§m————————————————————————————————————————————————————————
+- §a上方世界仅供参考，如果存在你的家园请及时清理掉落物和生物！
+# ========== SummerTown -> ErrorTown 重命名兼容 ==========
+# 权限节点已从 SummerTown.* 改为 ErrorTown.*。
+# 权限保存在 LuckPerms 等外部插件里，本插件无法自动迁移，因此默认同时接受旧节点。
+# 在权限组全部改完之后请设为 false，避免旧节点继续生效。
+LegacyPermissions: true
+# 默认权限开关
+Permission:
+  CommandUser: true
+  Visit: true
+  SetSpawn: false
+  Nether: false
+  End: false
+  Rain: false
+  Sun: false
+  Night: false
+  Day: false
+  Create-1: true
+  Create-2: true
+  Create-airland: true
+  LockTime: false
+  LockWeather: false
+
+
+# 一天最大的投递鲜花的数量<额外权限:ErrorTown.Flowers.数字>:
+MaxFlowers: 5
+# 综合权重
+PopularityAdd: 0.1
+FlowerAdd: 0.3
+# 默认上线地点世界（需自行设置世界出生点）'留空为不设置',该设置可以解决个别客户端进服提示维度崩客户端的BUG
+NormalJoinWorld: ''
+
+# 是否开启时间同步
+EnableAsnycTime: false
+# 根据哪个世界进行同步
+AsyncTimeWorld: world
+# 是否开启季节插件兼容同步:
+RealisticSeasons: false
+
+# 是否在GUI页面显示所有玩家,还是非公开的进行隐藏,ALL->显示公开,支持跨服/Public->显示公开,支持跨服/Load->显示加载,仅支持单服显示 三种选择.
+VisitGuiShowAll: Load
+
+# 是否开启玩家死亡后自动在家园复活
+EnableAutoRespawnInHome: false
+
+# 是否开启家园实体交互保护功能,盔甲架等物品无权限禁止交互,该功能对拔刀剑相关实体无效.
+EnableEntityInteract: true
+
+# 是否禁用家园传送门的创建
+DisablePortalCreate: true
+
+# 是否开启多世界兼容模式
+MultiverseCoreCompability: true
+
+# 是否开启版本检测
+CheckUpdate: true
+
+# 是否关闭世界出生点区块加载,纯净建议改成false关闭出生区块常加载,节约内存
+# 模组服如果工业2玻璃纤维线缆短线的话建议为true,不然为反向优化!.
+KeepSpawnInMemory: false
+
+
+# 是否开启时间锁定功能,占用较大,若spark或者timings发现locktime占用较大改为false减轻压力.
+EnableTimeLock: true
+# 在玩家删除家园/家园卸载/被踢出家园时,自动传送至什么世界?
+Spawn: world
+
+# =========== 家园专属地狱(下界)功能 ===========
+# 是否开启家园专属地狱:开启后,每个家园主世界会对应一个独立的地狱世界,
+# 玩家在自己家园内搭建并进入"下界传送门"即可前往对应地狱;在地狱内进入下界传送门可返回家园主世界.
+# 地狱会自动获得与家园主世界对应的边界(按 HomeNetherScale 换算),相当于一块"地狱版的家园地块".
+# 主世界与地狱坐标按 1:HomeNetherScale 换算,实现坐标一一对应;两个世界各自独立刷怪,实现双维度刷怪.
+# 注意:
+# 1)需要服务端 server.properties 中 allow-nether=true;
+# 2)开启本功能后,即使 DisablePortalCreate=true 也会允许在家园内搭建传送门;
+# 3)若想主世界家园里也刷怪(真正的双维度刷怪),需把上面的 doMobSpawning 改为 true(地狱本身默认就刷怪).
+EnableHomeNether: true
+# 家园地狱世界名使用的后缀(地狱世界名 = 玩家名 + 后缀)
+HomeNetherSuffix: _nether
+# 主世界与地狱的坐标比例:
+# 1  = 1:1 坐标完全相等,地狱大小与家园相同,最直观、最适合做双维度对照建筑/刷怪(推荐)
+# 8  = 原版比例(主世界走8格=地狱走1格),适合家园地块非常大的情况(地块小则地狱会很小)
+HomeNetherScale: 1
+
+HomeNetherPortal:
+  SearchRadius: 16
+  CreationRadius: 16
+  # true = 玩家/普通实体的找门与建门尽量交给原版内核处理, 坐标/落点会更接近原版
+  # false = 使用插件自己的手动找门/补门逻辑(只建议在原版 POI/门搜索异常时临时兜底)
+  UseVanillaResolver: true
+
+Debug: false
+
+EnableMultiverseCoreCreate: false
+
+SkyIsland:
+  Enable: true
+  CreateKey: airland
+  CenterX: 0
+  CenterZ: 0
+  SpawnY: 65
+  ClearHeight: 6
+  PlatformRadius: 3
+  PlatformTop: GRASS_BLOCK
+  PlatformMiddle: DIRT
+  PlatformBottom: BEDROCK
+  ChestOffsetX: 2
+  ChestOffsetY: 1
+  ChestOffsetZ: 0
+  StarterChest:
+    Enable: true
+    Items:
+    - LAVA_BUCKET,1,0
+    - ICE,2,1
+    - OAK_SAPLING,1,2
+    - DIRT,8,3
+
+# ========== 群系修改配置 ==========
+BiomeChange:
+  Enable: true
+  # 修改单个区块群系花费金币
+  SingleChunkCost: 1000
+  # 修改边界内所有群系花费金币
+  AllChunksCost: 8000
+
+# ========== 成员扩容配置 ==========
+MemberUpgrade:
+  Enable: true
+  # 扩容方案: '花费金币,增加成员数'
+  Plans:
+  - 3000,60,1
+  - 8000,160,2
+  - 15000,300,4
+  - 30000,600,8
+  # 最终成员上限
+  AbsoluteMax: 50
+
+# ========== 维度创建/重置配置 ==========
+DimensionCreate:
+  # 创建家园专属下界花费金币
+  CreateNetherCost: 20000
+  CreateNetherPoints: 400
+  # 创建家园专属末地花费金币
+  CreateEndCost: 30000
+  CreateEndPoints: 600
+  # 重置主世界花费金币
+  ResetOverworldCost: 12000
+  ResetOverworldPoints: 240
+  # 重置下界花费金币
+  ResetNetherCost: 10000
+  ResetNetherPoints: 200
+  # 重置末地花费金币
+  ResetEndCost: 15000
+  ResetEndPoints: 300
+  # 使用自定义种子重置额外花费(0=禁用)
+  CustomSeedExtraCost: 10000
+  CustomSeedExtraPoints: 200
+
+# ========== 家园标题/描述 ==========
+HomeTitle:
+  Enable: true
+  MaxTitleLength: 32
+  MaxDescriptionLines: 5
+
+# ========== 难度设置 ==========
+DifficultyChange:
+  Enable: true
+  Cost: 1500
+  Points: 30
+
+# 权限,额外新增的半径[家园主人/管理员]
+# 指令:/Sh refresh,权限ErrorTown.Refresh
+VIPAdd:
+- v1up,0
+- v2up,0
+
+# ========== 会员升级折扣 ==========
+# 格式: '权限后缀,折扣百分比'
+# 权限节点: ErrorTown.<权限后缀>  (例: ErrorTown.vip1)
+# 折扣百分比 = 实际支付比例 (80 = 打8折 = 支付原价的80% = 优惠20%)
+# 同时拥有多个权限时取折扣最优惠的一个
+# 同时影响金币升级和点券升级
+VIPDiscount:
+- st1,95
+- st2,90
+- st3,80
+
+# ========== 移动庄园中心点 ==========
+SetSpawn:
+  # 每次移动中心点花费金币
+  GoldFee: 1000
+  PointFee: 20
+  # 冷却时间(秒), 冷却期内不可再次移动
+  CooldownSeconds: 86400
+  SyncTeleportAndRespawn: true
+
+ShiftFOpenMainMenu:
+  Enable: true
+  RequireSneaking: true
+  CancelOffhandSwap: true
+  DebugMessage: false
+  Command: sh open
+
+ProhibitPlaceInCenter:
+- STONE
+SubStringNBT: 50
+
+
+HomeWorldLifecycle:
+  EnableAutoUnload: true
+  UnloadDelaySeconds: 180
+
+HomeInfoPanel:
+  Enable: true
+
+HomeRulesDefaults:
+  MaxMobCount: 0
+  MaxMobCountMin: 0
+  MaxMobCountMax: 512
+  MaxMobCountStep: 8
+  MaxVillagerCount: 12
+  AllowVillagerPickupItems: true
+  CountVillagersInMobCap: false
+
+HomeSpawnCompensation:
+  Enable: true
+  TargetMonsterCap: 70
+  MinMonsterSpawnLimit: 70
+  MaxMonsterSpawnLimit: 1024
+  ApplyToNether: true
+
+
+FeatureUnlock:
+  LockTimeLevel: 3
+  LockWeatherLevel: 3
+  BiomeChangeLevel: 3
+  MobRuleAdvancedLevel: 3

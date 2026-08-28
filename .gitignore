@@ -1,0 +1,80 @@
+# ErrorTown — GitHub 上传黑名单
+#
+# 规则：能由构建、IDE 或运行时重新生成的东西一律不上传；构建**必需**的东西一定上传。
+# 唯一容易搞错的是 gradle/wrapper/gradle-wrapper.jar —— 它被 *.jar 规则命中，
+# 但必须保留，否则别人克隆下来 ./gradlew 直接跑不起来，所以下面用 ! 单独放行。
+
+# ---- Gradle ----
+.gradle/
+build/
+gradle-app.setting
+!gradle-wrapper.jar
+!gradle-wrapper.properties
+
+# ---- 构建产物 ----
+bin/
+out/
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+# 例外：Gradle wrapper 必须随仓库分发
+!gradle/wrapper/gradle-wrapper.jar
+
+# 开发者自行放入的、未发布到 Maven 的可选插件 API（见 libs/README.md）
+# 这些通常是付费或私有 jar，不能上传
+libs/*.jar
+
+# ---- IDE / 编辑器 ----
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.classpath
+.project
+.settings/
+.metadata/
+*.swp
+*~
+nbproject/private/
+.nb-gradle/
+
+# ---- 日志与本地临时文件 ----
+*.log
+logs/
+crash-reports/
+hs_err_pid*
+replay_pid*
+compile-errors*.log
+verify-*.log
+
+# ---- 脚本生成的一次性测试服 ----
+# scripts/New-TestServer.ps1 会在这里铺一个完整服务端，含 server jar 与世界存档
+test-server/
+testserver/
+*.mca
+world/
+world_nether/
+world_the_end/
+ErrorTownWorld/
+
+# ---- 代理 / 工具链的工作目录 ----
+.omo/
+.codegraph/
+.claude/
+.cursor/
+
+# ---- 操作系统 ----
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
