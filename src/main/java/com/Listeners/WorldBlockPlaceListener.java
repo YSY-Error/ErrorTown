@@ -22,9 +22,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 public class WorldBlockPlaceListener implements Listener {
    public int getChunkAmount(String nbt, Chunk chunk) {
       int NowAmount = 0;
-
-      BlockState[] arrayOfBlockState;
-      for (BlockState state : arrayOfBlockState = chunk.getTileEntities()) {
+      for (BlockState state : chunk.getTileEntities()) {
          if (Util.getNBTString(state).toUpperCase().contains(nbt.toUpperCase())) {
             NowAmount++;
          }
@@ -68,9 +66,9 @@ public class WorldBlockPlaceListener implements Listener {
                String contain_nbt = "";
                int MaxThisTile = 0;
 
-               var __cfg0 = Main.JavaPlugin.getConfig().getStringList("TileList");
-               for (int d = 0; d < __cfg0.size(); d++) {
-                  String[] temp = (__cfg0.get(d)).split("\\|");
+               java.util.List<String> tileRules = Main.JavaPlugin.getConfig().getStringList("TileList");
+               for (int d = 0; d < tileRules.size(); d++) {
+                  String[] temp = (tileRules.get(d)).split("\\|");
                   if (temp[0].equalsIgnoreCase("world") && nbt.toUpperCase().contains(temp[1].toUpperCase())) {
                      check_contain = true;
                      contain_nbt = temp[1];
@@ -93,7 +91,6 @@ public class WorldBlockPlaceListener implements Listener {
                   bottomleft.setZ(p.getLocation().getWorld().getSpawnLocation().getZ() + (level + 1) * addradius);
                   bottomright.setX(p.getLocation().getWorld().getSpawnLocation().getX() - (level + 1) * addradius);
                   bottomright.setZ(p.getLocation().getWorld().getSpawnLocation().getZ() - (level + 1) * addradius);
-
                   for (Chunk temp : Util.getchunkmap(topleft, topright, bottomleft, bottomright)) {
                      NowAmount += this.getChunkAmount(contain_nbt, temp);
                   }
@@ -101,7 +98,6 @@ public class WorldBlockPlaceListener implements Listener {
                   NowAmount--;
                   boolean extra_perm = false;
                   int extra_amount = MaxThisTile;
-
                   for (int i = 100; i > 0; i--) {
                      if (com.Util.Perm.has(p, "ErrorTown.WorldPlace." + contain_nbt + "." + i)) {
                         extra_perm = true;
@@ -113,14 +109,13 @@ public class WorldBlockPlaceListener implements Listener {
                   }
 
                   Home home = HomeAPI.getHome(event.getBlock().getWorld().getName().replace(Variable.world_prefix, ""));
-
                   for (String str : home.getLimitBlock()) {
                      String[] args = str.split("\\|");
                      int start_amount = 0;
 
-                     var __cfg1 = Main.JavaPlugin.getConfig().getStringList("TileList");
-                     for (int e = 0; e < __cfg1.size(); e++) {
-                        String[] temp = (__cfg1.get(e)).split("\\|");
+                     java.util.List<String> tileRules2 = Main.JavaPlugin.getConfig().getStringList("TileList");
+                     for (int e = 0; e < tileRules2.size(); e++) {
+                        String[] temp = (tileRules2.get(e)).split("\\|");
                         if (temp[0].equalsIgnoreCase("world") && nbt.toUpperCase().contains(temp[1].toUpperCase())) {
                            start_amount = Integer.valueOf(temp[2]);
                            break;
@@ -135,7 +130,6 @@ public class WorldBlockPlaceListener implements Listener {
                         }
                      }
                   }
-
                   for (String se : Main.JavaPlugin.getConfig().getStringList("AnotherChunkLimit")) {
                      String[] args = se.split("\\|");
                      if (nbt.toUpperCase().contains(args[0].toUpperCase())
@@ -153,10 +147,8 @@ public class WorldBlockPlaceListener implements Listener {
                   if (Main.JavaPlugin.getConfig().getBoolean("EnableClearExtraBlocks") && NowAmount + 1 > MaxThisTile) {
                      event.setCancelled(true);
                      int wait_to_delete = NowAmount + 1 - MaxThisTile - 1;
-
                      for (Chunk temp : Util.getchunkmap(topleft, topright, bottomleft, bottomright)) {
-                        BlockState[] arrayOfBlockState;
-                        for (BlockState state : arrayOfBlockState = temp.getTileEntities()) {
+                        for (BlockState state : temp.getTileEntities()) {
                            if (Util.getNBTString(state).toUpperCase().contains(contain_nbt.toUpperCase())) {
                               if (wait_to_delete == 0) {
                                  break;
@@ -186,21 +178,21 @@ public class WorldBlockPlaceListener implements Listener {
 
                      p.sendMessage(tempx);
                   } else {
-                     String tempxx = Variable.Lang_YML.getString("PlaceReachWorldMaxTile");
-                     if (tempxx.contains("<Now>")) {
-                        tempxx = tempxx.replace("<Now>", String.valueOf(NowAmount));
+                     String reachWorldMaxMessage = Variable.Lang_YML.getString("PlaceReachWorldMaxTile");
+                     if (reachWorldMaxMessage.contains("<Now>")) {
+                        reachWorldMaxMessage = reachWorldMaxMessage.replace("<Now>", String.valueOf(NowAmount));
                      }
 
-                     if (tempxx.contains("<Max>")) {
-                        tempxx = tempxx.replace("<Max>", String.valueOf(MaxThisTile));
+                     if (reachWorldMaxMessage.contains("<Max>")) {
+                        reachWorldMaxMessage = reachWorldMaxMessage.replace("<Max>", String.valueOf(MaxThisTile));
                      }
 
-                     if (tempxx.contains("<NBT>")) {
-                        tempxx = tempxx.replace("<NBT>", String.valueOf(contain_nbt));
+                     if (reachWorldMaxMessage.contains("<NBT>")) {
+                        reachWorldMaxMessage = reachWorldMaxMessage.replace("<NBT>", String.valueOf(contain_nbt));
                      }
 
                      event.setCancelled(true);
-                     p.sendMessage(tempxx);
+                     p.sendMessage(reachWorldMaxMessage);
                   }
                }
             }

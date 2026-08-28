@@ -55,8 +55,8 @@ public class Home {
       if (Variable.bungee) {
          try {
             return MySQL.getGift(this.name);
-         } catch (IOException var3) {
-            var3.printStackTrace();
+         } catch (IOException ioFailure) {
+            ioFailure.printStackTrace();
             return null;
          }
       } else {

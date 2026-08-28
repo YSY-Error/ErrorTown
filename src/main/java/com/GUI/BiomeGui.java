@@ -118,8 +118,8 @@ public class BiomeGui implements InventoryHolder {
 
       try {
          currentBiome = getCN(p.getLocation().getBlock().getBiome().name());
-      } catch (Exception var7) {
-         com.Util.Diag.warnOnce("biome-current-name", "Could not resolve the current biome name", var7);
+      } catch (Exception failure) {
+         com.Util.Diag.warnOnce("biome-current-name", "Could not resolve the current biome name", failure);
       }
 
       this.MainGui
@@ -245,7 +245,7 @@ public class BiomeGui implements InventoryHolder {
                               Biome.valueOf(biomeName);
                               this.selectedBiome = biomeName;
                               this.buildGui(p);
-                           } catch (IllegalArgumentException var15) {
+                           } catch (IllegalArgumentException invalid) {
                               p.sendMessage("§c无效的群系: " + biomeName);
                            }
 

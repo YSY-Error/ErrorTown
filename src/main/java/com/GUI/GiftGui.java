@@ -32,7 +32,7 @@ public class GiftGui implements InventoryHolder {
                   if (str != null && !str.equalsIgnoreCase("")) {
                      try {
                         i = ss.deserializeItemStack(str);
-                     } catch (Exception var9) {
+                     } catch (Exception failure) {
                         continue;
                      }
 

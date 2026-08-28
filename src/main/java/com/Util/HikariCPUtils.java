@@ -64,9 +64,9 @@ public class HikariCPUtils {
             RenameMigration.migrateDatabaseTables();
             MySQL.init();
          }
-      } catch (SQLException var9) {
+      } catch (SQLException sqlFailure) {
          Bukkit.getConsoleSender().sendMessage(Lang.get("DataBaseConnectionError", "§c[ErrorTown] 数据库连接失败"));
-         Diag.warn("Database connection failed; cross-server features will not work", var9);
+         Diag.warn("Database connection failed; cross-server features will not work", sqlFailure);
       }
    }
 }

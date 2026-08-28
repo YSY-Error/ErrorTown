@@ -17,8 +17,8 @@ public class CheckUpdate {
 
             Bukkit.getConsoleSender().sendMessage(msg);
          }
-      } catch (Exception var1) {
-         com.Util.Diag.warnOnce("check-update", "Update check failed", var1);
+      } catch (Exception failure) {
+         com.Util.Diag.warnOnce("check-update", "Update check failed", failure);
       }
    }
 }

@@ -18,10 +18,10 @@ public class HomeWorldManager {
       if (home != null) {
          try {
             home.setLastActive(System.currentTimeMillis());
-         } catch (IOException var3) {
+         } catch (IOException ioFailure) {
             // lastActive drives NoBackup and the idle-unload decision; a silent failure
             // makes both operate on a stale timestamp.
-            com.Util.Diag.warn("Could not persist lastActive for home " + baseName, var3);
+            com.Util.Diag.warn("Could not persist lastActive for home " + baseName, ioFailure);
          }
       }
    }

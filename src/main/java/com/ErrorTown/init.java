@@ -47,9 +47,7 @@ public class init implements Listener {
          }
       } else {
          File folder = new File(Main.JavaPlugin.getDataFolder().getPath().toString() + Variable.file_loc_prefix + "playerdata");
-
-         File[] arrayOfFile;
-         for (File temp : arrayOfFile = folder.listFiles()) {
+         for (File temp : folder.listFiles()) {
             String want_to = temp.getPath()
                .replace(Main.JavaPlugin.getDataFolder().getPath().toString() + Variable.file_loc_prefix + "playerdata", "")
                .replace(Variable.file_loc_prefix, "")
@@ -60,7 +58,6 @@ public class init implements Listener {
 
       Variable.world_StaticsTick.clear();
       boolean check_has = false;
-
       for (World world : Bukkit.getWorlds()) {
          if (Util.CheckIsHome(world.getName())) {
             check_has = true;
@@ -68,18 +65,12 @@ public class init implements Listener {
             int tiles = 0;
             int entity = 0;
             int dropitem = 0;
-
-            Chunk[] arrayOfChunk;
-            for (Chunk chunk : arrayOfChunk = world.getLoadedChunks()) {
+            for (Chunk chunk : world.getLoadedChunks()) {
                chunks++;
-
-               BlockState[] arrayOfBlockState;
-               for (BlockState bs : arrayOfBlockState = chunk.getTileEntities()) {
+               for (BlockState bs : chunk.getTileEntities()) {
                   tiles++;
                }
-
-               Entity[] arrayOfEntity;
-               for (Entity et : arrayOfEntity = chunk.getEntities()) {
+               for (Entity et : chunk.getEntities()) {
                   if (!BukkitCompat.isDroppedItem(et)) {
                      entity++;
                   } else {
@@ -100,9 +91,7 @@ public class init implements Listener {
 
       if (check_has) {
          if (broad) {
-            var __cfg0 = Main.JavaPlugin.getConfig().getStringList("StatisticsTop");
-            for (int c = 0; c < __cfg0.size(); c++) {
-               String a = __cfg0.get(c);
+            for (String a : Main.JavaPlugin.getConfig().getStringList("StatisticsTop")) {
                Bukkit.broadcastMessage(a);
             }
 
@@ -111,7 +100,6 @@ public class init implements Listener {
             Variable.world_StaticsTick.sort((left, right) -> Double.compare(right.tps, left.tps));
 
             int showAmount = Main.JavaPlugin.getConfig().getInt("ShowAmount");
-
             for (int i = 0; i < Variable.world_StaticsTick.size() && i < showAmount; i++) {
                StaticsTick s = Variable.world_StaticsTick.get(i);
                if (s.tps != 0.0) {
@@ -147,10 +135,7 @@ public class init implements Listener {
                   Bukkit.broadcastMessage(temp);
                }
             }
-
-            var __cfg1 = Main.JavaPlugin.getConfig().getStringList("StatisticsEnd");
-            for (int c = 0; c < __cfg1.size(); c++) {
-               String a = __cfg1.get(c);
+            for (String a : Main.JavaPlugin.getConfig().getStringList("StatisticsEnd")) {
                Bukkit.broadcastMessage(a);
             }
          }
@@ -168,16 +153,13 @@ public class init implements Listener {
                            int vip_add = 0;
                            ArrayList<String> players = new ArrayList<>();
                            players.add(home.getName());
-
                            for (String op : home.getOPs()) {
                               if (Bukkit.getPlayer(op) != null) {
                                  players.add(op);
                               }
                            }
-
                            for (String s : Main.JavaPlugin.getConfig().getStringList("VIPAdd")) {
                               String[] ss = s.split(",");
-
                               for (String p_name : players) {
                                  Player pe = Bukkit.getPlayer(p_name);
                                  if (pe != null && pe.hasPermission(ss[0])) {
@@ -212,7 +194,6 @@ public class init implements Listener {
                                        vip_add
                                     )
                                  );
-
                               for (Player p : world.getPlayers()) {
                                  if (Variable.has_already_hide_border.contains(p.getName())) {
                                     WBControl.setEnable(p);
@@ -220,7 +201,7 @@ public class init implements Listener {
                                     WBControl.setDisable(p);
                                  }
                               }
-                           } catch (NoSuchMethodError var13) {
+                           } catch (NoSuchMethodError unsupported) {
                               Bukkit.getConsoleSender().sendMessage(Variable.Lang_YML.getString("BorderException"));
                            }
                         }
@@ -252,9 +233,7 @@ public class init implements Listener {
                   }
                } else {
                   File folder = new File(Main.JavaPlugin.getDataFolder().getPath().toString() + Variable.file_loc_prefix + "playerdata");
-
-                  File[] arrayOfFile;
-                  for (File temp : arrayOfFile = folder.listFiles()) {
+                  for (File temp : folder.listFiles()) {
                      String want_to = temp.getPath()
                         .replace(Main.JavaPlugin.getDataFolder().getPath().toString() + Variable.file_loc_prefix + "playerdata", "")
                         .replace(Variable.file_loc_prefix, "")
@@ -273,13 +252,12 @@ public class init implements Listener {
                         label59:
                         for (Player p : world.getPlayers()) {
                            if (!Util.Check(p, world.getName().replace(Variable.world_prefix, ""))) {
-                              ItemStack[] arrayOfItemStack;
-                              for (ItemStack i : arrayOfItemStack = p.getInventory().getContents()) {
+                              for (ItemStack i : p.getInventory().getContents()) {
                                  String nbt = Util.getItemNBTString(i);
 
-                                 var __cfg2 = Main.JavaPlugin.getConfig().getStringList("BlackItems");
-                                 for (int j = 0; j < __cfg2.size(); j++) {
-                                    if (nbt.toUpperCase().contains((__cfg2.get(j)).toUpperCase())) {
+                                 java.util.List<String> blackItems = Main.JavaPlugin.getConfig().getStringList("BlackItems");
+                                 for (int j = 0; j < blackItems.size(); j++) {
+                                    if (nbt.toUpperCase().contains((blackItems.get(j)).toUpperCase())) {
                                        String command = Main.JavaPlugin.getConfig().getString("BeKickedCommand");
                                        if (command.contains("<Name>")) {
                                           command = command.replace("<Name>", p.getName());
@@ -289,7 +267,7 @@ public class init implements Listener {
                                        String message = Variable.Lang_YML.getString("TakeBlackItemsInNoPermissionHome");
                                        if (message.contains("<type>")) {
                                           message = message.replace(
-                                             "<type>", (__cfg2.get(j)).toUpperCase()
+                                             "<type>", (blackItems.get(j)).toUpperCase()
                                           );
                                        }
 
@@ -313,7 +291,6 @@ public class init implements Listener {
                for (World world : Bukkit.getWorlds()) {
                   if (Util.CheckIsHome(world.getName().replace(Variable.world_prefix, ""))) {
                      HashMap<String, Integer> entity_map = new HashMap<>();
-
                      for (Entity entity : world.getEntities()) {
                         String type = null;
                         if (Bukkit.getBukkitVersion().toString().contains("1.12.2")) {
@@ -333,9 +310,9 @@ public class init implements Listener {
                         } else {
                            int now_amount = entity_map.get(type);
 
-                           var __cfg3 = Main.JavaPlugin.getConfig().getStringList("EntityList");
-                           for (int c = 0; c < __cfg3.size(); c++) {
-                              String[] args = (__cfg3.get(c)).split("\\|");
+                           java.util.List<String> entityRules = Main.JavaPlugin.getConfig().getStringList("EntityList");
+                           for (int c = 0; c < entityRules.size(); c++) {
+                              String[] args = (entityRules.get(c)).split("\\|");
                               if (args[0].toUpperCase().contains(type.toUpperCase())) {
                                  int Max_Amount = Integer.valueOf(args[1]);
                                  if (now_amount > Max_Amount) {
@@ -369,10 +346,7 @@ public class init implements Listener {
                public void run() {
                   for (World temp : Bukkit.getWorlds()) {
                      boolean is_jump = false;
-
-                     var __cfg4 = Main.JavaPlugin.getConfig().getStringList("UnAutoSaveWorlds");
-                     for (int i = 0; i < __cfg4.size(); i++) {
-                        String str = __cfg4.get(i);
+                     for (String str : Main.JavaPlugin.getConfig().getStringList("UnAutoSaveWorlds")) {
                         if (str.equalsIgnoreCase(temp.getName().replace(Variable.world_prefix, ""))) {
                            is_jump = true;
                            break;
@@ -399,7 +373,6 @@ public class init implements Listener {
                   for (World world : Bukkit.getWorlds()) {
                      if (Util.CheckIsHome(world.getName().replaceAll(Variable.world_prefix, ""))) {
                         int amount = 0;
-
                         for (Entity entity : world.getEntities()) {
                            if (entity.getType() == EntityType.ARMOR_STAND && ++amount > Main.JavaPlugin.getConfig().getInt("ArmorStand")) {
                               entity.remove();
@@ -433,7 +406,6 @@ public class init implements Listener {
 
                         boolean check_has_copy = true;
                         String folderToCompress = "";
-
                         for (String worldname : MySQL.getAllWorlds()) {
                            if (MySQL.getServer(worldname).equalsIgnoreCase(Main.JavaPlugin.getConfig().getString("Server"))) {
                               if (MySQL.getVisitTime(worldname).equalsIgnoreCase("")) {
@@ -458,7 +430,7 @@ public class init implements Listener {
                                  try {
                                     Util.copyDir(f.getPath(), oldDir);
                                     folderToCompress = Variable.custom_autobackup_location + Variable.file_loc_prefix + time;
-                                 } catch (Exception var24) {
+                                 } catch (Exception failure) {
                                     check_has_copy = false;
                                  }
                               }
@@ -470,8 +442,8 @@ public class init implements Listener {
 
                            try {
                               ZIP.zipFolder(OriginalBackup_location, zipFileName);
-                           } catch (IOException var23) {
-                              var23.printStackTrace();
+                           } catch (IOException ioFailure) {
+                              ioFailure.printStackTrace();
                            }
 
                            Util.deleteFile(new File(OriginalBackup_location));
@@ -486,9 +458,7 @@ public class init implements Listener {
 
                         String folderToCompress = null;
                         boolean check_has_copy = true;
-
-                        File[] arrayOfFile;
-                        for (File temp : arrayOfFile = folder.listFiles()) {
+                        for (File temp : folder.listFiles()) {
                            long lastModified = temp.lastModified();
                            long nowlong = System.currentTimeMillis();
                            long distance = (nowlong - lastModified) / 86400000L;
@@ -513,7 +483,7 @@ public class init implements Listener {
                               try {
                                  Util.copyDir(fx.getPath(), oldDir);
                                  folderToCompress = Variable.custom_autobackup_location + Variable.file_loc_prefix + time;
-                              } catch (Exception var22) {
+                              } catch (Exception failure) {
                                  check_has_copy = false;
                               }
                            }
@@ -524,8 +494,8 @@ public class init implements Listener {
 
                            try {
                               ZIP.zipFolder(OriginalBackup_locationx, zipFileName);
-                           } catch (IOException var21) {
-                              var21.printStackTrace();
+                           } catch (IOException ioFailure) {
+                              ioFailure.printStackTrace();
                            }
 
                            Util.deleteFile(new File(OriginalBackup_locationx));
@@ -544,14 +514,13 @@ public class init implements Listener {
          (new BukkitRunnable() {
                public void run() {
                   boolean has_been_solve = false;
-
                   for (World world : Bukkit.getWorlds()) {
                      if (Util.CheckIsHome(world.getName().replace(Variable.world_prefix, ""))) {
                         boolean in_whitelist = false;
 
-                        var __cfg5 = Main.JavaPlugin.getConfig().getStringList("UnOptimizeWorlds");
-                        for (int i = 0; i < __cfg5.size(); i++) {
-                           if ((__cfg5.get(i))
+                        java.util.List<String> unoptimizedWorlds = Main.JavaPlugin.getConfig().getStringList("UnOptimizeWorlds");
+                        for (int i = 0; i < unoptimizedWorlds.size(); i++) {
+                           if ((unoptimizedWorlds.get(i))
                               .equalsIgnoreCase(world.getName().replace(Variable.world_prefix, ""))) {
                               in_whitelist = true;
                               break;
@@ -565,19 +534,16 @@ public class init implements Listener {
                                  Bukkit.unloadWorld(world, true);
                               }
                            } else if (Main.JavaPlugin.getConfig().getInt("OptimizeType") == 2) {
-                              Chunk[] arrayOfChunk;
-                              for (Chunk temp_chunk : arrayOfChunk = world.getLoadedChunks()) {
+                              for (Chunk temp_chunk : world.getLoadedChunks()) {
                                  boolean check_player = false;
                                  boolean check_cable = false;
-
-                                 BlockState[] arrayOfBlockState;
-                                 for (BlockState bs : arrayOfBlockState = temp_chunk.getTileEntities()) {
+                                 for (BlockState bs : temp_chunk.getTileEntities()) {
                                     try {
                                        if (Util.getNBTString(bs).toUpperCase().contains("IC2:CABLE")) {
                                           check_cable = true;
                                           break;
                                        }
-                                    } catch (NoClassDefFoundError var17) {
+                                    } catch (NoClassDefFoundError absent) {
                                        check_cable = false;
                                     }
                                  }
@@ -629,7 +595,6 @@ public class init implements Listener {
                   List<String> UnLoadList = new ArrayList<>();
                   String WarnStr = "";
                   String UnLoadStr = "";
-
                   for (StaticsTick st : Variable.world_StaticsTick) {
                      World world = Bukkit.getWorld(Variable.world_prefix + st.name);
                      int tiles = st.tile;
@@ -659,9 +624,7 @@ public class init implements Listener {
 
                      if (Main.JavaPlugin.getConfig().getBoolean("CheckTipToAllPlayers")) {
                         if (WarnList.size() != 0) {
-                           var __cfg6 = Variable.Lang_YML.getStringList("WarnLanguage");
-                           for (int i = 0; i < __cfg6.size(); i++) {
-                              String message = __cfg6.get(i);
+                           for (String message : Variable.Lang_YML.getStringList("WarnLanguage")) {
                               if (message.contains("<WarnList>")) {
                                  message = message.replace("<WarnList>", WarnList.toString());
                               }
@@ -671,9 +634,7 @@ public class init implements Listener {
                         }
 
                         if (UnLoadList.size() != 0) {
-                           var __cfg7 = Variable.Lang_YML.getStringList("UnLoadLanguage");
-                           for (int i = 0; i < __cfg7.size(); i++) {
-                              String message = __cfg7.get(i);
+                           for (String message : Variable.Lang_YML.getStringList("UnLoadLanguage")) {
                               if (message.contains("<UnLoadList>")) {
                                  message = message.replace("<UnLoadList>", UnLoadList.toString());
                               }
@@ -683,9 +644,7 @@ public class init implements Listener {
                         }
                      } else {
                         if (WarnList.size() != 0) {
-                           var __cfg8 = Variable.Lang_YML.getStringList("WarnLanguage");
-                           for (int i = 0; i < __cfg8.size(); i++) {
-                              String message = __cfg8.get(i);
+                           for (String message : Variable.Lang_YML.getStringList("WarnLanguage")) {
                               if (message.contains("<WarnList>")) {
                                  message = message.replace("<WarnList>", WarnList.toString());
                               }
@@ -695,9 +654,7 @@ public class init implements Listener {
                         }
 
                         if (UnLoadList.size() != 0) {
-                           var __cfg9 = Variable.Lang_YML.getStringList("UnLoadLanguage");
-                           for (int i = 0; i < __cfg9.size(); i++) {
-                              String message = __cfg9.get(i);
+                           for (String message : Variable.Lang_YML.getStringList("UnLoadLanguage")) {
                               if (message.contains("<UnLoadList>")) {
                                  message = message.replace("<UnLoadList>", UnLoadList.toString());
                               }
@@ -726,14 +683,10 @@ public class init implements Listener {
                         Integer Amount = 0;
                         Boolean Check = false;
                         Integer Del = 0;
-
                         for (Entity entity : temp.getEntities()) {
                            if (entity instanceof LivingEntity) {
                               boolean check_white = false;
-
-                              var __cfg10 = Main.JavaPlugin.getConfig().getStringList("WhiteEntities");
-                              for (int c = 0; c < __cfg10.size(); c++) {
-                                 String white = __cfg10.get(c);
+                              for (String white : Main.JavaPlugin.getConfig().getStringList("WhiteEntities")) {
                                  if (white.equalsIgnoreCase(entity.getType().toString())) {
                                     check_white = true;
                                     break;
@@ -778,7 +731,6 @@ public class init implements Listener {
                         Integer Amount = 0;
                         Boolean Check = false;
                         Integer Del = 0;
-
                         for (Entity entity : temp.getEntities()) {
                            if (BukkitCompat.isDroppedItem(entity)) {
                               Amount = Amount + 1;
@@ -830,9 +782,7 @@ public class init implements Listener {
                      if (folder.listFiles() == null) {
                         return;
                      }
-
-                     File[] arrayOfFile;
-                     for (File temp : arrayOfFile = folder.listFiles()) {
+                     for (File temp : folder.listFiles()) {
                         String want_to = temp.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
                         if (Bukkit.getWorld(Variable.world_prefix + want_to) != null) {
                            World world = Bukkit.getWorld(Variable.world_prefix + want_to);
@@ -889,7 +839,6 @@ public class init implements Listener {
             public void run() {
                init.OPS_redis.clear();
                init.MEMBERS_redis.clear();
-
                for (World world : Bukkit.getWorlds()) {
                   Home temp_home = HomeAPI.getHome(world.getName());
                   if (temp_home != null) {

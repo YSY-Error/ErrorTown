@@ -43,8 +43,8 @@ public class WorldLoadListener implements Listener {
 
             Util.applyHomeWorldRules(world, home);
             HomeSpawnUtil.applyHomeSpawnCompensation(world);
-         } catch (Exception var6) {
-            com.Util.Diag.warnOnce("world-load-rules", "Could not apply home rules to a loading world", var6);
+         } catch (Exception failure) {
+            com.Util.Diag.warnOnce("world-load-rules", "Could not apply home rules to a loading world", failure);
          }
       }
    }

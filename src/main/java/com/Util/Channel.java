@@ -51,8 +51,7 @@ public class Channel {
 
    public static void waitToLoad(final Player p, final String Server, final String home_name) throws IOException {
       if (Bukkit.getWorld(Variable.world_prefix + home_name) != null) {
-         Chunk[] arrayOfChunk;
-         for (Chunk chunk : arrayOfChunk = Bukkit.getWorld(Variable.world_prefix + home_name).getLoadedChunks()) {
+         for (Chunk chunk : Bukkit.getWorld(Variable.world_prefix + home_name).getLoadedChunks()) {
             chunk.unload(true);
          }
 
@@ -82,8 +81,8 @@ public class Channel {
             try {
                msgout.writeUTF("waitToLoad," + p.getName() + "," + home_name + "," + f.getAbsolutePath());
                msgout.writeShort(123);
-            } catch (IOException var6) {
-               var6.printStackTrace();
+            } catch (IOException ioFailure) {
+               ioFailure.printStackTrace();
             }
 
             out.writeShort(msgbytes.toByteArray().length);

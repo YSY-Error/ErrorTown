@@ -112,9 +112,7 @@ public class CreatureSpawnListener implements Listener {
                type = event.getEntity().getType().toString().toUpperCase();
             }
 
-            var __cfg0 = Main.JavaPlugin.getConfig().getStringList("BlackEntitiesList");
-            for (int d = 0; d < __cfg0.size(); d++) {
-               String temp = __cfg0.get(d);
+            for (String temp : Main.JavaPlugin.getConfig().getStringList("BlackEntitiesList")) {
                if (type.toUpperCase().equalsIgnoreCase(temp.toUpperCase())) {
                   livingEntity.remove();
                   break;

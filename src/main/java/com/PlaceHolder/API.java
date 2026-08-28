@@ -199,15 +199,15 @@ public class API extends PlaceholderExpansion {
                }
 
                if (check.contains("World_ManageList_")) {
-                  String tempxx = check.replace("World_ManageList_", "");
-                  if (!Util.CheckIsHome(tempxx)) {
+                  String manageListWorldName = check.replace("World_ManageList_", "");
+                  if (!Util.CheckIsHome(manageListWorldName)) {
                      return Variable.Lang_YML.getString("PlaceHolders.NotIsHome");
                   }
 
                   if (Variable.bungee) {
-                     result_check = MySQL.getOP(tempxx).toString();
+                     result_check = MySQL.getOP(manageListWorldName).toString();
                   } else {
-                     File f = new File(Variable.Tempf, tempxx + ".yml");
+                     File f = new File(Variable.Tempf, manageListWorldName + ".yml");
                      YamlConfiguration yml = YamlConfiguration.loadConfiguration(f);
                      List<String> list = yml.getStringList("OP");
                      result_check = list.toString();
@@ -215,15 +215,15 @@ public class API extends PlaceholderExpansion {
                }
 
                if (check.contains("World_BlackList_")) {
-                  String tempxxx = check.replace("World_BlackList_", "");
-                  if (!Util.CheckIsHome(tempxxx)) {
+                  String blacklistWorldName = check.replace("World_BlackList_", "");
+                  if (!Util.CheckIsHome(blacklistWorldName)) {
                      return Variable.Lang_YML.getString("PlaceHolders.NotIsHome");
                   }
 
                   if (Variable.bungee) {
-                     result_check = MySQL.getDenys(tempxxx).toString();
+                     result_check = MySQL.getDenys(blacklistWorldName).toString();
                   } else {
-                     File f = new File(Variable.Tempf, tempxxx + ".yml");
+                     File f = new File(Variable.Tempf, blacklistWorldName + ".yml");
                      YamlConfiguration yml = YamlConfiguration.loadConfiguration(f);
                      List<String> list = yml.getStringList("Denys");
                      result_check = list.toString();
@@ -231,29 +231,29 @@ public class API extends PlaceholderExpansion {
                }
 
                if (check.contains("World_Level_")) {
-                  String tempxxxx = check.replace("World_Level_", "");
-                  if (!Util.CheckIsHome(tempxxxx)) {
+                  String levelWorldName = check.replace("World_Level_", "");
+                  if (!Util.CheckIsHome(levelWorldName)) {
                      return Variable.Lang_YML.getString("PlaceHolders.NotIsHome");
                   }
 
                   if (Variable.bungee) {
-                     result_check = MySQL.getLevel(tempxxxx);
+                     result_check = MySQL.getLevel(levelWorldName);
                   } else {
-                     File f = new File(Variable.Tempf, tempxxxx + ".yml");
+                     File f = new File(Variable.Tempf, levelWorldName + ".yml");
                      YamlConfiguration yml = YamlConfiguration.loadConfiguration(f);
                      result_check = String.valueOf(yml.getInt("Level"));
                   }
                }
 
                if (check.contains("World_Type_")) {
-                  String tempxxxxx = check.replace("World_Type_", "");
-                  if (!Util.CheckIsHome(tempxxxxx)) {
+                  String typeWorldName = check.replace("World_Type_", "");
+                  if (!Util.CheckIsHome(typeWorldName)) {
                      return Variable.Lang_YML.getString("PlaceHolders.NotIsHome");
                   }
 
                   result_check = Variable.Lang_YML.getString("PlaceHolders.Error");
-                  if (Bukkit.getWorld(Variable.world_prefix + tempxxxxx) != null) {
-                     World world = Bukkit.getWorld(Variable.world_prefix + tempxxxxx);
+                  if (Bukkit.getWorld(Variable.world_prefix + typeWorldName) != null) {
+                     World world = Bukkit.getWorld(Variable.world_prefix + typeWorldName);
                      result_check = world.getWorldType().toString();
                   }
                }
@@ -282,34 +282,34 @@ public class API extends PlaceholderExpansion {
             return result_check;
          } else {
             if (check.equalsIgnoreCase("Name")) {
-               String tempxxxxxx = player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "");
+               String viewerHomeName = player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "");
                if (Util.CheckIsHome(player.getPlayer().getWorld().getName().replace(Variable.world_prefix, ""))) {
-                  tempxxxxxx = Variable.Lang_YML.getString("PlaceHolders.WorldName");
-                  if (tempxxxxxx.contains("<PlayerName>")) {
-                     tempxxxxxx = tempxxxxxx.replace("<PlayerName>", player.getPlayer().getWorld().getName().replace(Variable.world_prefix, ""));
+                  viewerHomeName = Variable.Lang_YML.getString("PlaceHolders.WorldName");
+                  if (viewerHomeName.contains("<PlayerName>")) {
+                     viewerHomeName = viewerHomeName.replace("<PlayerName>", player.getPlayer().getWorld().getName().replace(Variable.world_prefix, ""));
                   }
 
-                  if (tempxxxxxx.contains("<WorldName>")) {
-                     tempxxxxxx = tempxxxxxx.replace("<WorldName>", player.getPlayer().getWorld().getName().replace(Variable.world_prefix, ""));
+                  if (viewerHomeName.contains("<WorldName>")) {
+                     viewerHomeName = viewerHomeName.replace("<WorldName>", player.getPlayer().getWorld().getName().replace(Variable.world_prefix, ""));
                   }
                } else if (Util.getAliasName(player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "")) != null) {
-                  tempxxxxxx = Util.getAliasName(player.getPlayer().getWorld().getName().replace(Variable.world_prefix, ""));
+                  viewerHomeName = Util.getAliasName(player.getPlayer().getWorld().getName().replace(Variable.world_prefix, ""));
                } else if (!PlaceholderAPI.setPlaceholders(player.getPlayer(), "%multiverse_world_alias%").equalsIgnoreCase("%multiverse_world_alias%")) {
-                  tempxxxxxx = PlaceholderAPI.setPlaceholders(player.getPlayer(), "%multiverse_world_alias%");
+                  viewerHomeName = PlaceholderAPI.setPlaceholders(player.getPlayer(), "%multiverse_world_alias%");
                }
 
-               result_check = String.valueOf(tempxxxxxx);
+               result_check = String.valueOf(viewerHomeName);
             }
 
             if (check.equalsIgnoreCase("World_Alias")) {
-               String tempxxxxxx = player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "");
+               String viewerHomeName = player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "");
                if (Util.getAliasName(player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "")) != null) {
-                  tempxxxxxx = Util.getAliasName(player.getPlayer().getWorld().getName().replace(Variable.world_prefix, ""));
+                  viewerHomeName = Util.getAliasName(player.getPlayer().getWorld().getName().replace(Variable.world_prefix, ""));
                } else if (!PlaceholderAPI.setPlaceholders(player, "%multiverse_world_alias%").equalsIgnoreCase("%multiverse_world_alias%")) {
-                  tempxxxxxx = PlaceholderAPI.setPlaceholders(player, "%multiverse_world_alias%");
+                  viewerHomeName = PlaceholderAPI.setPlaceholders(player, "%multiverse_world_alias%");
                }
 
-               result_check = String.valueOf(tempxxxxxx);
+               result_check = String.valueOf(viewerHomeName);
             }
 
             if (check.equalsIgnoreCase("Tile")) {
@@ -330,7 +330,7 @@ public class API extends PlaceholderExpansion {
                         amount++;
                      }
                   }
-               } catch (ExceptionInInitializerError var20) {
+               } catch (ExceptionInInitializerError initFailure) {
                   return Variable.Lang_YML.getString("PlaceHolders.Error");
                }
 
@@ -351,7 +351,7 @@ public class API extends PlaceholderExpansion {
                         amount++;
                      }
                   }
-               } catch (ExceptionInInitializerError var19) {
+               } catch (ExceptionInInitializerError initFailure) {
                   return Variable.Lang_YML.getString("PlaceHolders.Error");
                }
 
@@ -369,7 +369,6 @@ public class API extends PlaceholderExpansion {
                }
 
                int amount = 0;
-
                for (Chunk chunk : world.getLoadedChunks()) {
                   amount += chunk.getEntities().length;
                }
@@ -384,7 +383,6 @@ public class API extends PlaceholderExpansion {
                }
 
                int amount = 0;
-
                for (Chunk chunk : world.getLoadedChunks()) {
                   amount += chunk.getEntities().length;
                }
@@ -403,7 +401,6 @@ public class API extends PlaceholderExpansion {
                }
 
                int amount = 0;
-
                for (Chunk chunk : world.getLoadedChunks()) {
                   for (Entity entity : chunk.getEntities()) {
                      if (BukkitCompat.isDroppedItem(entity)) {
@@ -422,7 +419,6 @@ public class API extends PlaceholderExpansion {
                }
 
                int amount = 0;
-
                for (Chunk chunk : world.getLoadedChunks()) {
                   for (Entity entityx : chunk.getEntities()) {
                      if (BukkitCompat.isDroppedItem(entityx)) {
@@ -583,8 +579,8 @@ public class API extends PlaceholderExpansion {
                      }
                   } else {
                      File f = new File(Variable.Tempf, player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "") + ".yml");
-                     YamlConfiguration ymlxx = YamlConfiguration.loadConfiguration(f);
-                     if (ymlxx.getBoolean("pickup")) {
+                     YamlConfiguration homeYml0 = YamlConfiguration.loadConfiguration(f);
+                     if (homeYml0.getBoolean("pickup")) {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Enable");
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Disable");
@@ -604,12 +600,12 @@ public class API extends PlaceholderExpansion {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Disable");
                      }
                   } else {
-                     YamlConfiguration ymlxx = this.loadHomeYml(selfHomeName);
-                     if (ymlxx == null) {
+                     YamlConfiguration homeYml0 = this.loadHomeYml(selfHomeName);
+                     if (homeYml0 == null) {
                         return Variable.Lang_YML.getString("PlaceHolders.NoHome");
                      }
 
-                     if (ymlxx.getBoolean("drop")) {
+                     if (homeYml0.getBoolean("drop")) {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Enable");
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Disable");
@@ -630,8 +626,8 @@ public class API extends PlaceholderExpansion {
                      }
                   } else {
                      File f = new File(Variable.Tempf, player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "") + ".yml");
-                     YamlConfiguration ymlxxx = YamlConfiguration.loadConfiguration(f);
-                     if (ymlxxx.getBoolean("drop")) {
+                     YamlConfiguration homeYml = YamlConfiguration.loadConfiguration(f);
+                     if (homeYml.getBoolean("drop")) {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Enable");
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Disable");
@@ -647,12 +643,12 @@ public class API extends PlaceholderExpansion {
                   if (Variable.bungee) {
                      result_check = MySQL.getMembers(selfHomeName).toString();
                   } else {
-                     YamlConfiguration ymlxxx = this.loadHomeYml(selfHomeName);
-                     if (ymlxxx == null) {
+                     YamlConfiguration homeYml = this.loadHomeYml(selfHomeName);
+                     if (homeYml == null) {
                         return Variable.Lang_YML.getString("PlaceHolders.NoHome");
                      }
 
-                     List<String> list = ymlxxx.getStringList("Members");
+                     List<String> list = homeYml.getStringList("Members");
                      result_check = list.toString();
                   }
                }
@@ -666,8 +662,8 @@ public class API extends PlaceholderExpansion {
                      result_check = MySQL.getMembers(player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "")).toString();
                   } else {
                      File f = new File(Variable.Tempf, player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "") + ".yml");
-                     YamlConfiguration ymlxxx = YamlConfiguration.loadConfiguration(f);
-                     List<String> list = ymlxxx.getStringList("Members");
+                     YamlConfiguration homeYml = YamlConfiguration.loadConfiguration(f);
+                     List<String> list = homeYml.getStringList("Members");
                      result_check = list.toString();
                   }
                }
@@ -680,12 +676,12 @@ public class API extends PlaceholderExpansion {
                   if (Variable.bungee) {
                      result_check = MySQL.getOP(selfHomeName).toString();
                   } else {
-                     YamlConfiguration ymlxxx = this.loadHomeYml(selfHomeName);
-                     if (ymlxxx == null) {
+                     YamlConfiguration homeYml = this.loadHomeYml(selfHomeName);
+                     if (homeYml == null) {
                         return Variable.Lang_YML.getString("PlaceHolders.NoHome");
                      }
 
-                     List<String> list = ymlxxx.getStringList("OP");
+                     List<String> list = homeYml.getStringList("OP");
                      result_check = list.toString();
                   }
                }
@@ -699,8 +695,8 @@ public class API extends PlaceholderExpansion {
                      result_check = MySQL.getOP(player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "")).toString();
                   } else {
                      File f = new File(Variable.Tempf, player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "") + ".yml");
-                     YamlConfiguration ymlxxx = YamlConfiguration.loadConfiguration(f);
-                     List<String> list = ymlxxx.getStringList("OP");
+                     YamlConfiguration homeYml = YamlConfiguration.loadConfiguration(f);
+                     List<String> list = homeYml.getStringList("OP");
                      result_check = list.toString();
                   }
                }
@@ -713,12 +709,12 @@ public class API extends PlaceholderExpansion {
                   if (Variable.bungee) {
                      result_check = MySQL.getDenys(selfHomeName).toString();
                   } else {
-                     YamlConfiguration ymlxxx = this.loadHomeYml(selfHomeName);
-                     if (ymlxxx == null) {
+                     YamlConfiguration homeYml = this.loadHomeYml(selfHomeName);
+                     if (homeYml == null) {
                         return Variable.Lang_YML.getString("PlaceHolders.NoHome");
                      }
 
-                     List<String> list = ymlxxx.getStringList("Denys");
+                     List<String> list = homeYml.getStringList("Denys");
                      result_check = list.toString();
                   }
                }
@@ -732,8 +728,8 @@ public class API extends PlaceholderExpansion {
                      result_check = MySQL.getDenys(player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "")).toString();
                   } else {
                      File f = new File(Variable.Tempf, player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "") + ".yml");
-                     YamlConfiguration ymlxxx = YamlConfiguration.loadConfiguration(f);
-                     List<String> list = ymlxxx.getStringList("Denys");
+                     YamlConfiguration homeYml = YamlConfiguration.loadConfiguration(f);
+                     List<String> list = homeYml.getStringList("Denys");
                      result_check = list.toString();
                   }
                }
@@ -746,12 +742,12 @@ public class API extends PlaceholderExpansion {
                   if (Variable.bungee) {
                      result_check = String.valueOf(MySQL.getMembers(selfHomeName).size());
                   } else {
-                     YamlConfiguration ymlxxx = this.loadHomeYml(selfHomeName);
-                     if (ymlxxx == null) {
+                     YamlConfiguration homeYml = this.loadHomeYml(selfHomeName);
+                     if (homeYml == null) {
                         return Variable.Lang_YML.getString("PlaceHolders.NoHome");
                      }
 
-                     result_check = String.valueOf(ymlxxx.getStringList("Members").size());
+                     result_check = String.valueOf(homeYml.getStringList("Members").size());
                   }
                }
 
@@ -763,12 +759,12 @@ public class API extends PlaceholderExpansion {
                   if (Variable.bungee) {
                      result_check = String.valueOf(MySQL.getOP(selfHomeName).size());
                   } else {
-                     YamlConfiguration ymlxxx = this.loadHomeYml(selfHomeName);
-                     if (ymlxxx == null) {
+                     YamlConfiguration homeYml = this.loadHomeYml(selfHomeName);
+                     if (homeYml == null) {
                         return Variable.Lang_YML.getString("PlaceHolders.NoHome");
                      }
 
-                     result_check = String.valueOf(ymlxxx.getStringList("OP").size());
+                     result_check = String.valueOf(homeYml.getStringList("OP").size());
                   }
                }
 
@@ -787,13 +783,13 @@ public class API extends PlaceholderExpansion {
                         0
                      ));
                   } else {
-                     YamlConfiguration ymlxxx = this.loadHomeYml(selfHomeName);
-                     if (ymlxxx == null) {
+                     YamlConfiguration homeYml = this.loadHomeYml(selfHomeName);
+                     if (homeYml == null) {
                         return Variable.Lang_YML.getString("PlaceHolders.NoHome");
                      }
 
                      result_check = String.valueOf(HomeTerrainPolicy.configuredBorderSize(
-                        ymlxxx.getInt("Level"),
+                        homeYml.getInt("Level"),
                         Main.JavaPlugin.getConfig().getBoolean("HomeTerrain.Enabled", false),
                         Main.JavaPlugin.getConfig().getIntegerList("HomeUpgrade.LevelSizes"),
                         Main.JavaPlugin.getConfig().getInt("WorldBoard"),
@@ -819,9 +815,9 @@ public class API extends PlaceholderExpansion {
                      ));
                   } else {
                      File f = new File(Variable.Tempf, currentHomeName + ".yml");
-                     YamlConfiguration ymlxxx = YamlConfiguration.loadConfiguration(f);
+                     YamlConfiguration homeYml = YamlConfiguration.loadConfiguration(f);
                      result_check = String.valueOf(HomeTerrainPolicy.configuredBorderSize(
-                        ymlxxx.getInt("Level"),
+                        homeYml.getInt("Level"),
                         Main.JavaPlugin.getConfig().getBoolean("HomeTerrain.Enabled", false),
                         Main.JavaPlugin.getConfig().getIntegerList("HomeUpgrade.LevelSizes"),
                         Main.JavaPlugin.getConfig().getInt("WorldBoard"),
@@ -847,9 +843,9 @@ public class API extends PlaceholderExpansion {
                      ));
                   } else {
                      File f = new File(Variable.Tempf, currentHomeName + ".yml");
-                     YamlConfiguration ymlxxx = YamlConfiguration.loadConfiguration(f);
+                     YamlConfiguration homeYml = YamlConfiguration.loadConfiguration(f);
                      result_check = String.valueOf(HomeTerrainPolicy.configuredBorderSize(
-                        ymlxxx.getInt("Level") + 1,
+                        homeYml.getInt("Level") + 1,
                         Main.JavaPlugin.getConfig().getBoolean("HomeTerrain.Enabled", false),
                         Main.JavaPlugin.getConfig().getIntegerList("HomeUpgrade.LevelSizes"),
                         Main.JavaPlugin.getConfig().getInt("WorldBoard"),
@@ -893,14 +889,14 @@ public class API extends PlaceholderExpansion {
                      );
                   } else {
                      File f = new File(Variable.Tempf, player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "") + ".yml");
-                     YamlConfiguration ymlxxx = YamlConfiguration.loadConfiguration(f);
+                     YamlConfiguration homeYml = YamlConfiguration.loadConfiguration(f);
                      result_check = String.valueOf(
                         "§aX: §d"
-                           + String.format("%.2f", ymlxxx.getDouble("X"))
+                           + String.format("%.2f", homeYml.getDouble("X"))
                            + "§a,Y: §d"
-                           + String.format("%.2f", ymlxxx.getDouble("Y"))
+                           + String.format("%.2f", homeYml.getDouble("Y"))
                            + "§a,Z: §d"
-                           + String.format("%.2f", ymlxxx.getDouble("Z"))
+                           + String.format("%.2f", homeYml.getDouble("Z"))
                      );
                   }
                }
@@ -917,12 +913,12 @@ public class API extends PlaceholderExpansion {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Disable");
                      }
                   } else {
-                     YamlConfiguration ymlxxx = this.loadHomeYml(selfHomeName);
-                     if (ymlxxx == null) {
+                     YamlConfiguration homeYml = this.loadHomeYml(selfHomeName);
+                     if (homeYml == null) {
                         return Variable.Lang_YML.getString("PlaceHolders.NoHome");
                      }
 
-                     if (ymlxxx.getBoolean("locktime")) {
+                     if (homeYml.getBoolean("locktime")) {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Enable");
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Disable");
@@ -943,8 +939,8 @@ public class API extends PlaceholderExpansion {
                      }
                   } else {
                      File f = new File(Variable.Tempf, player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "") + ".yml");
-                     YamlConfiguration ymlxxxx = YamlConfiguration.loadConfiguration(f);
-                     if (ymlxxxx.getBoolean("locktime")) {
+                     YamlConfiguration homeYml2 = YamlConfiguration.loadConfiguration(f);
+                     if (homeYml2.getBoolean("locktime")) {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Enable");
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Disable");
@@ -964,12 +960,12 @@ public class API extends PlaceholderExpansion {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Disable");
                      }
                   } else {
-                     YamlConfiguration ymlxxxx = this.loadHomeYml(selfHomeName);
-                     if (ymlxxxx == null) {
+                     YamlConfiguration homeYml2 = this.loadHomeYml(selfHomeName);
+                     if (homeYml2 == null) {
                         return Variable.Lang_YML.getString("PlaceHolders.NoHome");
                      }
 
-                     if (ymlxxxx.getBoolean("lockweather")) {
+                     if (homeYml2.getBoolean("lockweather")) {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Enable");
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Disable");
@@ -990,8 +986,8 @@ public class API extends PlaceholderExpansion {
                      }
                   } else {
                      File f = new File(Variable.Tempf, player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "") + ".yml");
-                     YamlConfiguration ymlxxxxx = YamlConfiguration.loadConfiguration(f);
-                     if (ymlxxxxx.getBoolean("lockweather")) {
+                     YamlConfiguration homeYml3 = YamlConfiguration.loadConfiguration(f);
+                     if (homeYml3.getBoolean("lockweather")) {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Enable");
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Disable");
@@ -1011,12 +1007,12 @@ public class API extends PlaceholderExpansion {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.NoPublic");
                      }
                   } else {
-                     YamlConfiguration ymlxxxxx = this.loadHomeYml(selfHomeName);
-                     if (ymlxxxxx == null) {
+                     YamlConfiguration homeYml3 = this.loadHomeYml(selfHomeName);
+                     if (homeYml3 == null) {
                         return Variable.Lang_YML.getString("PlaceHolders.NoHome");
                      }
 
-                     if (ymlxxxxx.getBoolean("Public")) {
+                     if (homeYml3.getBoolean("Public")) {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Public");
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.NoPublic");
@@ -1037,8 +1033,8 @@ public class API extends PlaceholderExpansion {
                      }
                   } else {
                      File f = new File(Variable.Tempf, player.getPlayer().getWorld().getName().replace(Variable.world_prefix, "") + ".yml");
-                     YamlConfiguration ymlxxxxxx = YamlConfiguration.loadConfiguration(f);
-                     if (ymlxxxxxx.getBoolean("Public")) {
+                     YamlConfiguration homeYml4 = YamlConfiguration.loadConfiguration(f);
+                     if (homeYml4.getBoolean("Public")) {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.Public");
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.NoPublic");
@@ -1066,13 +1062,13 @@ public class API extends PlaceholderExpansion {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.HasAlreadyReachLevelMax");
                      }
                   } else {
-                     YamlConfiguration ymlxxxxxx = this.loadHomeYml(selfHomeName);
-                     if (ymlxxxxxx == null) {
+                     YamlConfiguration homeYml4 = this.loadHomeYml(selfHomeName);
+                     if (homeYml4 == null) {
                         return Variable.Lang_YML.getString("PlaceHolders.NoHome");
                      }
 
-                     if (Main.JavaPlugin.getConfig().getInt("MaxLevel") != ymlxxxxxx.getInt("Level")) {
-                        result_check = String.valueOf(Main.JavaPlugin.getConfig().getDoubleList("MoneyNeed").get(ymlxxxxxx.getInt("Level") - 1));
+                     if (Main.JavaPlugin.getConfig().getInt("MaxLevel") != homeYml4.getInt("Level")) {
+                        result_check = String.valueOf(Main.JavaPlugin.getConfig().getDoubleList("MoneyNeed").get(homeYml4.getInt("Level") - 1));
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.HasAlreadyReachLevelMax");
                      }
@@ -1093,13 +1089,13 @@ public class API extends PlaceholderExpansion {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.HasAlreadyReachLevelMax");
                      }
                   } else {
-                     YamlConfiguration ymlxxxxxxx = this.loadHomeYml(selfHomeName);
-                     if (ymlxxxxxxx == null) {
+                     YamlConfiguration selfHomeYml = this.loadHomeYml(selfHomeName);
+                     if (selfHomeYml == null) {
                         return Variable.Lang_YML.getString("PlaceHolders.NoHome");
                      }
 
-                     if (Main.JavaPlugin.getConfig().getInt("MaxLevel") != ymlxxxxxxx.getInt("Level")) {
-                        result_check = String.valueOf(Main.JavaPlugin.getConfig().getDoubleList("PointsNeed").get(ymlxxxxxxx.getInt("Level") - 1));
+                     if (Main.JavaPlugin.getConfig().getInt("MaxLevel") != selfHomeYml.getInt("Level")) {
+                        result_check = String.valueOf(Main.JavaPlugin.getConfig().getDoubleList("PointsNeed").get(selfHomeYml.getInt("Level") - 1));
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.HasAlreadyReachLevelMax");
                      }
@@ -1120,14 +1116,14 @@ public class API extends PlaceholderExpansion {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.HasAlreadyReachLevelMax");
                      }
                   } else {
-                     YamlConfiguration ymlxxxxxxxx = this.loadHomeYml(selfHomeName);
-                     if (ymlxxxxxxxx == null) {
+                     YamlConfiguration selfHomeYml2 = this.loadHomeYml(selfHomeName);
+                     if (selfHomeYml2 == null) {
                         return Variable.Lang_YML.getString("PlaceHolders.NoHome");
                      }
 
-                     if (Main.JavaPlugin.getConfig().getInt("MaxLevel") != ymlxxxxxxxx.getInt("Level")) {
+                     if (Main.JavaPlugin.getConfig().getInt("MaxLevel") != selfHomeYml2.getInt("Level")) {
                         result_check = String.valueOf(
-                           ((String)Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(ymlxxxxxxxx.getInt("Level") - 1)).split(",")[0]
+                           ((String)Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(selfHomeYml2.getInt("Level") - 1)).split(",")[0]
                         );
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.HasAlreadyReachLevelMax");
@@ -1150,14 +1146,14 @@ public class API extends PlaceholderExpansion {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.HasAlreadyReachLevelMax");
                      }
                   } else {
-                     YamlConfiguration ymlxxxxxxxxx = this.loadHomeYml(selfHomeName);
-                     if (ymlxxxxxxxxx == null) {
+                     YamlConfiguration selfHomeYml3 = this.loadHomeYml(selfHomeName);
+                     if (selfHomeYml3 == null) {
                         return Variable.Lang_YML.getString("PlaceHolders.NoHome");
                      }
 
-                     if (Main.JavaPlugin.getConfig().getInt("MaxLevel") != ymlxxxxxxxxx.getInt("Level")) {
+                     if (Main.JavaPlugin.getConfig().getInt("MaxLevel") != selfHomeYml3.getInt("Level")) {
                         result_check = String.valueOf(
-                           ((String)Main.JavaPlugin.getConfig().getStringList("ItemsChineseName").get(ymlxxxxxxxxx.getInt("Level") - 1)).split(",")[0]
+                           ((String)Main.JavaPlugin.getConfig().getStringList("ItemsChineseName").get(selfHomeYml3.getInt("Level") - 1)).split(",")[0]
                         );
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.HasAlreadyReachLevelMax");
@@ -1179,14 +1175,14 @@ public class API extends PlaceholderExpansion {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.HasAlreadyReachLevelMax");
                      }
                   } else {
-                     YamlConfiguration ymlxxxxxxxxxx = this.loadHomeYml(selfHomeName);
-                     if (ymlxxxxxxxxxx == null) {
+                     YamlConfiguration selfHomeYml4 = this.loadHomeYml(selfHomeName);
+                     if (selfHomeYml4 == null) {
                         return Variable.Lang_YML.getString("PlaceHolders.NoHome");
                      }
 
-                     if (Main.JavaPlugin.getConfig().getInt("MaxLevel") != ymlxxxxxxxxxx.getInt("Level")) {
+                     if (Main.JavaPlugin.getConfig().getInt("MaxLevel") != selfHomeYml4.getInt("Level")) {
                         result_check = String.valueOf(
-                           ((String)Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(ymlxxxxxxxxxx.getInt("Level") - 1)).split(",")[1]
+                           ((String)Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(selfHomeYml4.getInt("Level") - 1)).split(",")[1]
                         );
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.HasAlreadyReachLevelMax");
@@ -1329,10 +1325,8 @@ public class API extends PlaceholderExpansion {
                      list = lis;
                   } else {
                      File folder = new File(Variable.Tempf);
-
-                     File[] arrayOfFile;
-                     for (File tempxxxxxx : arrayOfFile = folder.listFiles()) {
-                        String want_to = tempxxxxxx.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
+                     for (File viewerHomeName : folder.listFiles()) {
+                        String want_to = viewerHomeName.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
                         list.add(want_to);
                      }
                   }
@@ -1359,7 +1353,6 @@ public class API extends PlaceholderExpansion {
 
                if (check.equalsIgnoreCase("LoadWorlds")) {
                   int amount = 0;
-
                   for (World world : Bukkit.getWorlds()) {
                      if (Util.CheckIsHome(world.getName().replace(Variable.world_prefix, ""))) {
                         amount++;
@@ -1370,8 +1363,8 @@ public class API extends PlaceholderExpansion {
                }
 
                if (check.toLowerCase().contains("HasPermission_")) {
-                  String tempxxxxxx = check.replace("HasPermission_", "");
-                  if (com.Util.Perm.has(player.getPlayer(), "ErrorTown." + tempxxxxxx)) {
+                  String viewerHomeName = check.replace("HasPermission_", "");
+                  if (com.Util.Perm.has(player.getPlayer(), "ErrorTown." + viewerHomeName)) {
                      result_check = String.valueOf(Variable.Lang_YML.getString("PlaceHolders.HasPermision"));
                   } else {
                      result_check = String.valueOf(Variable.Lang_YML.getString("PlaceHolders.NoPermission"));
@@ -1397,21 +1390,18 @@ public class API extends PlaceholderExpansion {
                   } else {
                      File folder = new File(Variable.Tempf);
                      List<Home> homelist = new ArrayList<>();
-
-                     File[] arrayOfFile;
-                     for (File tempxxxxxx : arrayOfFile = folder.listFiles()) {
-                        String want_to = tempxxxxxx.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
-                        YamlConfiguration ymlxxxxxxxxxxx = YamlConfiguration.loadConfiguration(tempxxxxxx);
-                        Home home = new Home(want_to, ymlxxxxxxxxxxx.getInt("Level"), ymlxxxxxxxxxxx.getInt("flowers"), ymlxxxxxxxxxxx.getInt("popularity"));
+                     for (File viewerHomeName : folder.listFiles()) {
+                        String want_to = viewerHomeName.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
+                        YamlConfiguration viewerHomeYml = YamlConfiguration.loadConfiguration(viewerHomeName);
+                        Home home = new Home(want_to, viewerHomeYml.getInt("Level"), viewerHomeYml.getInt("flowers"), viewerHomeYml.getInt("popularity"));
                         homelist.add(home);
                      }
-
                      for (int i = 0; i < homelist.size() - 1; i++) {
                         for (int j = 0; j < homelist.size() - 1 - i; j++) {
                            if (homelist.get(j).level < homelist.get(j + 1).level) {
-                              Home tempxxxxxx = homelist.get(j);
+                              Home viewerHomeName = homelist.get(j);
                               homelist.set(j, homelist.get(j + 1));
-                              homelist.set(j + 1, tempxxxxxx);
+                              homelist.set(j + 1, viewerHomeName);
                            }
                         }
                      }
@@ -1434,28 +1424,24 @@ public class API extends PlaceholderExpansion {
                   } else {
                      File folder = new File(Variable.Tempf);
                      List<Home> homelist = new ArrayList<>();
-
-                     File[] arrayOfFilex;
-                     for (File tempxxxxxx : arrayOfFilex = folder.listFiles()) {
-                        String want_to = tempxxxxxx.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
-                        YamlConfiguration ymlxxxxxxxxxxx = YamlConfiguration.loadConfiguration(tempxxxxxx);
-                        Home home = new Home(want_to, ymlxxxxxxxxxxx.getInt("Level"), ymlxxxxxxxxxxx.getInt("flowers"), ymlxxxxxxxxxxx.getInt("popularity"));
+                     for (File viewerHomeName : folder.listFiles()) {
+                        String want_to = viewerHomeName.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
+                        YamlConfiguration viewerHomeYml = YamlConfiguration.loadConfiguration(viewerHomeName);
+                        Home home = new Home(want_to, viewerHomeYml.getInt("Level"), viewerHomeYml.getInt("flowers"), viewerHomeYml.getInt("popularity"));
                         homelist.add(home);
                      }
-
                      for (int i = 0; i < homelist.size() - 1; i++) {
                         for (int jx = 0; jx < homelist.size() - 1 - i; jx++) {
                            if (homelist.get(jx).level < homelist.get(jx + 1).level) {
-                              Home tempxxxxxx = homelist.get(jx);
+                              Home viewerHomeName = homelist.get(jx);
                               homelist.set(jx, homelist.get(jx + 1));
-                              homelist.set(jx + 1, tempxxxxxx);
+                              homelist.set(jx + 1, viewerHomeName);
                            }
                         }
                      }
 
                      int i = 0;
                      boolean check_contain = false;
-
                      for (i = 0; i < homelist.size(); i++) {
                         if (primaryHomeName != null && homelist.get(i).name.equalsIgnoreCase(primaryHomeName)) {
                            check_contain = true;
@@ -1478,21 +1464,18 @@ public class API extends PlaceholderExpansion {
                   } else {
                      File folder = new File(Variable.Tempf);
                      List<Home> homelist = new ArrayList<>();
-
-                     File[] arrayOfFilexx;
-                     for (File tempxxxxxx : arrayOfFilexx = folder.listFiles()) {
-                        String want_to = tempxxxxxx.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
-                        YamlConfiguration ymlxxxxxxxxxxx = YamlConfiguration.loadConfiguration(tempxxxxxx);
-                        Home home = new Home(want_to, ymlxxxxxxxxxxx.getInt("Level"), ymlxxxxxxxxxxx.getInt("flowers"), ymlxxxxxxxxxxx.getInt("popularity"));
+                     for (File viewerHomeName : folder.listFiles()) {
+                        String want_to = viewerHomeName.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
+                        YamlConfiguration viewerHomeYml = YamlConfiguration.loadConfiguration(viewerHomeName);
+                        Home home = new Home(want_to, viewerHomeYml.getInt("Level"), viewerHomeYml.getInt("flowers"), viewerHomeYml.getInt("popularity"));
                         homelist.add(home);
                      }
-
                      for (int i = 0; i < homelist.size() - 1; i++) {
-                        for (int jxx = 0; jxx < homelist.size() - 1 - i; jxx++) {
-                           if (homelist.get(jxx).flowers < homelist.get(jxx + 1).flowers) {
-                              Home tempxxxxxx = homelist.get(jxx);
-                              homelist.set(jxx, homelist.get(jxx + 1));
-                              homelist.set(jxx + 1, tempxxxxxx);
+                        for (int sortPass0 = 0; sortPass0 < homelist.size() - 1 - i; sortPass0++) {
+                           if (homelist.get(sortPass0).flowers < homelist.get(sortPass0 + 1).flowers) {
+                              Home viewerHomeName = homelist.get(sortPass0);
+                              homelist.set(sortPass0, homelist.get(sortPass0 + 1));
+                              homelist.set(sortPass0 + 1, viewerHomeName);
                            }
                         }
                      }
@@ -1512,21 +1495,18 @@ public class API extends PlaceholderExpansion {
                   } else {
                      File folder = new File(Variable.Tempf);
                      List<Home> homelist = new ArrayList<>();
-
-                     File[] arrayOfFilexxx;
-                     for (File tempxxxxxx : arrayOfFilexxx = folder.listFiles()) {
-                        String want_to = tempxxxxxx.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
-                        YamlConfiguration ymlxxxxxxxxxxx = YamlConfiguration.loadConfiguration(tempxxxxxx);
-                        Home home = new Home(want_to, ymlxxxxxxxxxxx.getInt("Level"), ymlxxxxxxxxxxx.getInt("flowers"), ymlxxxxxxxxxxx.getInt("popularity"));
+                     for (File viewerHomeName : folder.listFiles()) {
+                        String want_to = viewerHomeName.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
+                        YamlConfiguration viewerHomeYml = YamlConfiguration.loadConfiguration(viewerHomeName);
+                        Home home = new Home(want_to, viewerHomeYml.getInt("Level"), viewerHomeYml.getInt("flowers"), viewerHomeYml.getInt("popularity"));
                         homelist.add(home);
                      }
-
                      for (int i = 0; i < homelist.size() - 1; i++) {
-                        for (int jxxx = 0; jxxx < homelist.size() - 1 - i; jxxx++) {
-                           if (homelist.get(jxxx).popularity < homelist.get(jxxx + 1).popularity) {
-                              Home tempxxxxxx = homelist.get(jxxx);
-                              homelist.set(jxxx, homelist.get(jxxx + 1));
-                              homelist.set(jxxx + 1, tempxxxxxx);
+                        for (int sortPass = 0; sortPass < homelist.size() - 1 - i; sortPass++) {
+                           if (homelist.get(sortPass).popularity < homelist.get(sortPass + 1).popularity) {
+                              Home viewerHomeName = homelist.get(sortPass);
+                              homelist.set(sortPass, homelist.get(sortPass + 1));
+                              homelist.set(sortPass + 1, viewerHomeName);
                            }
                         }
                      }
@@ -1549,28 +1529,24 @@ public class API extends PlaceholderExpansion {
                   } else {
                      File folder = new File(Variable.Tempf);
                      List<Home> homelist = new ArrayList<>();
-
-                     File[] arrayOfFilexxxx;
-                     for (File tempxxxxxx : arrayOfFilexxxx = folder.listFiles()) {
-                        String want_to = tempxxxxxx.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
-                        YamlConfiguration ymlxxxxxxxxxxx = YamlConfiguration.loadConfiguration(tempxxxxxx);
-                        Home home = new Home(want_to, ymlxxxxxxxxxxx.getInt("Level"), ymlxxxxxxxxxxx.getInt("flowers"), ymlxxxxxxxxxxx.getInt("popularity"));
+                     for (File viewerHomeName : folder.listFiles()) {
+                        String want_to = viewerHomeName.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
+                        YamlConfiguration viewerHomeYml = YamlConfiguration.loadConfiguration(viewerHomeName);
+                        Home home = new Home(want_to, viewerHomeYml.getInt("Level"), viewerHomeYml.getInt("flowers"), viewerHomeYml.getInt("popularity"));
                         homelist.add(home);
                      }
-
                      for (int i = 0; i < homelist.size() - 1; i++) {
-                        for (int jxxxx = 0; jxxxx < homelist.size() - 1 - i; jxxxx++) {
-                           if (homelist.get(jxxxx).flowers < homelist.get(jxxxx + 1).flowers) {
-                              Home tempxxxxxx = homelist.get(jxxxx);
-                              homelist.set(jxxxx, homelist.get(jxxxx + 1));
-                              homelist.set(jxxxx + 1, tempxxxxxx);
+                        for (int sortPass2 = 0; sortPass2 < homelist.size() - 1 - i; sortPass2++) {
+                           if (homelist.get(sortPass2).flowers < homelist.get(sortPass2 + 1).flowers) {
+                              Home viewerHomeName = homelist.get(sortPass2);
+                              homelist.set(sortPass2, homelist.get(sortPass2 + 1));
+                              homelist.set(sortPass2 + 1, viewerHomeName);
                            }
                         }
                      }
 
                      int i = 0;
                      boolean check_contain = false;
-
                      for (i = 0; i < homelist.size(); i++) {
                         if (primaryHomeName != null && homelist.get(i).name.equalsIgnoreCase(primaryHomeName)) {
                            check_contain = true;
@@ -1596,28 +1572,24 @@ public class API extends PlaceholderExpansion {
                   } else {
                      File folder = new File(Variable.Tempf);
                      List<Home> homelist = new ArrayList<>();
-
-                     File[] arrayOfFilexxxxx;
-                     for (File tempxxxxxx : arrayOfFilexxxxx = folder.listFiles()) {
-                        String want_to = tempxxxxxx.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
-                        YamlConfiguration ymlxxxxxxxxxxx = YamlConfiguration.loadConfiguration(tempxxxxxx);
-                        Home home = new Home(want_to, ymlxxxxxxxxxxx.getInt("Level"), ymlxxxxxxxxxxx.getInt("flowers"), ymlxxxxxxxxxxx.getInt("popularity"));
+                     for (File viewerHomeName : folder.listFiles()) {
+                        String want_to = viewerHomeName.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
+                        YamlConfiguration viewerHomeYml = YamlConfiguration.loadConfiguration(viewerHomeName);
+                        Home home = new Home(want_to, viewerHomeYml.getInt("Level"), viewerHomeYml.getInt("flowers"), viewerHomeYml.getInt("popularity"));
                         homelist.add(home);
                      }
-
                      for (int i = 0; i < homelist.size() - 1; i++) {
-                        for (int jxxxxx = 0; jxxxxx < homelist.size() - 1 - i; jxxxxx++) {
-                           if (homelist.get(jxxxxx).popularity < homelist.get(jxxxxx + 1).popularity) {
-                              Home tempxxxxxx = homelist.get(jxxxxx);
-                              homelist.set(jxxxxx, homelist.get(jxxxxx + 1));
-                              homelist.set(jxxxxx + 1, tempxxxxxx);
+                        for (int sortPass3 = 0; sortPass3 < homelist.size() - 1 - i; sortPass3++) {
+                           if (homelist.get(sortPass3).popularity < homelist.get(sortPass3 + 1).popularity) {
+                              Home viewerHomeName = homelist.get(sortPass3);
+                              homelist.set(sortPass3, homelist.get(sortPass3 + 1));
+                              homelist.set(sortPass3 + 1, viewerHomeName);
                            }
                         }
                      }
 
                      int i = 0;
                      boolean check_contain = false;
-
                      for (i = 0; i < homelist.size(); i++) {
                         if (primaryHomeName != null && homelist.get(i).name.equalsIgnoreCase(primaryHomeName)) {
                            check_contain = true;

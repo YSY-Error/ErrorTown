@@ -1346,8 +1346,8 @@ public class ConfigUpdate {
                         + ".yml"
                   )
                );
-         } catch (IOException var5) {
-            var5.printStackTrace();
+         } catch (IOException ioFailure) {
+            ioFailure.printStackTrace();
          }
 
          Bukkit.getConsoleSender().sendMessage(Variable.Lang_YML.getString("UpdateLanguageMessage"));
@@ -1356,8 +1356,8 @@ public class ConfigUpdate {
       if (gui_check) {
          try {
             Variable.GUI_YML.save(new File(Main.JavaPlugin.getDataFolder() + Variable.file_loc_prefix + "GUI.yml"));
-         } catch (IOException var4) {
-            var4.printStackTrace();
+         } catch (IOException ioFailure) {
+            ioFailure.printStackTrace();
          }
 
          Bukkit.getConsoleSender().sendMessage(Variable.Lang_YML.getString("UpdateGuiMessage"));

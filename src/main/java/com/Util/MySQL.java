@@ -108,8 +108,8 @@ public class MySQL {
 
             try {
                yamlConfiguration.save(Variable.f_log);
-            } catch (IOException var25) {
-               var25.printStackTrace();
+            } catch (IOException ioFailure) {
+               ioFailure.printStackTrace();
             }
 
             int nowID = yamlConfiguration.getInt("NowID");
@@ -152,8 +152,8 @@ public class MySQL {
                      ps.setString(2, Main.JavaPlugin.getConfig().getString("Server"));
                      ps.executeUpdate();
                   }
-               } catch (SQLException var23) {
-                  var23.printStackTrace();
+               } catch (SQLException sqlFailure) {
+                  sqlFailure.printStackTrace();
                } finally {
                   try {
                      if (res != null) {
@@ -167,8 +167,8 @@ public class MySQL {
                      if (con != null) {
                         con.close();
                      }
-                  } catch (SQLException var22) {
-                     var22.printStackTrace();
+                  } catch (SQLException closeFailure) {
+                     closeFailure.printStackTrace();
                   }
                }
             }
@@ -188,8 +188,8 @@ public class MySQL {
          if (res.next()) {
             result = res.getString("Server");
          }
-      } catch (SQLException var13) {
-         var13.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -203,8 +203,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var12) {
-            var12.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -223,8 +223,8 @@ public class MySQL {
          if (res.next()) {
             result = res.getString("Server");
          }
-      } catch (SQLException var13) {
-         var13.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -238,8 +238,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var12) {
-            var12.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -259,8 +259,8 @@ public class MySQL {
          if (res.next()) {
             amount = res.getDouble("Amount");
          }
-      } catch (SQLException var15) {
-         var15.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -274,8 +274,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var14) {
-            var14.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -295,8 +295,8 @@ public class MySQL {
          if (res.next()) {
             ss++;
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -310,8 +310,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -331,8 +331,8 @@ public class MySQL {
          if (res.next()) {
             check = true;
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -346,8 +346,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -367,8 +367,8 @@ public class MySQL {
          if (res.next()) {
             check = true;
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -382,8 +382,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -420,8 +420,8 @@ public class MySQL {
                break;
             }
          }
-      } catch (SQLException var16) {
-         var16.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -435,8 +435,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var15) {
-            var15.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -456,8 +456,8 @@ public class MySQL {
          if (res.next()) {
             Server = res.getString("Server");
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -471,8 +471,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -492,8 +492,8 @@ public class MySQL {
          if (res.next()) {
             Server = res.getString("Server");
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -507,8 +507,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -523,7 +523,7 @@ public class MySQL {
       try {
          ps = con.prepareStatement("alter table ErrorTown_Users add column flowers VARCHAR(100) default '0'");
          ps.executeUpdate();
-      } catch (SQLException var15) {
+      } catch (SQLException sqlFailure) {
          try {
             if (res != null) {
                res.close();
@@ -536,8 +536,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var14) {
-            var14.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       } finally {
          try {
@@ -552,8 +552,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -566,7 +566,7 @@ public class MySQL {
       try {
          ps = con.prepareStatement("alter table ErrorTown_Users add column advertisement VARCHAR(255)");
          ps.executeUpdate();
-      } catch (SQLException var15) {
+      } catch (SQLException sqlFailure) {
          try {
             if (res != null) {
                res.close();
@@ -579,8 +579,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var14) {
-            var14.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       } finally {
          try {
@@ -595,8 +595,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -609,7 +609,7 @@ public class MySQL {
       try {
          ps = con.prepareStatement("alter table ErrorTown_Users add column limitblock VARCHAR(255)");
          ps.executeUpdate();
-      } catch (SQLException var15) {
+      } catch (SQLException sqlFailure) {
          try {
             if (res != null) {
                res.close();
@@ -622,8 +622,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var14) {
-            var14.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       } finally {
          try {
@@ -638,8 +638,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -652,7 +652,7 @@ public class MySQL {
       try {
          ps = con.prepareStatement("alter table ErrorTown_Users add column icon VARCHAR(255)");
          ps.executeUpdate();
-      } catch (SQLException var15) {
+      } catch (SQLException sqlFailure) {
          try {
             if (res != null) {
                res.close();
@@ -665,8 +665,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var14) {
-            var14.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       } finally {
          try {
@@ -681,8 +681,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -695,7 +695,7 @@ public class MySQL {
       try {
          ps = con.prepareStatement("alter table ErrorTown_Users add column visittime VARCHAR(255)");
          ps.executeUpdate();
-      } catch (SQLException var15) {
+      } catch (SQLException sqlFailure) {
          try {
             if (res != null) {
                res.close();
@@ -708,8 +708,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var14) {
-            var14.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       } finally {
          try {
@@ -724,8 +724,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -738,7 +738,7 @@ public class MySQL {
       try {
          ps = con.prepareStatement("alter table ErrorTown_Users add column popularity VARCHAR(100) default '0'");
          ps.executeUpdate();
-      } catch (SQLException var15) {
+      } catch (SQLException sqlFailure) {
          try {
             if (res != null) {
                res.close();
@@ -751,8 +751,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var14) {
-            var14.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       } finally {
          try {
@@ -767,8 +767,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -781,7 +781,7 @@ public class MySQL {
       try {
          ps = con.prepareStatement("alter table ErrorTown_Users add column gifts TEXT default NULL");
          ps.executeUpdate();
-      } catch (SQLException var15) {
+      } catch (SQLException sqlFailure) {
          try {
             if (res != null) {
                res.close();
@@ -794,8 +794,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var14) {
-            var14.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       } finally {
          try {
@@ -810,8 +810,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -826,8 +826,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -841,8 +841,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -857,8 +857,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -872,8 +872,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -889,8 +889,8 @@ public class MySQL {
          ps.setCharacterStream(1, reader);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var15) {
-         var15.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (reader != null) {
@@ -908,8 +908,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var14) {
-            var14.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -924,8 +924,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -939,8 +939,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -969,8 +969,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -984,8 +984,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1000,8 +1000,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1015,8 +1015,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1035,8 +1035,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1050,8 +1050,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1066,8 +1066,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1081,8 +1081,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1097,8 +1097,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1112,8 +1112,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1128,8 +1128,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1143,8 +1143,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1159,8 +1159,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1174,8 +1174,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1190,8 +1190,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1205,8 +1205,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1221,8 +1221,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1236,8 +1236,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1252,8 +1252,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1267,8 +1267,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1283,8 +1283,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1298,8 +1298,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1314,8 +1314,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1329,8 +1329,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1345,8 +1345,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1360,8 +1360,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1376,8 +1376,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1391,8 +1391,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1407,8 +1407,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1422,8 +1422,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1438,8 +1438,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1453,8 +1453,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1469,8 +1469,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1484,8 +1484,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1500,8 +1500,8 @@ public class MySQL {
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1515,8 +1515,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -1538,8 +1538,8 @@ public class MySQL {
          if (result.contains(".")) {
             result = result.split("\\.")[0];
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1553,8 +1553,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -1578,8 +1578,8 @@ public class MySQL {
          if (result.contains(".")) {
             result = result.split("\\.")[0];
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1593,8 +1593,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -1623,8 +1623,8 @@ public class MySQL {
                   while ((line = r.readLine()) != null) {
                      sb.append(line);
                   }
-               } catch (IOException var19) {
-                  var19.printStackTrace();
+               } catch (IOException ioFailure) {
+                  ioFailure.printStackTrace();
                }
 
                str = sb.toString();
@@ -1638,8 +1638,8 @@ public class MySQL {
                list.add(str);
             }
          }
-      } catch (SQLException var20) {
-         var20.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1653,8 +1653,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var18) {
-            var18.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -1679,8 +1679,8 @@ public class MySQL {
                result = "";
             }
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1694,8 +1694,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -1720,8 +1720,8 @@ public class MySQL {
                result = "";
             }
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1735,8 +1735,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -1762,8 +1762,8 @@ public class MySQL {
                list.add(res.getString("advertisement"));
             }
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1777,8 +1777,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -1791,7 +1791,6 @@ public class MySQL {
       ResultSet res = null;
       List<String> list = new ArrayList<>();
 
-      Object var6;
       try {
          ps = con.prepareStatement("SELECT limitblock FROM ErrorTown_Users WHERE Name = ?");
          ps.setString(1, name);
@@ -1801,28 +1800,20 @@ public class MySQL {
          }
 
          String value = res.getString("limitblock");
-         if (value != null) {
-            if (value != null && value.length() != 0 && value.substring(0, 1).equals(",")) {
-               value = value.substring(1, value.length());
-            }
-
-            if (value == null) {
-               list.add("");
-               return list;
-            } else {
-               if (value.contains(",")) {
-                  list = Arrays.asList(res.getString("limitblock").split(","));
-               } else {
-                  list.add(res.getString("limitblock"));
-               }
-
-               return list;
-            }
+         if (value == null) {
+            return list;
          }
-
-         var6 = list;
-      } catch (SQLException var17) {
-         var17.printStackTrace();
+         // Historical rows carry a leading separator.
+         if (value.startsWith(",")) {
+            value = value.substring(1);
+         }
+         if (value.contains(",")) {
+            return Arrays.asList(value.split(","));
+         }
+         list.add(value);
+         return list;
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
          return list;
       } finally {
          try {
@@ -1837,12 +1828,10 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var16) {
-            var16.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
-
-      return (List<String>)var6;
    }
 
    public static String getX(String name) {
@@ -1858,8 +1847,8 @@ public class MySQL {
          if (res.next()) {
             result = res.getString("X");
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1873,8 +1862,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -1894,8 +1883,8 @@ public class MySQL {
          if (res.next()) {
             result = res.getString("Y");
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1909,8 +1898,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -1930,8 +1919,8 @@ public class MySQL {
          if (res.next()) {
             result = res.getString("Z");
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -1945,8 +1934,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -1973,8 +1962,8 @@ public class MySQL {
                   list.add(res.getString("Members"));
                }
             }
-         } catch (SQLException var14) {
-            var14.printStackTrace();
+         } catch (SQLException sqlFailure) {
+            sqlFailure.printStackTrace();
          } finally {
             try {
                if (res != null) {
@@ -1988,8 +1977,8 @@ public class MySQL {
                if (con != null) {
                   con.close();
                }
-            } catch (SQLException var13) {
-               var13.printStackTrace();
+            } catch (SQLException closeFailure) {
+               closeFailure.printStackTrace();
             }
          }
 
@@ -2017,8 +2006,8 @@ public class MySQL {
                   list.add(res.getString("OP"));
                }
             }
-         } catch (SQLException var14) {
-            var14.printStackTrace();
+         } catch (SQLException sqlFailure) {
+            sqlFailure.printStackTrace();
          } finally {
             try {
                if (res != null) {
@@ -2032,8 +2021,8 @@ public class MySQL {
                if (con != null) {
                   con.close();
                }
-            } catch (SQLException var13) {
-               var13.printStackTrace();
+            } catch (SQLException closeFailure) {
+               closeFailure.printStackTrace();
             }
          }
 
@@ -2058,8 +2047,8 @@ public class MySQL {
                list.add(res.getString("Denys"));
             }
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2073,8 +2062,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -2094,8 +2083,8 @@ public class MySQL {
          if (res.next()) {
             result = res.getString("Public");
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2109,8 +2098,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -2130,8 +2119,8 @@ public class MySQL {
          if (res.next()) {
             result = res.getString("Level");
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2145,8 +2134,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -2166,8 +2155,8 @@ public class MySQL {
          if (res.next()) {
             result = res.getString("pvp");
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2181,8 +2170,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -2202,8 +2191,8 @@ public class MySQL {
          if (res.next()) {
             result = res.getString("pickup");
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2217,8 +2206,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -2238,8 +2227,8 @@ public class MySQL {
          if (res.next()) {
             result = res.getString("dropitem");
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2253,8 +2242,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -2278,8 +2267,8 @@ public class MySQL {
          if (res.next()) {
             result = res.getString("locktime");
          }
-      } catch (SQLException var18) {
-         var18.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2293,8 +2282,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var16) {
-            var16.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -2310,8 +2299,8 @@ public class MySQL {
          if (con != null) {
             con.close();
          }
-      } catch (SQLException var17) {
-         var17.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       }
 
       return result;
@@ -2330,8 +2319,8 @@ public class MySQL {
          if (res.next()) {
             result = res.getString("lockweather");
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2345,8 +2334,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -2366,8 +2355,8 @@ public class MySQL {
          if (res.next()) {
             result = res.getString("time");
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2381,8 +2370,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -2402,8 +2391,8 @@ public class MySQL {
          while (res.next()) {
             list.add(res.getString("Name"));
          }
-      } catch (SQLException var13) {
-         var13.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2417,8 +2406,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var12) {
-            var12.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -2436,8 +2425,8 @@ public class MySQL {
          res = ps.executeQuery();
          res.last();
          amount = res.getRow();
-      } catch (SQLException var13) {
-         var13.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2451,8 +2440,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var12) {
-            var12.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -2485,8 +2474,8 @@ public class MySQL {
          if (con != null) {
             con.close();
          }
-      } catch (SQLException var7) {
-         var7.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       }
 
       return result;
@@ -2511,8 +2500,8 @@ public class MySQL {
                success = true;
             }
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2526,8 +2515,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -2589,8 +2578,8 @@ public class MySQL {
          ps.setString(22, s22);
          ps.setString(23, s23);
          ps.executeUpdate();
-      } catch (SQLException var35) {
-         var35.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2604,8 +2593,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var34) {
-            var34.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -2619,8 +2608,8 @@ public class MySQL {
          ps = con.prepareStatement("DELETE From ErrorTown_Users Where Name = ?");
          ps.setString(1, name);
          ps.executeUpdate();
-      } catch (SQLException var13) {
-         var13.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2634,8 +2623,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var12) {
-            var12.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -2656,8 +2645,8 @@ public class MySQL {
                break;
             }
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2671,8 +2660,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -2695,8 +2684,8 @@ public class MySQL {
                break;
             }
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2710,8 +2699,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -2734,8 +2723,8 @@ public class MySQL {
                break;
             }
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2749,8 +2738,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -2770,8 +2759,8 @@ public class MySQL {
          while (res.next() && !res.getString("Name").equalsIgnoreCase(name)) {
             amount++;
          }
-      } catch (SQLException var14) {
-         var14.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2785,8 +2774,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var13) {
-            var13.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -2811,8 +2800,8 @@ public class MySQL {
                }
             }
          }
-      } catch (SQLException var16) {
-         var16.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -2826,8 +2815,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var15) {
-            var15.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
 
@@ -2863,8 +2852,8 @@ public class MySQL {
                p.sendMessage(msg);
                continue;
             }
-         } catch (SQLException var20) {
-            var20.printStackTrace();
+         } catch (SQLException sqlFailure) {
+            sqlFailure.printStackTrace();
          }
 
          List<String> Members = new ArrayList<>();
@@ -2947,8 +2936,8 @@ public class MySQL {
          if (con != null) {
             con.close();
          }
-      } catch (SQLException var19) {
-         var19.printStackTrace();
+      } catch (SQLException ioFailure) {
+         ioFailure.printStackTrace();
       }
    }
 
@@ -3004,14 +2993,14 @@ public class MySQL {
                } else {
                   try {
                      playerdata.createNewFile();
-                  } catch (IOException var44) {
-                     var44.printStackTrace();
+                  } catch (IOException ioFailure) {
+                     ioFailure.printStackTrace();
                   }
 
                   try {
                      playerdata.createNewFile();
-                  } catch (IOException var43) {
-                     var43.printStackTrace();
+                  } catch (IOException ioFailure) {
+                     ioFailure.printStackTrace();
                   }
 
                   YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(playerdata);
@@ -3049,20 +3038,20 @@ public class MySQL {
 
                   try {
                      yamlConfiguration.set("flowers", Integer.valueOf(flowers));
-                  } catch (NumberFormatException var42) {
+                  } catch (NumberFormatException malformed) {
                      yamlConfiguration.set("flowers", 0);
                   }
 
                   try {
                      yamlConfiguration.set("popularity", Integer.valueOf(popularity));
-                  } catch (NumberFormatException var41) {
+                  } catch (NumberFormatException malformed) {
                      yamlConfiguration.set("popularity", popularity);
                   }
 
                   try {
                      yamlConfiguration.set("gifts", getGift(name));
-                  } catch (IOException var40) {
-                     var40.printStackTrace();
+                  } catch (IOException ioFailure) {
+                     ioFailure.printStackTrace();
                   }
 
                   yamlConfiguration.set("advertisement", getAdvertisement(name));
@@ -3071,8 +3060,8 @@ public class MySQL {
 
                   try {
                      yamlConfiguration.save(playerdata);
-                  } catch (IOException var39) {
-                     var39.printStackTrace();
+                  } catch (IOException ioFailure) {
+                     ioFailure.printStackTrace();
                   }
 
                   String tempx = Variable.Lang_YML.getString("ExportSuccess");
@@ -3092,8 +3081,8 @@ public class MySQL {
          }
 
          p.sendMessage(tempx);
-      } catch (SQLException var45) {
-         var45.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (res != null) {
@@ -3107,8 +3096,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var38) {
-            var38.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -3129,9 +3118,9 @@ public class MySQL {
          PreparedStatement ps2 = getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS ErrorTown_Servers (Server VarChar(100),Amount double)");
          ps2.executeUpdate();
          return;
-      } catch (SQLException var12) {
+      } catch (SQLException sqlFailure) {
          Bukkit.getConsoleSender().sendMessage(Variable.Lang_YML.getString("CreateDataBaseTableError"));
-         var12.printStackTrace();
+         sqlFailure.printStackTrace();
       } finally {
          try {
             if (ps != null) {
@@ -3141,8 +3130,8 @@ public class MySQL {
             if (con != null) {
                con.close();
             }
-         } catch (SQLException var11) {
-            var11.printStackTrace();
+         } catch (SQLException closeFailure) {
+            closeFailure.printStackTrace();
          }
       }
    }
@@ -3150,8 +3139,8 @@ public class MySQL {
    public static Connection getConnection() {
       try {
          return HikariCPUtils.sqlConnectionPool.getConnection();
-      } catch (SQLException var1) {
-         var1.printStackTrace();
+      } catch (SQLException sqlFailure) {
+         sqlFailure.printStackTrace();
          return null;
       }
    }

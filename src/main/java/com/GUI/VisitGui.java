@@ -44,8 +44,8 @@ public class VisitGui implements InventoryHolder {
          if (title != null && !title.isEmpty()) {
             lores.add("§d家园标题: §f" + title);
          }
-      } catch (Exception var5) {
-         com.Util.Diag.warnOnce("visit-title", "Could not read a home title for the visit menu", var5);
+      } catch (Exception failure) {
+         com.Util.Diag.warnOnce("visit-title", "Could not read a home title for the visit menu", failure);
       }
 
       try {
@@ -59,8 +59,8 @@ public class VisitGui implements InventoryHolder {
                }
             }
          }
-      } catch (Exception var6) {
-         com.Util.Diag.warnOnce("visit-desc", "Could not read a home description for the visit menu", var6);
+      } catch (Exception failure) {
+         com.Util.Diag.warnOnce("visit-desc", "Could not read a home description for the visit menu", failure);
       }
    }
 
@@ -98,9 +98,9 @@ public class VisitGui implements InventoryHolder {
                         }
                      }
                   } else {
-                     for (World worldxx : Bukkit.getWorlds()) {
-                        if (VisitGui.isMainHomeWorld(worldxx.getName()) && Util.CheckIsHome(worldxx.getName())) {
-                           Home home = HomeAPI.getHome(worldxx.getName());
+                     for (World loadedWorld0 : Bukkit.getWorlds()) {
+                        if (VisitGui.isMainHomeWorld(loadedWorld0.getName()) && Util.CheckIsHome(loadedWorld0.getName())) {
+                           Home home = HomeAPI.getHome(loadedWorld0.getName());
                            if (home != null) {
                               VisitGui.this.players.add(home);
                            }
@@ -110,9 +110,9 @@ public class VisitGui implements InventoryHolder {
 
                   VisitGui.this.MaxPage = (int)Math.ceil(Math.ceil(VisitGui.this.players.size()) / (29 - VisitGui.this.item_add_amount) * 1.0);
                } else {
-                  for (World worldxxx : Bukkit.getWorlds()) {
-                     if (VisitGui.isMainHomeWorld(worldxxx.getName()) && Util.CheckIsHome(worldxxx.getName())) {
-                        Home home = HomeAPI.getHome(worldxxx.getName());
+                  for (World loadedWorld : Bukkit.getWorlds()) {
+                     if (VisitGui.isMainHomeWorld(loadedWorld.getName()) && Util.CheckIsHome(loadedWorld.getName())) {
+                        Home home = HomeAPI.getHome(loadedWorld.getName());
                         if (home != null && (!Main.JavaPlugin.getConfig().getString("VisitGuiShowAll").equalsIgnoreCase("Public") || home.isAllowStranger())) {
                            VisitGui.this.players.add(home);
                         }
@@ -267,8 +267,8 @@ public class VisitGui implements InventoryHolder {
                   for (String str : home.getAdvertisement()) {
                      lores.add(str);
                   }
-               } catch (Exception var21) {
-                  com.Util.Diag.warnOnce("visit-slogan", "Could not read a home advertisement for the visit menu", var21);
+               } catch (Exception failure) {
+                  com.Util.Diag.warnOnce("visit-slogan", "Could not read a home advertisement for the visit menu", failure);
                }
             }
 

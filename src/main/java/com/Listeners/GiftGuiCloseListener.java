@@ -28,7 +28,6 @@ public class GiftGuiCloseListener implements Listener {
          (new BukkitRunnable() {
             public void run() {
                String home_name = "";
-
                for (Entry<String, String> entry : Variable.has_open_gifts_list.entrySet()) {
                   if (entry.getValue().equalsIgnoreCase(event.getPlayer().getName())) {
                      home_name = entry.getKey();
@@ -41,9 +40,7 @@ public class GiftGuiCloseListener implements Listener {
                int amount = 0;
                Home home = HomeAPI.getHome(home_name);
                List<String> gifts = new ArrayList<>();
-
-               ItemStack[] arrayOfItemStack;
-               for (ItemStack i : arrayOfItemStack = event.getInventory().getContents()) {
+               for (ItemStack i : event.getInventory().getContents()) {
                   if (i != null && i.getType() != Material.AIR) {
                      if (++amount > 45) {
                         break;
@@ -53,8 +50,8 @@ public class GiftGuiCloseListener implements Listener {
 
                      try {
                         str = ss.serializeItemStack(i);
-                     } catch (Exception var13) {
-                        var13.printStackTrace();
+                     } catch (Exception failure) {
+                        failure.printStackTrace();
                      }
 
                      gifts.add(str);
@@ -63,8 +60,8 @@ public class GiftGuiCloseListener implements Listener {
 
                try {
                   home.setGifts(gifts);
-               } catch (IOException var12) {
-                  var12.printStackTrace();
+               } catch (IOException ioFailure) {
+                  ioFailure.printStackTrace();
                }
             }
          }).runTaskAsynchronously(Main.JavaPlugin);

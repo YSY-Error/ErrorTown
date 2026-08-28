@@ -111,8 +111,8 @@ public class PlayerTeleportListener implements Listener {
                HomeWorldManager.markActive(targetBaseHomeName);
                HomeWorldManager.cancelUnload(targetBaseHomeName);
                Util.applyHomeWorldRules(event.getTo().getWorld(), h);
-            } catch (Exception var20) {
-               com.Util.Diag.warnOnce("tp-apply-rules", "Could not apply home rules on teleport into " + targetBaseHomeName, var20);
+            } catch (Exception failure) {
+               com.Util.Diag.warnOnce("tp-apply-rules", "Could not apply home rules on teleport into " + targetBaseHomeName, failure);
             }
 
             final String name = world.getName().replace(Variable.world_prefix, "");
@@ -143,8 +143,8 @@ public class PlayerTeleportListener implements Listener {
 
                      try {
                         yml.save(f2);
-                     } catch (IOException var19) {
-                        var19.printStackTrace();
+                     } catch (IOException ioFailure) {
+                        ioFailure.printStackTrace();
                      }
 
                      String temp = Variable.Lang_YML.getString("AutoUpdateHomeLevel");
@@ -210,8 +210,8 @@ public class PlayerTeleportListener implements Listener {
                         if (infoHome != null) {
                            HomeWorldManager.showHomeInfo(p, infoHome, event.getTo().getWorld());
                         }
-                     } catch (Exception var18) {
-                        com.Util.Diag.warnOnce("tp-info-panel", "Could not show the home info panel", var18);
+                     } catch (Exception failure) {
+                        com.Util.Diag.warnOnce("tp-info-panel", "Could not show the home info panel", failure);
                      }
 
                      if (!event.getPlayer().getName().equalsIgnoreCase(event.getTo().getWorld().getName().replace(Variable.world_prefix, ""))
@@ -351,7 +351,7 @@ public class PlayerTeleportListener implements Listener {
                                            Main.JavaPlugin.getConfig().getInt("UpdateRadius"),
                                            PlayerTeleportListener.this.vip_add
                                         ));
-                                 } catch (NoSuchMethodError var2) {
+                                 } catch (NoSuchMethodError unsupported) {
                                     Bukkit.getConsoleSender().sendMessage(Variable.Lang_YML.getString("BorderException"));
                                  }
                               }
@@ -440,10 +440,10 @@ public class PlayerTeleportListener implements Listener {
                   HomeSpawnUtil.applyHomeSpawnCompensation(world);
                   boolean openborderx = false;
                   if (Main.JavaPlugin.getConfig().getString("CustomBorder") != null) {
-                     String tempxx = Main.JavaPlugin.getConfig().getString("CustomBorder");
-                     if (!tempxx.equalsIgnoreCase("")) {
-                        if (tempxx.contains("<Radius>")) {
-                           tempxx = tempxx.replace(
+                     String customBorderSpec = Main.JavaPlugin.getConfig().getString("CustomBorder");
+                     if (!customBorderSpec.equalsIgnoreCase("")) {
+                        if (customBorderSpec.contains("<Radius>")) {
+                           customBorderSpec = customBorderSpec.replace(
                               "<Radius>",
                               String.valueOf(
                                  HomeTerrainPolicy.configuredBorderSize(
@@ -458,31 +458,31 @@ public class PlayerTeleportListener implements Listener {
                            );
                         }
 
-                        if (tempxx.contains("<Player>")) {
-                           tempxx = tempxx.replace("<Player>", event.getTo().getWorld().getName().replace(Variable.world_prefix, ""));
+                        if (customBorderSpec.contains("<Player>")) {
+                           customBorderSpec = customBorderSpec.replace("<Player>", event.getTo().getWorld().getName().replace(Variable.world_prefix, ""));
                         }
 
-                        if (tempxx.contains("<X>")) {
-                           tempxx = tempxx.replace("<X>", String.valueOf(world.getSpawnLocation().getX()));
+                        if (customBorderSpec.contains("<X>")) {
+                           customBorderSpec = customBorderSpec.replace("<X>", String.valueOf(world.getSpawnLocation().getX()));
                         }
 
-                        if (tempxx.contains("<Y>")) {
-                           tempxx = tempxx.replace("<Y>", String.valueOf(world.getSpawnLocation().getY()));
+                        if (customBorderSpec.contains("<Y>")) {
+                           customBorderSpec = customBorderSpec.replace("<Y>", String.valueOf(world.getSpawnLocation().getY()));
                         }
 
-                        if (tempxx.contains("<Z>")) {
-                           tempxx = tempxx.replace("<Z>", String.valueOf(world.getSpawnLocation().getZ()));
+                        if (customBorderSpec.contains("<Z>")) {
+                           customBorderSpec = customBorderSpec.replace("<Z>", String.valueOf(world.getSpawnLocation().getZ()));
                         }
 
                         openborderx = true;
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), tempxx);
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), customBorderSpec);
                      }
                   }
 
                   try {
                      yml.save(f2);
-                  } catch (IOException var17) {
-                     var17.printStackTrace();
+                  } catch (IOException ioFailure) {
+                     ioFailure.printStackTrace();
                   }
 
                   if (!openborderx) {
@@ -500,7 +500,7 @@ public class PlayerTeleportListener implements Listener {
                                            Main.JavaPlugin.getConfig().getInt("UpdateRadius"),
                                            PlayerTeleportListener.this.vip_add
                                         ));
-                                 } catch (NoSuchMethodError var2) {
+                                 } catch (NoSuchMethodError unsupported) {
                                     Bukkit.getConsoleSender().sendMessage(Variable.Lang_YML.getString("BorderException"));
                                  }
                               }

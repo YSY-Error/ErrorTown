@@ -41,7 +41,6 @@ public class CheckGui implements InventoryHolder {
                   ItemMeta i1 = blb1.getItemMeta();
                   i1.setDisplayName("");
                   blb1.setItemMeta(i1);
-
                   for (int i = 0; i < 9; i++) {
                      CheckGui.this.MainGui.setItem(i, blb1);
                   }
@@ -52,7 +51,6 @@ public class CheckGui implements InventoryHolder {
                   CheckGui.this.MainGui.setItem(17, blb1);
                   CheckGui.this.MainGui.setItem(26, blb1);
                   CheckGui.this.MainGui.setItem(35, blb1);
-
                   for (int i = 36; i < 45; i++) {
                      if (i != 40) {
                         CheckGui.this.MainGui.setItem(i, blb1);
@@ -61,7 +59,6 @@ public class CheckGui implements InventoryHolder {
                }
 
                ConfigurationSection cs = Variable.GUI_YML.getConfigurationSection("");
-
                for (String temp : cs.getKeys(false)) {
                   if (Variable.GUI_YML.getString(temp + ".InMenu") != null && Variable.GUI_YML.getString(temp + ".InMenu").equalsIgnoreCase("Check") && com.Util.ItemSpec.visibleTo(temp, p)) {
                      Material itemMat = com.Util.ItemSpec.material(Variable.GUI_YML.getString(temp + ".Material"));
@@ -83,15 +80,13 @@ public class CheckGui implements InventoryHolder {
                         ItemMeta meta = item.getItemMeta();
                         List<String> lores = new ArrayList<>();
                         meta.setDisplayName(com.Util.Text.format(Variable.GUI_YML.getString(temp + ".CustomName")));
-
-                        for (String __loreLine : Variable.GUI_YML.getStringList(temp + ".Lores")) {
-                           String tempstr = GuiSafe.papi(p, __loreLine);
+                        for (String loreLine : Variable.GUI_YML.getStringList(temp + ".Lores")) {
+                           String tempstr = GuiSafe.papi(p, loreLine);
 
                            lores.add(tempstr);
                         }
-
-                        for (String __enchantSpec : Variable.GUI_YML.getStringList(temp + ".Enchants")) {
-                           String[] tempenc = __enchantSpec.split("\\,");
+                        for (String enchantSpec : Variable.GUI_YML.getStringList(temp + ".Enchants")) {
+                           String[] tempenc = enchantSpec.split("\\,");
                            Enchantment ench = Enchantment.getByName(tempenc[0]);
                            if (ench != null) {
                               meta.addEnchant(ench, Integer.valueOf(tempenc[1]), true);
@@ -115,8 +110,8 @@ public class CheckGui implements InventoryHolder {
 
                      if (!check_has) {
                         for (int ix = 0; ix < MySQL.getMembers(worldname).size(); ix++) {
-                           String temp_str = MySQL.getMembers(worldname).get(ix);
-                           if (temp_str.equalsIgnoreCase(p.getName()) || temp_str.equals("*")) {
+                           String listedName = MySQL.getMembers(worldname).get(ix);
+                           if (listedName.equalsIgnoreCase(p.getName()) || listedName.equals("*")) {
                               check_has = true;
                               break;
                            }
@@ -124,9 +119,9 @@ public class CheckGui implements InventoryHolder {
                      }
 
                      if (!check_has) {
-                        for (int ixx = 0; ixx < MySQL.getOP(worldname).size(); ixx++) {
-                           String temp_str = MySQL.getOP(worldname).get(ixx);
-                           if (temp_str.equalsIgnoreCase(p.getName()) || temp_str.equals("*")) {
+                        for (int opIndex = 0; opIndex < MySQL.getOP(worldname).size(); opIndex++) {
+                           String listedName = MySQL.getOP(worldname).get(opIndex);
+                           if (listedName.equalsIgnoreCase(p.getName()) || listedName.equals("*")) {
                               check_has = true;
                               break;
                            }
@@ -170,27 +165,20 @@ public class CheckGui implements InventoryHolder {
                } else {
                   int amountx = 0;
                   File folder = new File(Variable.Tempf);
-
-                  File[] arrayOfFile;
-                  for (File tempx : arrayOfFile = folder.listFiles()) {
+                  for (File tempx : folder.listFiles()) {
                      boolean check_hasx = false;
                      String want_to = tempx.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
                      YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(tempx);
-
-                     var __cfg0 = yamlConfiguration.getStringList("Members");
-                     for (int ixxx = 0; ixxx < __cfg0.size(); ixxx++) {
-                        String temp_str = __cfg0.get(ixxx);
-                        if (temp_str.equalsIgnoreCase(p.getName()) || temp_str.equals("*")) {
+                     for (String listedName : yamlConfiguration.getStringList("Members")) {
+                        if (listedName.equalsIgnoreCase(p.getName()) || listedName.equals("*")) {
                            check_hasx = true;
                            break;
                         }
                      }
 
                      if (!check_hasx) {
-                        var __cfg1 = yamlConfiguration.getStringList("OP");
-                        for (int ixxxx = 0; ixxxx < __cfg1.size(); ixxxx++) {
-                           String temp_str = __cfg1.get(ixxxx);
-                           if (temp_str.equalsIgnoreCase(p.getName()) || temp_str.equals("*")) {
+                        for (String listedName : yamlConfiguration.getStringList("OP")) {
+                           if (listedName.equalsIgnoreCase(p.getName()) || listedName.equals("*")) {
                               check_hasx = true;
                               break;
                            }

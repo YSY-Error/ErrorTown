@@ -31,7 +31,7 @@ public class HomeSpawnUtil {
          WorldBorder border = world.getWorldBorder();
          int chunksWide = Math.max(1, (int)Math.ceil(border.getSize() / 16.0));
          return chunksWide * chunksWide;
-      } catch (Throwable var3) {
+      } catch (Throwable failure) {
          return 289;
       }
    }

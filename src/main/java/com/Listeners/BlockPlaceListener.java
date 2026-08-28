@@ -91,9 +91,9 @@ public class BlockPlaceListener implements Listener {
                   String contain_nbt = "";
                   int MaxThisTile = 0;
 
-                  var __cfg0 = Main.JavaPlugin.getConfig().getStringList("TileList");
-                  for (int d = 0; d < __cfg0.size(); d++) {
-                     String[] temp = (__cfg0.get(d)).split("\\|");
+                  java.util.List<String> tileRules = Main.JavaPlugin.getConfig().getStringList("TileList");
+                  for (int d = 0; d < tileRules.size(); d++) {
+                     String[] temp = (tileRules.get(d)).split("\\|");
                      if (temp[0].equalsIgnoreCase("chunk") && nbt.toUpperCase().contains(temp[1].toUpperCase())) {
                         check_contain = true;
                         contain_nbt = temp[1];
@@ -123,9 +123,9 @@ public class BlockPlaceListener implements Listener {
                         String[] args = str.split("\\|");
                         int start_amount = 0;
 
-                        var __cfg1 = Main.JavaPlugin.getConfig().getStringList("TileList");
-                        for (int e = 0; e < __cfg1.size(); e++) {
-                           String[] temp = (__cfg1.get(e)).split("\\|");
+                        java.util.List<String> tileRules2 = Main.JavaPlugin.getConfig().getStringList("TileList");
+                        for (int e = 0; e < tileRules2.size(); e++) {
+                           String[] temp = (tileRules2.get(e)).split("\\|");
                            if (temp[0].equalsIgnoreCase("chunk") && nbt.toUpperCase().contains(temp[1].toUpperCase())) {
                               start_amount = Integer.valueOf(args[2]);
                               break;
@@ -244,15 +244,15 @@ public class BlockPlaceListener implements Listener {
                set_z = p.getWorld().getSpawnLocation().getZ() + halfSize;
                min_z = p.getWorld().getSpawnLocation().getZ() - halfSize;
                if (set_x < min_x) {
-                  double tempxx = set_x;
+                  double borderX = set_x;
                   set_x = min_x;
-                  min_x = tempxx;
+                  min_x = borderX;
                }
 
                if (set_z < min_z) {
-                  double tempxx = set_z;
+                  double borderX = set_z;
                   set_z = min_z;
-                  min_z = tempxx;
+                  min_z = borderX;
                }
 
                if (event.getBlock().getLocation().getX() < min_x

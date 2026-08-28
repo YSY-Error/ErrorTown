@@ -57,8 +57,8 @@ public class Metrics {
 
          try {
             config.save(configFile);
-         } catch (IOException var11) {
-            com.Util.Diag.warn("Could not save the bStats config; metrics settings will not persist", var11);
+         } catch (IOException ioFailure) {
+            com.Util.Diag.warn("Could not save the bStats config; metrics settings will not persist", ioFailure);
          }
       }
 
@@ -114,7 +114,7 @@ public class Metrics {
          return onlinePlayersMethod.getReturnType().equals(Collection.class)
             ? ((Collection)onlinePlayersMethod.invoke(Bukkit.getServer())).size()
             : ((Player[])onlinePlayersMethod.invoke(Bukkit.getServer())).length;
-      } catch (Exception var2) {
+      } catch (Exception failure) {
          return Bukkit.getOnlinePlayers().size();
       }
    }
@@ -199,9 +199,9 @@ public class Metrics {
             }
 
             builder.appendField("data", data);
-         } catch (Throwable var5) {
+         } catch (Throwable failure) {
             if (logErrors) {
-               errorLogger.accept("Failed to get data for custom chart with id " + this.chartId, var5);
+               errorLogger.accept("Failed to get data for custom chart with id " + this.chartId, failure);
             }
 
             return null;
@@ -506,27 +506,16 @@ public class Metrics {
             outputStream.write(compressedData);
          }
 
-         StringBuilder var13 = new StringBuilder();
-         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-         String line;
-         try {
+         StringBuilder responseText = new StringBuilder();
+         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            String line;
             while ((line = bufferedReader.readLine()) != null) {
-               var13.append(line);
+               responseText.append(line);
             }
-         } catch (Throwable var12) {
-            try {
-               bufferedReader.close();
-            } catch (Throwable var9) {
-               var12.addSuppressed(var9);
-            }
-
-            throw var12;
          }
 
-         bufferedReader.close();
          if (this.logResponseStatusText) {
-            this.infoLogger.accept("Sent data to bStats and received response: " + var13);
+            this.infoLogger.accept("Sent data to bStats and received response: " + responseText);
          }
       }
 

@@ -15,8 +15,8 @@ public class CryptoUtils {
          SecretKeySpec secretKey = new SecretKeySpec("1234567890abcdef".getBytes(), "AES");
          cipher.init(1, secretKey);
          return Base64.getEncoder().encodeToString(cipher.doFinal(value.getBytes()));
-      } catch (Exception var3) {
-         throw new RuntimeException("Error while encrypting", var3);
+      } catch (Exception failure) {
+         throw new RuntimeException("Error while encrypting", failure);
       }
    }
 
@@ -27,8 +27,8 @@ public class CryptoUtils {
          cipher.init(2, secretKey);
          byte[] decodedValue = Base64.getDecoder().decode(encryptedValue);
          return new String(cipher.doFinal(decodedValue));
-      } catch (Exception var4) {
-         throw new RuntimeException("Error while decrypting", var4);
+      } catch (Exception failure) {
+         throw new RuntimeException("Error while decrypting", failure);
       }
    }
 }

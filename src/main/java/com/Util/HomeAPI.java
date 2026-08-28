@@ -24,9 +24,7 @@ public class HomeAPI {
          }
       } else {
          File folder = new File(Variable.Tempf);
-
-         File[] arrayOfFile;
-         for (File temp : arrayOfFile = folder.listFiles()) {
+         for (File temp : folder.listFiles()) {
             String want_to = temp.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
             Home home = new Home(want_to);
             list.add(home);
@@ -47,16 +45,11 @@ public class HomeAPI {
             }
          } else {
             File folder = new File(Variable.Tempf);
-
-            File[] arrayOfFile;
-            for (File temp : arrayOfFile = folder.listFiles()) {
+            for (File temp : folder.listFiles()) {
                String want_to = temp.getPath().replace(Variable.Tempf, "").replace(".yml", "").replace(Variable.file_loc_prefix, "");
                YamlConfiguration yamlConfiguration1 = YamlConfiguration.loadConfiguration(temp);
-
-               var __cfg0 = yamlConfiguration1.getStringList("OP");
-               for (int i = 0; i < __cfg0.size(); i++) {
-                  String temp_str = __cfg0.get(i);
-                  if (temp_str.equalsIgnoreCase(name)) {
+               for (String listedName : yamlConfiguration1.getStringList("OP")) {
+                  if (listedName.equalsIgnoreCase(name)) {
                      has_been_join = true;
                      name = want_to;
                      break;
@@ -120,7 +113,7 @@ public class HomeAPI {
          if (homeName.regionMatches(true, 0, prefix, 0, prefix.length())) {
             try {
                return Integer.parseInt(homeName.substring(prefix.length()));
-            } catch (Exception var4) {
+            } catch (Exception failure) {
                // Suffix is not numeric, so this is not an indexed home name.
             }
          }

@@ -107,14 +107,14 @@ public class DenyGui implements InventoryHolder {
                         List<String> lores = new ArrayList<>();
                         meta.setDisplayName(com.Util.Text.format(Variable.GUI_YML.getString(temp + ".CustomName")));
 
-                        for (String __loreLine : Variable.GUI_YML.getStringList(temp + ".Lores")) {
-                           String tempstr = GuiSafe.papi(null, __loreLine);
+                        for (String loreLine : Variable.GUI_YML.getStringList(temp + ".Lores")) {
+                           String tempstr = GuiSafe.papi(null, loreLine);
 
                            lores.add(tempstr);
                         }
 
-                        for (String __enchantSpec : Variable.GUI_YML.getStringList(temp + ".Enchants")) {
-                           String[] tempenc = __enchantSpec.split("\\,");
+                        for (String enchantSpec : Variable.GUI_YML.getStringList(temp + ".Enchants")) {
+                           String[] tempenc = enchantSpec.split("\\,");
                            Enchantment ench = Enchantment.getByName(tempenc[0]);
                            if (ench != null) {
                               meta.addEnchant(ench, Integer.valueOf(tempenc[1]), true);
@@ -241,14 +241,14 @@ public class DenyGui implements InventoryHolder {
                            List<String> lores = new ArrayList<>();
                            meta.setDisplayName(com.Util.Text.format(Variable.GUI_YML.getString(temp + ".CustomName")));
 
-                           for (String __loreLine : Variable.GUI_YML.getStringList(temp + ".Lores")) {
-                              String tempstr = GuiSafe.papi(p, __loreLine);
+                           for (String loreLine : Variable.GUI_YML.getStringList(temp + ".Lores")) {
+                              String tempstr = GuiSafe.papi(p, loreLine);
 
                               lores.add(tempstr);
                            }
 
-                           for (String __enchantSpec : Variable.GUI_YML.getStringList(temp + ".Enchants")) {
-                              String[] tempenc = __enchantSpec.split("\\,");
+                           for (String enchantSpec : Variable.GUI_YML.getStringList(temp + ".Enchants")) {
+                              String[] tempenc = enchantSpec.split("\\,");
                               Enchantment ench = Enchantment.getByName(tempenc[0]);
                               if (ench != null) {
                                  meta.addEnchant(ench, Integer.valueOf(tempenc[1]), true);
@@ -382,14 +382,14 @@ public class DenyGui implements InventoryHolder {
                            List<String> lores = new ArrayList<>();
                            meta.setDisplayName(com.Util.Text.format(Variable.GUI_YML.getString(temp + ".CustomName")));
 
-                           for (String __loreLine : Variable.GUI_YML.getStringList(temp + ".Lores")) {
-                              String tempstr = GuiSafe.papi(p, __loreLine);
+                           for (String loreLine : Variable.GUI_YML.getStringList(temp + ".Lores")) {
+                              String tempstr = GuiSafe.papi(p, loreLine);
 
                               lores.add(tempstr);
                            }
 
-                           for (String __enchantSpec : Variable.GUI_YML.getStringList(temp + ".Enchants")) {
-                              String[] tempenc = __enchantSpec.split("\\,");
+                           for (String enchantSpec : Variable.GUI_YML.getStringList(temp + ".Enchants")) {
+                              String[] tempenc = enchantSpec.split("\\,");
                               Enchantment ench = Enchantment.getByName(tempenc[0]);
                               if (ench != null) {
                                  meta.addEnchant(ench, Integer.valueOf(tempenc[1]), true);

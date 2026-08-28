@@ -115,8 +115,8 @@ public class Util {
                }
             }
          }
-      } catch (Exception var7) {
-         com.Util.Diag.warnOnce("vip-discount-parse", "A VIPDiscount entry is malformed (expected \"suffix,percent\"); it is ignored", var7);
+      } catch (Exception failure) {
+         com.Util.Diag.warnOnce("vip-discount-parse", "A VIPDiscount entry is malformed (expected \"suffix,percent\"); it is ignored", failure);
       }
 
       return best;
@@ -189,7 +189,7 @@ public class Util {
             + state.getData()
             + ",nbt:"
             + tent.asNBTString().toUpperCase().substring(0, Main.JavaPlugin.getConfig().getInt("SubStringNBT") + 1);
-      } catch (Exception var4) {
+      } catch (Exception failure) {
          name = state.getType().toString().toUpperCase() + ":" + state.getData();
       }
 
@@ -207,7 +207,7 @@ public class Util {
 
          try {
             name = "id:" + i.getType().toString().toUpperCase() + ":" + i.getDurability() + ",nbt:" + nbti.asNBTString().toUpperCase();
-         } catch (Exception var4) {
+         } catch (Exception failure) {
             name = i.getType().toString().toUpperCase() + ":" + i.getDurability();
          }
 
@@ -220,9 +220,9 @@ public class Util {
       if (Variable.Lang_YML.getStringList("PlaceHolders.OtherWorldAlias") == null) {
          result = name;
       } else {
-         var __cfg0 = Variable.Lang_YML.getStringList("PlaceHolders.OtherWorldAlias");
-         for (int e = 0; e < __cfg0.size(); e++) {
-            String[] temp = (__cfg0.get(e)).split(",");
+         java.util.List<String> worldAliases = Variable.Lang_YML.getStringList("PlaceHolders.OtherWorldAlias");
+         for (int e = 0; e < worldAliases.size(); e++) {
+            String[] temp = (worldAliases.get(e)).split(",");
             if (temp[0].equalsIgnoreCase(name)) {
                result = temp[1];
             }
@@ -238,8 +238,8 @@ public class Util {
          if (s != null && !s.isEmpty()) {
             return s;
          }
-      } catch (Exception var1) {
-         com.Util.Diag.warnOnce("nether-suffix", "Could not read HomeNetherSuffix; using the built-in default", var1);
+      } catch (Exception failure) {
+         com.Util.Diag.warnOnce("nether-suffix", "Could not read HomeNetherSuffix; using the built-in default", failure);
       }
 
       return "_nether";
@@ -303,8 +303,8 @@ public class Util {
                         break;
                      }
                   }
-               } catch (Exception var12) {
-                  com.Util.Diag.warnOnce("joined-homes-scan", "Could not read a home file while collecting joined homes", var12);
+               } catch (Exception failure) {
+                  com.Util.Diag.warnOnce("joined-homes-scan", "Could not read a home file while collecting joined homes", failure);
                }
             }
 
@@ -392,8 +392,8 @@ public class Util {
             }
 
             file.delete();
-         } catch (Exception var6) {
-            var6.printStackTrace();
+         } catch (Exception failure) {
+            failure.printStackTrace();
          }
       }
    }
@@ -441,22 +441,22 @@ public class Util {
          }
 
          bufferedOutputStream.flush();
-      } catch (IOException var19) {
-         com.Util.Diag.warn("File copy failed; the destination may be truncated", var19);
+      } catch (IOException ioFailure) {
+         com.Util.Diag.warn("File copy failed; the destination may be truncated", ioFailure);
       } finally {
          if (bufferedInputStream != null) {
             try {
                bufferedInputStream.close();
-            } catch (IOException var18) {
-               var18.printStackTrace();
+            } catch (IOException closeFailure) {
+               closeFailure.printStackTrace();
             }
          }
 
          if (bufferedOutputStream != null) {
             try {
                bufferedOutputStream.close();
-            } catch (IOException var17) {
-               var17.printStackTrace();
+            } catch (IOException closeFailure) {
+               closeFailure.printStackTrace();
             }
          }
       }
@@ -693,9 +693,7 @@ public class Util {
          && !name.contains("^")
          && !name.contains("*")
          && !name.toUpperCase().contains("DIM")) {
-         var __cfg1 = Main.JavaPlugin.getConfig().getStringList("IlleagalName");
-         for (int i = 0; i < __cfg1.size(); i++) {
-            String temp = __cfg1.get(i);
+         for (String temp : Main.JavaPlugin.getConfig().getStringList("IlleagalName")) {
             if (p.getName().equalsIgnoreCase(temp)) {
                return true;
             }
@@ -796,9 +794,9 @@ public class Util {
                   loc8 = Util.getAir(loc8);
                   HologramCompat.Handle holo1 = HologramCompat.create(Main.JavaPlugin, loc1);
 
-                  var __cfg2 = Variable.Lang_YML.getStringList("HDTagsNorth");
-                  for (int line = 0; line < __cfg2.size(); line++) {
-                     String TempLine = __cfg2.get(line);
+                  java.util.List<String> tagsNorth = Variable.Lang_YML.getStringList("HDTagsNorth");
+                  for (int line = 0; line < tagsNorth.size(); line++) {
+                     String TempLine = tagsNorth.get(line);
                      TempLine = PlaceholderAPI.setPlaceholders(null, TempLine);
                      holo1.insertTextLine(line, TempLine);
                   }
@@ -806,9 +804,9 @@ public class Util {
                   holo1.teleport(loc1);
                   HologramCompat.Handle holo2 = HologramCompat.create(Main.JavaPlugin, loc2);
 
-                  var __cfg3 = Variable.Lang_YML.getStringList("HDTagsSouth");
-                  for (int line = 0; line < __cfg3.size(); line++) {
-                     String TempLine = __cfg3.get(line);
+                  java.util.List<String> tagsSouth = Variable.Lang_YML.getStringList("HDTagsSouth");
+                  for (int line = 0; line < tagsSouth.size(); line++) {
+                     String TempLine = tagsSouth.get(line);
                      TempLine = PlaceholderAPI.setPlaceholders(null, TempLine);
                      holo2.insertTextLine(line, TempLine);
                   }
@@ -816,9 +814,9 @@ public class Util {
                   holo2.teleport(loc2);
                   HologramCompat.Handle holo3 = HologramCompat.create(Main.JavaPlugin, loc4);
 
-                  var __cfg4 = Variable.Lang_YML.getStringList("HDTagsEast");
-                  for (int line = 0; line < __cfg4.size(); line++) {
-                     String TempLine = __cfg4.get(line);
+                  java.util.List<String> tagsEast = Variable.Lang_YML.getStringList("HDTagsEast");
+                  for (int line = 0; line < tagsEast.size(); line++) {
+                     String TempLine = tagsEast.get(line);
                      TempLine = PlaceholderAPI.setPlaceholders(null, TempLine);
                      holo3.insertTextLine(line, TempLine);
                   }
@@ -826,9 +824,9 @@ public class Util {
                   holo3.teleport(loc4);
                   HologramCompat.Handle holo4 = HologramCompat.create(Main.JavaPlugin, loc3);
 
-                  var __cfg5 = Variable.Lang_YML.getStringList("HDTagsWest");
-                  for (int line = 0; line < __cfg5.size(); line++) {
-                     String TempLine = __cfg5.get(line);
+                  java.util.List<String> tagsWest = Variable.Lang_YML.getStringList("HDTagsWest");
+                  for (int line = 0; line < tagsWest.size(); line++) {
+                     String TempLine = tagsWest.get(line);
                      TempLine = PlaceholderAPI.setPlaceholders(null, TempLine);
                      holo4.insertTextLine(line, TempLine);
                   }
@@ -836,9 +834,9 @@ public class Util {
                   holo4.teleport(loc3);
                   HologramCompat.Handle holo5 = HologramCompat.create(Main.JavaPlugin, loc5);
 
-                  var __cfg6 = Variable.Lang_YML.getStringList("HDTagsNorthWest");
-                  for (int line = 0; line < __cfg6.size(); line++) {
-                     String TempLine = __cfg6.get(line);
+                  java.util.List<String> tagsNorthWest = Variable.Lang_YML.getStringList("HDTagsNorthWest");
+                  for (int line = 0; line < tagsNorthWest.size(); line++) {
+                     String TempLine = tagsNorthWest.get(line);
                      TempLine = PlaceholderAPI.setPlaceholders(null, TempLine);
                      holo5.insertTextLine(line, TempLine);
                   }
@@ -846,9 +844,9 @@ public class Util {
                   holo5.teleport(loc5);
                   HologramCompat.Handle holo6 = HologramCompat.create(Main.JavaPlugin, loc6);
 
-                  var __cfg7 = Variable.Lang_YML.getStringList("HDTagsNorthEast");
-                  for (int line = 0; line < __cfg7.size(); line++) {
-                     String TempLine = __cfg7.get(line);
+                  java.util.List<String> tagsNorthEast = Variable.Lang_YML.getStringList("HDTagsNorthEast");
+                  for (int line = 0; line < tagsNorthEast.size(); line++) {
+                     String TempLine = tagsNorthEast.get(line);
                      TempLine = PlaceholderAPI.setPlaceholders(null, TempLine);
                      holo6.insertTextLine(line, TempLine);
                   }
@@ -856,9 +854,9 @@ public class Util {
                   holo6.teleport(loc6);
                   HologramCompat.Handle holo7 = HologramCompat.create(Main.JavaPlugin, loc7);
 
-                  var __cfg8 = Variable.Lang_YML.getStringList("HDTagsWestSouth");
-                  for (int line = 0; line < __cfg8.size(); line++) {
-                     String TempLine = __cfg8.get(line);
+                  java.util.List<String> tagsWestSouth = Variable.Lang_YML.getStringList("HDTagsWestSouth");
+                  for (int line = 0; line < tagsWestSouth.size(); line++) {
+                     String TempLine = tagsWestSouth.get(line);
                      TempLine = PlaceholderAPI.setPlaceholders(null, TempLine);
                      holo7.insertTextLine(line, TempLine);
                   }
@@ -866,9 +864,9 @@ public class Util {
                   holo7.teleport(loc7);
                   HologramCompat.Handle holo8 = HologramCompat.create(Main.JavaPlugin, loc8);
 
-                  var __cfg9 = Variable.Lang_YML.getStringList("HDTagsEastSouth");
-                  for (int line = 0; line < __cfg9.size(); line++) {
-                     String TempLine = __cfg9.get(line);
+                  java.util.List<String> tagsEastSouth = Variable.Lang_YML.getStringList("HDTagsEastSouth");
+                  for (int line = 0; line < tagsEastSouth.size(); line++) {
+                     String TempLine = tagsEastSouth.get(line);
                      TempLine = PlaceholderAPI.setPlaceholders(null, TempLine);
                      holo8.insertTextLine(line, TempLine);
                   }

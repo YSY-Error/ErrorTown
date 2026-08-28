@@ -46,7 +46,7 @@ public class PlayerChatListener implements Listener {
                int amount;
                try {
                   amount = Integer.parseInt(message);
-               } catch (NumberFormatException var13) {
+               } catch (NumberFormatException malformed) {
                   p.sendMessage("§8[§6错误庄园§8] §c请输入有效的数字");
                   Variable.wait_chat_input.put(p.getName(), inputType);
                   return;
@@ -83,7 +83,7 @@ public class PlayerChatListener implements Listener {
                         x = Double.parseDouble(parts[0]);
                         y = Double.parseDouble(parts[1]);
                         z = Double.parseDouble(parts[2]);
-                     } catch (NumberFormatException var14) {
+                     } catch (NumberFormatException malformed) {
                         p.sendMessage("§c坐标格式不正确，请输入数字，例如: 128 75 -64");
                         Variable.wait_chat_input.put(p.getName(), inputType);
                         return;
@@ -124,7 +124,7 @@ public class PlayerChatListener implements Listener {
                                  } else {
                                     try {
                                        home.setTitle(title);
-                                    } catch (IOException var5) {
+                                    } catch (IOException ioFailure) {
                                        p.sendMessage("§c设置庄园名失败");
                                        return;
                                     }
@@ -166,7 +166,7 @@ public class PlayerChatListener implements Listener {
                                  } else {
                                     try {
                                        home.setDescription(lines);
-                                    } catch (IOException var7) {
+                                    } catch (IOException ioFailure) {
                                        p.sendMessage("§c设置庄园描述失败");
                                        return;
                                     }
@@ -242,7 +242,7 @@ public class PlayerChatListener implements Listener {
 
                                  try {
                                     wc.seed(Long.parseLong(seed));
-                                 } catch (NumberFormatException var11) {
+                                 } catch (NumberFormatException malformed) {
                                     wc.seed(seed.hashCode());
                                  }
 
@@ -272,8 +272,8 @@ public class PlayerChatListener implements Listener {
 
                                        try {
                                           ry.save(rf);
-                                       } catch (IOException var10) {
-                                          com.Util.Diag.warn("Could not clear TpSet after a home spawn reset; the old spawn point stays on disk", var10);
+                                       } catch (IOException ioFailure) {
+                                          com.Util.Diag.warn("Could not clear TpSet after a home spawn reset; the old spawn point stays on disk", ioFailure);
                                        }
                                     }
                                  }
@@ -372,8 +372,8 @@ public class PlayerChatListener implements Listener {
                            if (home != null) {
                               try {
                                  home.setRuleDifficulty(finalChosen);
-                              } catch (IOException var6) {
-                                 var6.printStackTrace();
+                              } catch (IOException ioFailure) {
+                                 ioFailure.printStackTrace();
                               }
                            }
 
@@ -408,7 +408,7 @@ public class PlayerChatListener implements Listener {
    private static int tryParseInt(String s, int def) {
       try {
          return Integer.parseInt(s);
-      } catch (Exception var3) {
+      } catch (Exception failure) {
          return def;
       }
    }

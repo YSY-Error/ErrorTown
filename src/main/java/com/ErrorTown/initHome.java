@@ -18,9 +18,7 @@ public class initHome {
          MySQL.addLimitBlockColumn();
       } else {
          File folder = new File(Variable.Tempf);
-
-         File[] arrayOfFile;
-         for (File temp : arrayOfFile = folder.listFiles()) {
+         for (File temp : folder.listFiles()) {
             YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(temp);
             boolean edit = false;
             if (!yamlConfiguration.isSet("flowers")) {
@@ -56,8 +54,8 @@ public class initHome {
             if (edit) {
                try {
                   yamlConfiguration.save(temp);
-               } catch (IOException var8) {
-                  var8.printStackTrace();
+               } catch (IOException ioFailure) {
+                  ioFailure.printStackTrace();
                }
             }
          }

@@ -139,8 +139,8 @@ public class Main extends JavaPlugin implements PluginMessageListener {
          }
 
          md5Hash = sb.toString();
-      } catch (IOException | URISyntaxException | NoSuchAlgorithmException var9) {
-         com.Util.Diag.warn("Could not compute the plugin jar checksum", var9);
+      } catch (IOException | URISyntaxException | NoSuchAlgorithmException failure) {
+         com.Util.Diag.warn("Could not compute the plugin jar checksum", failure);
       }
 
       return md5Hash;
@@ -187,9 +187,7 @@ public class Main extends JavaPlugin implements PluginMessageListener {
       for (World tempx : Bukkit.getWorlds()) {
          boolean is_jump = false;
 
-         var __cfg0 = JavaPlugin.getConfig().getStringList("UnAutoSaveWorlds");
-         for (int i = 0; i < __cfg0.size(); i++) {
-            String str = __cfg0.get(i);
+         for (String str : JavaPlugin.getConfig().getStringList("UnAutoSaveWorlds")) {
             if (str.equalsIgnoreCase(Variable.prefix_p + tempx.getName().replace(Variable.world_prefix, ""))) {
                is_jump = true;
                break;
@@ -603,8 +601,8 @@ public class Main extends JavaPlugin implements PluginMessageListener {
 
       try {
          Tempf0 = f.getCanonicalPath();
-      } catch (IOException var7) {
-         var7.printStackTrace();
+      } catch (IOException ioFailure) {
+         ioFailure.printStackTrace();
       }
 
       Variable.Final = "";
@@ -690,8 +688,8 @@ public class Main extends JavaPlugin implements PluginMessageListener {
       if (!Variable.f_log.exists()) {
          try {
             Variable.f_log.createNewFile();
-         } catch (IOException var6) {
-            var6.printStackTrace();
+         } catch (IOException ioFailure) {
+            ioFailure.printStackTrace();
          }
 
          Variable.f_log = new File(Variable.Log_All, "log.yml");
@@ -762,8 +760,8 @@ public class Main extends JavaPlugin implements PluginMessageListener {
                      }
                   }).runTaskLater(JavaPlugin, 20L);
                }
-            } catch (IOException var12) {
-               var12.printStackTrace();
+            } catch (IOException ioFailure) {
+               ioFailure.printStackTrace();
             }
          }
       }

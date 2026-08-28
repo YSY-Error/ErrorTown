@@ -279,8 +279,8 @@ public class HomePortalListener implements Listener {
          if (Math.abs(target.getSize() - size) > 0.01) {
             target.setSize(size);
          }
-      } catch (Throwable var12) {
-         com.Util.Diag.warnOnce("portal-border-size", "Could not resize the nether world border", var12);
+      } catch (Throwable failure) {
+         com.Util.Diag.warnOnce("portal-border-size", "Could not resize the nether world border", failure);
       }
    }
 
@@ -301,8 +301,8 @@ public class HomePortalListener implements Listener {
             WorldCreator creator = new WorldCreator(worldName);
             creator.environment(env);
             w = Bukkit.createWorld(creator);
-         } catch (Throwable var4) {
-            Bukkit.getConsoleSender().sendMessage("§c[错误庄园] 创建世界失败: " + worldName + " -> " + var4.getMessage());
+         } catch (Throwable failure) {
+            Bukkit.getConsoleSender().sendMessage("§c[错误庄园] 创建世界失败: " + worldName + " -> " + failure.getMessage());
          }
 
          return w;
@@ -755,7 +755,7 @@ public class HomePortalListener implements Listener {
             int surfaceY;
             try {
                surfaceY = world.getHighestBlockAt(x, z, HeightMap.MOTION_BLOCKING_NO_LEAVES).getY() + 1;
-            } catch (Throwable var8) {
+            } catch (Throwable failure) {
                surfaceY = target.getBlockY();
             }
 
@@ -906,7 +906,7 @@ public class HomePortalListener implements Listener {
                int highestY;
                try {
                   highestY = world.getHighestBlockAt(baseX, baseZ, HeightMap.MOTION_BLOCKING_NO_LEAVES).getY() + 1;
-               } catch (Throwable var10) {
+               } catch (Throwable failure) {
                   highestY = baseY;
                }
 
@@ -991,14 +991,14 @@ public class HomePortalListener implements Listener {
    private static void setPortalSearchOptions(PlayerPortalEvent event) {
       try {
          event.setSearchRadius(getPortalSearchRadius());
-      } catch (Throwable var3) {
-         com.Util.Diag.warnOnce("portal-search-radius", "This server rejects PlayerPortalEvent.setSearchRadius; vanilla search is used", var3);
+      } catch (Throwable failure) {
+         com.Util.Diag.warnOnce("portal-search-radius", "This server rejects PlayerPortalEvent.setSearchRadius; vanilla search is used", failure);
       }
 
       try {
          event.setCreationRadius(getPortalCreationRadius());
-      } catch (Throwable var2) {
-         com.Util.Diag.warnOnce("portal-creation-radius", "This server rejects PlayerPortalEvent.setCreationRadius; vanilla creation is used", var2);
+      } catch (Throwable failure) {
+         com.Util.Diag.warnOnce("portal-creation-radius", "This server rejects PlayerPortalEvent.setCreationRadius; vanilla creation is used", failure);
       }
    }
 

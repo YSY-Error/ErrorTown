@@ -74,8 +74,7 @@ public class WorldInitListener implements Listener {
                      diff = "Easy";
                   }
 
-                  String var3 = diff.toLowerCase();
-                  switch (var3) {
+                  switch (diff.toLowerCase()) {
                      case "peaceful":
                         initWorld.setDifficulty(Difficulty.PEACEFUL);
                         break;
@@ -88,14 +87,14 @@ public class WorldInitListener implements Listener {
                      default:
                         initWorld.setDifficulty(Difficulty.EASY);
                   }
-               } catch (Exception var6) {
-                  com.Util.Diag.warnOnce("world-init-difficulty", "Could not apply the configured Difficulty to a new world", var6);
+               } catch (Exception failure) {
+                  com.Util.Diag.warnOnce("world-init-difficulty", "Could not apply the configured Difficulty to a new world", failure);
                }
 
                try {
                   Platform.setGameRule(initWorld, "doMobSpawning", "true");
-               } catch (Exception var5) {
-                  com.Util.Diag.warnOnce("world-init-mobspawning", "Could not set doMobSpawning on a new world", var5);
+               } catch (Exception failure) {
+                  com.Util.Diag.warnOnce("world-init-mobspawning", "Could not set doMobSpawning on a new world", failure);
                }
             }
          }).runTaskLater(Main.JavaPlugin, 5L);
