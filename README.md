@@ -30,8 +30,6 @@
 - [依赖](#依赖)
 - [目录结构](#目录结构)
 - [测试](#测试)
-- [贡献约定](#贡献约定)
-- [来源说明](#来源说明)
 
 ---
 
@@ -66,48 +64,6 @@ Spigot API 是 Paper API 的子集，Purpur 与 Leaves 是 Paper 分支且不移
 [`com.Util.GameRuleNames`](src/main/java/com/Util/GameRuleNames.java)，其余代码不感知平台。
 
 > **Leaves 注意**：Leaves 官方目前最新只到 1.21.11，没有 26.x 构建，所以 Leaves 实际覆盖到 1.21.11。
-
-### 已处理的跨版本断裂点
-
-- **游戏规则在 1.21.11 被整体改名**（`camelCase` → `minecraft:snake_case`，且部分语义改名）。
-  更糟的是服务端 API 各走各路：Spigot 26.2 把 `GameRule` 常量一起改名
-  （`DO_MOB_SPAWNING` → `SPAWN_MOBS`），Paper 26.2 保留旧常量。因此源码里**不能出现任何
-  `GameRule.X` 常量**，全部改为运行时按名解析，并带改名别名表与取值反转处理
-  （`disableRaids` ↔ `raids`）。
-- **`doFireTick` 被删除**，替代品是整数 `fire_spread_radius_around_player`。家园「禁止火焰蔓延」
-  开关映射为半径 `0`，开启则恢复该规则自身的默认值。
-- **`World.setGameRuleValue(String,String)` / `getGameRuleValue(String)` 在 26.2 被移除** ——
-  改走强类型 `GameRule` 重载。
-- **`WorldCreator.keepSpawnInMemory(boolean)` 被 Paper 26.2 移除**，其替代
-  `keepSpawnLoaded(TriState)` 又是 Paper 独有；两者都通过反射择一调用。
-- **Paper 独有 API** —— `Location.toCenterLocation()`（改为纯坐标计算）、
-  `World.getChunkAtAsync(...)`（Spigot 上退化为按 tick 限流的同步加载，避免 96×96 家园卡住主线程）、
-  `Item.setWillAge/setCanMobPickup/setCanPlayerPickup`（Spigot 上由 `setUnlimitedLifetime` 覆盖）。
-
-### 顺带修掉的既有缺陷
-
-这些在整个支持版本范围内都是坏的，不是移植引入的：
-
-- **`/sh help` 完全没有输出** —— 三个语言文件都缺 `Help-1`…`Help-6` 键，命令只打印页首页尾；
-  加上 `new TextComponent()` 不解析 `§` 码、以及 `str[1]` 未判空会抛数组越界，共三个缺陷叠加。
-  现已补齐六页帮助（三语）、渲染收敛到 [`com.Util.ClickableText`](src/main/java/com/Util/ClickableText.java)，
-  并恢复可点击帮助导航。
-- **`Lang.seedMissingFromBundle()`** —— Bukkit 只在语言文件不存在时写一次，否则新版本新增的键
-  在老服务器上永远缺失。现在启动时会从 jar 内置语言文件补全缺失键，且不覆盖已改过的文本。
-- **创建超平坦家园会打印 `No key layers in MapLike[{}]`** —— `type(WorldType.FLAT)` 设了但
-  `generatorSettings` 为空，原版读不到 `layers` 就回落到内置预设。现由
-  [`com.Util.SuperflatPreset`](src/main/java/com/Util/SuperflatPreset.java) 提供合法地层 JSON。
-- **`SoilType` 默认值原本是 `SOIL`**，该材质自 1.13 起不存在。旧代码把 `Material.valueOf`
-  的异常吞掉并 `return`，等于**整个交互保护监听器在所有支持版本上静默失效**。
-- **`/sh togglecc` 原本完全无效** —— 它按 CraftBukkit 包名嗅探 `v1_12_R1` / `v1_16_Rx`，而
-  1.20.5 起包名不再带版本号，且被调用的四个 `WorldBorder.R_*` 类本身是空实现。现改用公共 API
-  （`Bukkit.createWorldBorder()` + `Player.setWorldBorder(...)`）。
-- **`GUI_en.yml` 有 16 处 1.12 时代材质名**（`SKULL_ITEM` / `INK_SACK` / `EXP_BOTTLE` /
-  `ENDER_STONE` / `GRASS` / `STAINED_GLASS_PANE`），会抛异常并连带整个英文菜单打不开。
-  所有读配置的材质名也不再用 `Material.valueOf`，改为容错解析 + 旧名别名表 + 告警回退。
-
-每一项的成因与定位过程都写在对应类的 Javadoc 里（`Text`、`ClickableText`、`SuperflatPreset`、
-`WBControl`、`Platform`、`GameRuleNames`），改动前请先读那段说明。
 
 ### 为什么不支持 Folia
 
@@ -377,35 +333,3 @@ gradlew.bat clean build        # Windows
 
 修改相关代码前请先跑测试。测试 classpath 上有 `spigot-api` 与 Adventure，可以直接引用
 Bukkit 类型（但没有运行中的服务端，Bukkit 静态方法仍不可用）。
-
----
-
-## 贡献约定
-
-- 提交前跑 `./gradlew build`，保证 0 error、测试通过、`apiCheck` 双平台通过。
-- **不要引用任何 `GameRule.X` 常量** —— Spigot 26.2 改了名，Paper 26.2 没改，源码里写死必崩其一。
-  走 `Platform.setGameRule(world, "name", "value")`。
-- **不要用 `Entity#teleport` 之外的 Paper 独有 API** —— 若必须用，收进 `Platform` 并加反射回退，
-  然后确认 `apiCheckSpigot` 仍然通过。
-- **配置里的材质名不要用 `Material.valueOf`** —— 会抛异常并连带整个菜单打不开。
-  用 `Platform.material(...)` 或 `ItemSpec`。
-- **不要新增空 `catch` 块**（当前为 0 个）。失败路径三选一：向调用方返回结果、用
-  `Diag.warn` / `Diag.warnOnce` 记日志、或加注释说明「这里失败就是走默认分支」。
-- 语言取值走 `Lang.get(key, fallback)`，不要用裸 `Lang_YML.getString(key)`。
-- 显示文本走 `Text.format(...)`，否则 MiniMessage 与 `&` 码不会生效。
-- 涉及扣费的逻辑：**先校验并扣费，再执行操作，失败时退款**，并在 `CreateCostLedger` 记账。
-- 不要在 `for` 的条件段里调用 `getStringList` / `getIntegerList` —— 每次迭代都会重新解析 YAML。
-- 权限判定走 `Perm.has(target, "ErrorTown.X")`，不要用裸 `hasPermission` —— 否则
-  更名前的 `SummerTown.*` 节点回退会失效。
-- 涉及权限判定或配置不变量的改动请附带回归测试。**优先写行为测试**；只有在需要活服务端
-  才能执行时才退回 `SourceContract` 源码契约。
-
----
-
-## 来源说明
-
-本仓库是 `SummerTown-2.1.6.0.jar`（原始产物）的维护性重建源码树，不是原作者的原始工程。
-反编译产物已经过整理、去重与缺陷修复。
-
-历史迭代笔记与基线溯源记录（原始 jar 的哈希、条目清单、测试服日志）未随仓库发布。
-每一处非显然的实现选择，其成因都写在对应类的 Javadoc 里 —— 那是唯一需要维护的解释来源。
