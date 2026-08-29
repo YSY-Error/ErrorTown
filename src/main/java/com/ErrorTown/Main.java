@@ -234,7 +234,8 @@ public class Main extends JavaPlugin implements PluginMessageListener {
 
    public void onEnable() {
       JavaPlugin = this;
-      int pluginId = 19436;
+      // bStats service id for this plugin: https://bstats.org/plugin/bukkit/ErrorTown/33724
+      int pluginId = 33724;
       new Metrics(JavaPlugin, pluginId);
       Variable.NMS_Version = Bukkit.getServer()
          .getClass()

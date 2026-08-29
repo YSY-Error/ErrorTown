@@ -63,7 +63,9 @@ public class Metrics {
       }
 
       boolean enabled = config.getBoolean("enabled", true);
-      String serverUUID = UUID.randomUUID().toString();
+      // Must come from the shared bStats config, not a fresh random value: bStats counts
+      // distinct servers by this id, so regenerating it per start reports one server as many.
+      String serverUUID = config.getString("serverUuid");
       boolean logErrors = config.getBoolean("logFailedRequests", false);
       boolean logSentData = config.getBoolean("logSentData", false);
       boolean logResponseStatusText = config.getBoolean("logResponseStatusText", false);
