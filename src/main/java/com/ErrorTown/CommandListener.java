@@ -745,15 +745,6 @@ public class CommandListener implements CommandExecutor, TabExecutor {
       }
    }
 
-   private void addChestItem(Chest chest, int slot, int amount, String... materialNames) {
-      if (chest != null && slot >= 0) {
-         Material material = this.findFirstMaterial(materialNames);
-         if (material != null) {
-            chest.getBlockInventory().setItem(slot, new ItemStack(material, amount));
-         }
-      }
-   }
-
    private void setupSimpleSkyIsland(World world) {
       if (world != null) {
          Material air = this.findFirstMaterial("AIR");
@@ -1733,7 +1724,6 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                   double Y = 0.0;
                   double Z = 0.0;
                   boolean has_set_Members = false;
-                  new ArrayList();
                   String publicswitch = yamlConfiguration3.getString("Worlds." + uuid + ".1.Access");
                   if (publicswitch.equalsIgnoreCase("Public")) {
                      publicAccess = true;
@@ -1801,9 +1791,9 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                   yamlConfiguration.createSection("gifts");
                   yamlConfiguration.set("flowers", 0);
                   yamlConfiguration.set("popularity", 0);
-                  yamlConfiguration.set("gifts", new ArrayList());
-                  yamlConfiguration.set("advertisement", new ArrayList());
-                  yamlConfiguration.set("limitblock", new ArrayList());
+                  yamlConfiguration.set("gifts", new ArrayList<>());
+                  yamlConfiguration.set("advertisement", new ArrayList<>());
+                  yamlConfiguration.set("limitblock", new ArrayList<>());
                   yamlConfiguration.set("icon", "");
 
                   try {
@@ -1961,7 +1951,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                   public void run() {
                      int YS = Integer.valueOf(args[1]);
                   if (Variable.world_StaticsTick.size() == 0) {
-                     init.refreshWorldStatics(false);
+                     ScheduledTasks.refreshWorldStatics(false);
                   }
                   for (String a : Main.JavaPlugin.getConfig().getStringList("StatisticsTop")) {
                      sender.sendMessage(a);
@@ -2346,10 +2336,10 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                   yamlConfiguration1.createSection("limitblock");
                   yamlConfiguration1.set("flowers", 0);
                   yamlConfiguration1.set("popularity", 0);
-                  yamlConfiguration1.set("gifts", new ArrayList());
+                  yamlConfiguration1.set("gifts", new ArrayList<>());
                   yamlConfiguration1.set("icon", "");
-                  yamlConfiguration1.set("advertisement", new ArrayList());
-                  yamlConfiguration1.set("limitblock", new ArrayList());
+                  yamlConfiguration1.set("advertisement", new ArrayList<>());
+                  yamlConfiguration1.set("limitblock", new ArrayList<>());
                   yamlConfiguration1.createSection("X");
                   yamlConfiguration1.createSection("Y");
                   yamlConfiguration1.createSection("Z");
@@ -2970,7 +2960,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                         World _ro_world = Bukkit.getWorld(worldName);
                         World _spawn_world = Bukkit.getWorld(Main.JavaPlugin.getConfig().getString("Spawn", "world"));
                         if (_spawn_world == null) {
-                           _spawn_world = (World)Bukkit.getWorlds().get(0);
+                           _spawn_world = Bukkit.getWorlds().get(0);
                         }
 
                         if (_ro_world != null) {
@@ -3047,7 +3037,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                            return false;
                         } else {
                            World _overWorld = Bukkit.getWorld(Variable.world_prefix + _rn_base);
-                           Location _over_spawn = _overWorld != null ? _overWorld.getSpawnLocation() : ((World)Bukkit.getWorlds().get(0)).getSpawnLocation();
+                           Location _over_spawn = _overWorld != null ? _overWorld.getSpawnLocation() : (Bukkit.getWorlds().get(0)).getSpawnLocation();
                            for (Player pl : nether.getPlayers()) {
                               pl.teleport(_over_spawn);
                               pl.sendMessage("§c家园下界正在重置中...");
@@ -3213,7 +3203,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
 
                         int _bDiscount = Util.getUpgradeDiscount(commandPlayer);
                         if (modex.equals("money")) {
-                           double origMoney = (Double)Main.JavaPlugin.getConfig().getDoubleList("MoneyNeed").get(Now - 1);
+                           double origMoney = Main.JavaPlugin.getConfig().getDoubleList("MoneyNeed").get(Now - 1);
                            double needMoney = _bDiscount < 100 ? Math.ceil(origMoney * _bDiscount / 100.0) : origMoney;
                            double haveMoney = Variable.econ.getBalance(commandPlayer);
                            if (haveMoney < needMoney) {
@@ -3240,7 +3230,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                               return false;
                            }
 
-                           int origPts = (Integer)Main.JavaPlugin.getConfig().getIntegerList("PointsNeed").get(Now - 1);
+                           int origPts = Main.JavaPlugin.getConfig().getIntegerList("PointsNeed").get(Now - 1);
                            int needPts = _bDiscount < 100 ? (int)Math.ceil(origPts * _bDiscount / 100.0) : origPts;
                            int havePts = Variable.playerPoints.getAPI().look(commandPlayer.getUniqueId());
                            if (havePts < needPts) {
@@ -3309,7 +3299,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
 
                         int _discount = Util.getUpgradeDiscount(commandPlayer);
                         if (modex.equals("money")) {
-                           double origMoney = (Double)Main.JavaPlugin.getConfig().getDoubleList("MoneyNeed").get(Nowx - 1);
+                           double origMoney = Main.JavaPlugin.getConfig().getDoubleList("MoneyNeed").get(Nowx - 1);
                            double needMoney = _discount < 100 ? Math.ceil(origMoney * _discount / 100.0) : origMoney;
                            double haveMoney = Variable.econ.getBalance(commandPlayer);
                            if (haveMoney < needMoney) {
@@ -3331,7 +3321,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                               return false;
                            }
 
-                           int origPts = (Integer)Main.JavaPlugin.getConfig().getIntegerList("PointsNeed").get(Nowx - 1);
+                           int origPts = Main.JavaPlugin.getConfig().getIntegerList("PointsNeed").get(Nowx - 1);
                            int needPts = _discount < 100 ? (int)Math.ceil(origPts * _discount / 100.0) : origPts;
                            int havePts = Variable.playerPoints.getAPI().look(commandPlayer.getUniqueId());
                            if (havePts < needPts) {
@@ -3352,7 +3342,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                               return false;
                            }
 
-                           String itemLine = (String)Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(Nowx - 1);
+                           String itemLine = Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(Nowx - 1);
                            if (!itemLine.equalsIgnoreCase("")) {
                               String[] parts = itemLine.split(",");
                               ItemStack need_i = new ItemStack(Material.valueOf(parts[0]));
@@ -3403,7 +3393,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
 
                         java.util.List<String> afterUpdateCommands = Main.JavaPlugin.getConfig().getStringList("AfterUpdateDispathCommand");
                         for (int c = 0; c < afterUpdateCommands.size(); c++) {
-                           String _cmd = (String)Main.JavaPlugin.getConfig().getStringList("DispathCommand").get(c);
+                           String _cmd = Main.JavaPlugin.getConfig().getStringList("DispathCommand").get(c);
                            if (_cmd.contains("<Name>")) {
                               _cmd = _cmd.replace("<Name>", commandPlayer.getName());
                            }
@@ -3478,10 +3468,10 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                               sender.sendMessage(Variable.Lang_YML.getString("BottomLineTtitle"));
                            } else {
                               double GetMoney = Variable.econ.getBalance(commandPlayer);
-                              if (GetMoney >= (Double)Main.JavaPlugin.getConfig().getDoubleList("MoneyNeed").get(currentLevel - 1)) {
+                              if (GetMoney >= Main.JavaPlugin.getConfig().getDoubleList("MoneyNeed").get(currentLevel - 1)) {
                                  if (Variable.PlyaerPointsModule) {
                                     Integer GetPoints = Variable.playerPoints.getAPI().look(commandPlayer.getUniqueId());
-                                    if (GetPoints < (Integer)Main.JavaPlugin.getConfig().getIntegerList("PointsNeed").get(currentLevel - 1)) {
+                                    if (GetPoints < Main.JavaPlugin.getConfig().getIntegerList("PointsNeed").get(currentLevel - 1)) {
                                        String adminCommandMessage = Variable.Lang_YML.getString("UpdateNoPoints");
                                        if (adminCommandMessage.contains("<NeedPoints>")) {
                                           adminCommandMessage = adminCommandMessage.replace(
@@ -3496,8 +3486,8 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     }
                                  }
 
-                                 if (!((String)Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(currentLevel - 1)).equalsIgnoreCase("")) {
-                                    String[] adminCommandMessage = ((String)Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(currentLevel - 1)).split(",");
+                                 if (!(Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(currentLevel - 1)).equalsIgnoreCase("")) {
+                                    String[] adminCommandMessage = (Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(currentLevel - 1)).split(",");
                                     ItemStack planLine = new ItemStack(Material.valueOf(adminCommandMessage[0]));
                                     planLine.setAmount(Integer.valueOf(adminCommandMessage[1]));
                                     if (!commandPlayer.getInventory().containsAtLeast(planLine, planLine.getAmount())) {
@@ -3538,10 +3528,10 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  if (Variable.PlyaerPointsModule) {
                                     Variable.playerPoints
                                        .getAPI()
-                                       .take(commandPlayer.getUniqueId(), (Integer)Main.JavaPlugin.getConfig().getIntegerList("PointsNeed").get(currentLevel - 1));
+                                       .take(commandPlayer.getUniqueId(), Main.JavaPlugin.getConfig().getIntegerList("PointsNeed").get(currentLevel - 1));
                                  }
 
-                                 Variable.econ.withdrawPlayer(commandPlayer, (Double)Main.JavaPlugin.getConfig().getDoubleList("MoneyNeed").get(currentLevel - 1));
+                                 Variable.econ.withdrawPlayer(commandPlayer, Main.JavaPlugin.getConfig().getDoubleList("MoneyNeed").get(currentLevel - 1));
                                  MySQL.setLevel(commandPlayer.getWorld().getName().replace(Variable.world_prefix, ""), String.valueOf(currentLevel + 1));
                                  if (Variable.hook_FastAsyncWorldEdit
                                     && Main.JavaPlugin.getConfig().getBoolean("FaweSwitch")
@@ -3606,10 +3596,10 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                               sender.sendMessage(Variable.Lang_YML.getString("BottomLineTtitle"));
                            } else {
                               double GetMoney = Variable.econ.getBalance(commandPlayer);
-                              if (GetMoney >= (Double)Main.JavaPlugin.getConfig().getDoubleList("MoneyNeed").get(currentLevel - 1)) {
+                              if (GetMoney >= Main.JavaPlugin.getConfig().getDoubleList("MoneyNeed").get(currentLevel - 1)) {
                                  if (Variable.PlyaerPointsModule) {
                                     Integer GetPoints = Variable.playerPoints.getAPI().look(commandPlayer.getUniqueId());
-                                    if (GetPoints < (Integer)Main.JavaPlugin.getConfig().getIntegerList("PointsNeed").get(currentLevel - 1)) {
+                                    if (GetPoints < Main.JavaPlugin.getConfig().getIntegerList("PointsNeed").get(currentLevel - 1)) {
                                        String notEnoughMoneyMessage = Variable.Lang_YML.getString("UpdateNoPoints");
                                        if (notEnoughMoneyMessage.contains("<NeedPoints>")) {
                                           notEnoughMoneyMessage = notEnoughMoneyMessage.replace(
@@ -3624,8 +3614,8 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     }
                                  }
 
-                                 if (!((String)Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(currentLevel - 1)).equalsIgnoreCase("")) {
-                                    String[] notEnoughMoneyMessage = ((String)Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(currentLevel - 1)).split(",");
+                                 if (!(Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(currentLevel - 1)).equalsIgnoreCase("")) {
+                                    String[] notEnoughMoneyMessage = (Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(currentLevel - 1)).split(",");
                                     ItemStack planLine = new ItemStack(Material.valueOf(notEnoughMoneyMessage[0]));
                                     planLine.setAmount(Integer.valueOf(notEnoughMoneyMessage[1]));
                                     if (!commandPlayer.getInventory().containsAtLeast(planLine, planLine.getAmount())) {
@@ -3666,10 +3656,10 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  if (Variable.PlyaerPointsModule) {
                                     Variable.playerPoints
                                        .getAPI()
-                                       .take(commandPlayer.getUniqueId(), (Integer)Main.JavaPlugin.getConfig().getIntegerList("PointsNeed").get(currentLevel - 1));
+                                       .take(commandPlayer.getUniqueId(), Main.JavaPlugin.getConfig().getIntegerList("PointsNeed").get(currentLevel - 1));
                                  }
 
-                                 Variable.econ.withdrawPlayer(commandPlayer, (Double)Main.JavaPlugin.getConfig().getDoubleList("MoneyNeed").get(currentLevel - 1));
+                                 Variable.econ.withdrawPlayer(commandPlayer, Main.JavaPlugin.getConfig().getDoubleList("MoneyNeed").get(currentLevel - 1));
                                  yamlConfigurationx.set("Level", yamlConfigurationx.getInt("Level") + 1);
 
                                  try {
@@ -3682,7 +3672,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
 
                                  java.util.List<String> afterUpdateCommands2 = Main.JavaPlugin.getConfig().getStringList("AfterUpdateDispathCommand");
                                  for (int c = 0; c < afterUpdateCommands2.size(); c++) {
-                                    String temp1 = (String)Main.JavaPlugin.getConfig().getStringList("DispathCommand").get(c);
+                                    String temp1 = Main.JavaPlugin.getConfig().getStringList("DispathCommand").get(c);
                                     if (temp1.contains("<Name>")) {
                                        temp1 = temp1.replace("<Name>", commandPlayer.getName());
                                     }
@@ -4182,7 +4172,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
 
                            java.util.List<String> afterDeleteCommands = Main.JavaPlugin.getConfig().getStringList("AfterDeleteDispathCommand");
                            for (int cx = 0; cx < afterDeleteCommands.size(); cx++) {
-                              String temp1x = (String)Main.JavaPlugin.getConfig().getStringList("DispathCommand").get(cx);
+                              String temp1x = Main.JavaPlugin.getConfig().getStringList("DispathCommand").get(cx);
                               if (temp1x.contains("<Name>")) {
                                  temp1x = temp1x.replace("<Name>", commandPlayer.getName());
                               }
@@ -6541,7 +6531,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     netherRuleIndex < Main.JavaPlugin.getConfig().getStringList("NeitherGameRules").size();
                                     netherRuleIndex++
                                  ) {
-                                    String[] noPendingInviteMessage = ((String)Main.JavaPlugin
+                                    String[] noPendingInviteMessage = (Main.JavaPlugin
                                           .getConfig()
                                           .getStringList("NeitherGameRules")
                                           .get(netherRuleIndex))
@@ -6581,7 +6571,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     netherRuleIndex < Main.JavaPlugin.getConfig().getStringList("EndGameRules").size();
                                     netherRuleIndex++
                                  ) {
-                                    String[] noPendingInviteMessage = ((String)Main.JavaPlugin
+                                    String[] noPendingInviteMessage = (Main.JavaPlugin
                                           .getConfig()
                                           .getStringList("EndGameRules")
                                           .get(netherRuleIndex))
@@ -8055,10 +8045,10 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                        yamlConfiguration1x.createSection("limitblock");
                                        yamlConfiguration1x.set("flowers", 0);
                                        yamlConfiguration1x.set("popularity", 0);
-                                       yamlConfiguration1x.set("gifts", new ArrayList());
+                                       yamlConfiguration1x.set("gifts", new ArrayList<>());
                                        yamlConfiguration1x.set("icon", "");
-                                       yamlConfiguration1x.set("advertisement", new ArrayList());
-                                       yamlConfiguration1x.set("limitblock", new ArrayList());
+                                       yamlConfiguration1x.set("advertisement", new ArrayList<>());
+                                       yamlConfiguration1x.set("limitblock", new ArrayList<>());
 
                                        try {
                                           yamlConfiguration1x.save(createHomeFile);

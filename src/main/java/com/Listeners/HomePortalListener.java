@@ -4,7 +4,6 @@ import com.ErrorTown.Main;
 import com.ErrorTown.Variable;
 import com.Util.Util;
 import com.Util.BukkitCompat;
-import com.Util.Platform;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,10 +46,8 @@ public class HomePortalListener implements Listener {
    private static final int PORTAL_COOLDOWN_TICKS = 60;
    private static final int SURVIVAL_PORTAL_WARMUP_TICKS = 80;
    private static final int INSTANT_PORTAL_WARMUP_TICKS = 1;
-   private static final Set<UUID> ACTIVE_PORTAL_BOATS = new HashSet<>();
    private static final Set<UUID> ACTIVE_PORTAL_PLAYERS = new HashSet<>();
    private static final Map<String, Location> PORTAL_LINKS = new HashMap<>();
-   private static boolean boatPortalTaskStarted = false;
 
    private static boolean useVanillaPortalResolver() {
       return Main.JavaPlugin.getConfig().getBoolean("HomeNetherPortal.UseVanillaResolver", true);
@@ -221,7 +218,7 @@ public class HomePortalListener implements Listener {
          (new BukkitRunnable() {
             public void run() {
                if (player.isOnline()) {
-                  player.setPortalCooldown(60);
+                  player.setPortalCooldown(PORTAL_COOLDOWN_TICKS);
                   player.setFallDistance(0.0F);
                   player.teleport(safeTarget, TeleportCause.NETHER_PORTAL);
                }
@@ -470,7 +467,7 @@ public class HomePortalListener implements Listener {
                      teleportBoatAndPassengersThroughPortal(entity, event.getFrom(), TeleportCause.NETHER_PORTAL);
                   } else if (entity instanceof Item) {
                      if (!useVanillaPortalResolver()) {
-                        entity.setPortalCooldown(60);
+                        entity.setPortalCooldown(PORTAL_COOLDOWN_TICKS);
                      }
 
                      event.setTo(target);
@@ -497,7 +494,7 @@ public class HomePortalListener implements Listener {
             Entity vehicle = event.getEntity();
             if (isBoatEntity(vehicle)) {
                if (isPortalBlock(event.getLocation())) {
-                  vehicle.setPortalCooldown(60);
+                  vehicle.setPortalCooldown(PORTAL_COOLDOWN_TICKS);
                   teleportBoatAndPassengersThroughPortal(vehicle, event.getLocation(), TeleportCause.NETHER_PORTAL);
                }
             }
@@ -519,7 +516,7 @@ public class HomePortalListener implements Listener {
                      if (player.getPortalCooldown() <= 0) {
                         if (ACTIVE_PORTAL_PLAYERS.add(player.getUniqueId())) {
                            int warmupTicks = getPlayerPortalWarmupTicks(player);
-                           player.setPortalCooldown(Math.max(60, warmupTicks + 5));
+                           player.setPortalCooldown(Math.max(PORTAL_COOLDOWN_TICKS, warmupTicks + 5));
                            player.setFallDistance(0.0F);
                            (new BukkitRunnable() {
                                  public void run() {
@@ -587,17 +584,12 @@ public class HomePortalListener implements Listener {
 
    private static int getPlayerPortalWarmupTicks(Player player) {
       if (player == null) {
-         return 80;
+         return SURVIVAL_PORTAL_WARMUP_TICKS;
       } else {
          GameMode gameMode = player.getGameMode();
-         return gameMode != GameMode.CREATIVE && gameMode != GameMode.SPECTATOR ? 80 : 1;
-      }
-   }
-
-   private static void trackPortalBoat(Entity vehicle) {
-      if (vehicle != null) {
-         ACTIVE_PORTAL_BOATS.add(vehicle.getUniqueId());
-         ensureBoatPortalTask();
+         return gameMode != GameMode.CREATIVE && gameMode != GameMode.SPECTATOR
+            ? SURVIVAL_PORTAL_WARMUP_TICKS
+            : INSTANT_PORTAL_WARMUP_TICKS;
       }
    }
 
@@ -620,7 +612,7 @@ public class HomePortalListener implements Listener {
                         }
                      }
 
-                     vehicle.setPortalCooldown(60);
+                     vehicle.setPortalCooldown(PORTAL_COOLDOWN_TICKS);
                      vehicle.teleport(vehicleTarget, cause);
                      final Entity finalVehicle = vehicle;
                      final List<Entity> finalPassengers = new ArrayList<>(passengers);
@@ -629,7 +621,7 @@ public class HomePortalListener implements Listener {
                            if (finalVehicle != null && finalVehicle.isValid()) {
                               for (Entity passenger : finalPassengers) {
                                  if (passenger != null && passenger.isValid()) {
-                                    passenger.setPortalCooldown(60);
+                                    passenger.setPortalCooldown(PORTAL_COOLDOWN_TICKS);
                                     passenger.setFallDistance(0.0F);
                                     passenger.teleport(vehicleTarget, cause);
 
@@ -648,49 +640,6 @@ public class HomePortalListener implements Listener {
             }).runTask(Main.JavaPlugin);
          }
       }
-   }
-
-   private static void ensureBoatPortalTask() {
-      if (!boatPortalTaskStarted) {
-         boatPortalTaskStarted = true;
-         (new BukkitRunnable() {
-            public void run() {
-               if (!HomePortalListener.ACTIVE_PORTAL_BOATS.isEmpty()) {
-                  List<UUID> toRemove = new ArrayList<>();
-
-                  for (UUID uuid : new ArrayList<>(HomePortalListener.ACTIVE_PORTAL_BOATS)) {
-                     Entity vehicle = Bukkit.getEntity(uuid);
-                     if (vehicle == null || !vehicle.isValid() || !HomePortalListener.isBoatEntity(vehicle)) {
-                        toRemove.add(uuid);
-                     } else if (!HomePortalListener.isEntityTouchingPortal(vehicle)) {
-                        toRemove.add(uuid);
-                     } else {
-                        vehicle.setPortalCooldown(60);
-                        if (HomePortalListener.hasNonPlayerLivingPassengers(vehicle)) {
-                           HomePortalListener.teleportBoatPassengersThroughPortal(vehicle, vehicle.getLocation());
-                        }
-                     }
-                  }
-
-                  HomePortalListener.ACTIVE_PORTAL_BOATS.removeAll(toRemove);
-               }
-            }
-         }).runTaskTimer(Main.JavaPlugin, 1L, 1L);
-      }
-   }
-
-   private static boolean hasNonPlayerLivingPassengers(Entity entity) {
-      for (Entity passenger : entity.getPassengers()) {
-         if (passenger instanceof LivingEntity && !(passenger instanceof Player)) {
-            return true;
-         }
-
-         if (hasNonPlayerLivingPassengers(passenger)) {
-            return true;
-         }
-      }
-
-      return false;
    }
 
    private static boolean isPortalBlock(Location location) {
@@ -1002,68 +951,6 @@ public class HomePortalListener implements Listener {
       }
    }
 
-   private static void teleportNonPlayerLivingPassengers(Entity vehicle, final Location target) {
-      final List<LivingEntity> passengers = new ArrayList<>();
-      collectNonPlayerLivingPassengers(vehicle, passengers);
-      if (!passengers.isEmpty()) {
-         (new BukkitRunnable() {
-            public void run() {
-               for (LivingEntity passenger : passengers) {
-                  if (passenger != null && passenger.isValid()) {
-                     if (passenger.isInsideVehicle()) {
-                        passenger.leaveVehicle();
-                     }
-
-                     passenger.setPortalCooldown(60);
-                     passenger.teleport(target, TeleportCause.NETHER_PORTAL);
-                  }
-               }
-            }
-         }).runTask(Main.JavaPlugin);
-      }
-   }
-
-   private static void releaseNonPlayerLivingPassengersIntoPortal(Entity vehicle, Location portalLocation) {
-      final List<LivingEntity> passengers = new ArrayList<>();
-      collectNonPlayerLivingPassengers(vehicle, passengers);
-      if (!passengers.isEmpty() && portalLocation != null && portalLocation.getWorld() != null) {
-         final Location centeredPortal = Platform.toCenterLocation(portalLocation);
-         centeredPortal.setYaw(vehicle.getLocation().getYaw());
-         centeredPortal.setPitch(vehicle.getLocation().getPitch());
-         (new BukkitRunnable() {
-            public void run() {
-               for (LivingEntity passenger : passengers) {
-                  if (passenger != null && passenger.isValid()) {
-                     if (passenger.isInsideVehicle()) {
-                        passenger.leaveVehicle();
-                     }
-
-                     passenger.setFallDistance(0.0F);
-                     passenger.setPortalCooldown(0);
-                     passenger.setVelocity(passenger.getVelocity().zero());
-                     passenger.teleport(centeredPortal);
-                  }
-               }
-            }
-         }).runTask(Main.JavaPlugin);
-      }
-   }
-
-   private static void teleportBoatPassengersThroughPortal(Entity vehicle, Location sourcePortalLocation) {
-      Location target = computePortalTarget(sourcePortalLocation);
-      if (target == null) {
-         releaseNonPlayerLivingPassengersIntoPortal(vehicle, sourcePortalLocation);
-      } else {
-         int searchRadius = Math.max(1, Main.JavaPlugin.getConfig().getInt("HomeNetherPortal.SearchRadius", 16));
-         Location portalCenter = findNearestPortalCenter(target, searchRadius, 24);
-         if (portalCenter == null) {
-            releaseNonPlayerLivingPassengersIntoPortal(vehicle, sourcePortalLocation);
-         } else {
-            teleportNonPlayerLivingPassengers(vehicle, portalCenter);
-         }
-      }
-   }
-
    private static Location findNearestPortalCenter(Location center, int horizontalRadius, int verticalRadius) {
       if (center != null && center.getWorld() != null) {
          World world = center.getWorld();
@@ -1101,18 +988,6 @@ public class HomePortalListener implements Listener {
          return best;
       } else {
          return null;
-      }
-   }
-
-   private static void collectNonPlayerLivingPassengers(Entity entity, List<LivingEntity> passengers) {
-      for (Entity passenger : entity.getPassengers()) {
-         if (passenger instanceof LivingEntity && !(passenger instanceof Player)) {
-            passengers.add((LivingEntity)passenger);
-         }
-
-         if (!passenger.getPassengers().isEmpty()) {
-            collectNonPlayerLivingPassengers(passenger, passengers);
-         }
       }
    }
 

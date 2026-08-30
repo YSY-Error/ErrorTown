@@ -216,7 +216,7 @@ public class PlayerChatListener implements Listener {
                            World existing = Bukkit.getWorld(worldName);
                            World spawnWorld = Bukkit.getWorld(Main.JavaPlugin.getConfig().getString("Spawn", "world"));
                            if (spawnWorld == null) {
-                              spawnWorld = (World)Bukkit.getWorlds().get(0);
+                              spawnWorld = Bukkit.getWorlds().get(0);
                            }
 
                            World finalSpawn = spawnWorld;

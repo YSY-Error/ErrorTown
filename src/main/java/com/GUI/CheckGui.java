@@ -8,7 +8,6 @@ import com.Util.MySQL;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;

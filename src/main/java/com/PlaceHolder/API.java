@@ -2,7 +2,7 @@ package com.PlaceHolder;
 
 import com.ErrorTown.Main;
 import com.ErrorTown.Variable;
-import com.ErrorTown.init;
+import com.ErrorTown.ScheduledTasks;
 import com.Util.HomeAPI;
 import com.Util.HomeTerrainPolicy;
 import com.Util.BukkitCompat;
@@ -78,7 +78,7 @@ public class API extends PlaceholderExpansion {
    }
 
    public static String getRankName(int level) {
-      init.refreshWorldStatics(false);
+      ScheduledTasks.refreshWorldStatics(false);
       return Variable.world_StaticsTick.size() > level - 1 ? Variable.world_StaticsTick.get(level - 1).name : "";
    }
 
@@ -1110,7 +1110,7 @@ public class API extends PlaceholderExpansion {
                   if (Variable.bungee) {
                      if (Main.JavaPlugin.getConfig().getInt("MaxLevel") != Integer.valueOf(MySQL.getLevel(selfHomeName))) {
                         result_check = String.valueOf(
-                           ((String)Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(Integer.valueOf(MySQL.getLevel(selfHomeName)) - 1)).split(",")[0]
+                           (Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(Integer.valueOf(MySQL.getLevel(selfHomeName)) - 1)).split(",")[0]
                         );
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.HasAlreadyReachLevelMax");
@@ -1123,7 +1123,7 @@ public class API extends PlaceholderExpansion {
 
                      if (Main.JavaPlugin.getConfig().getInt("MaxLevel") != selfHomeYml2.getInt("Level")) {
                         result_check = String.valueOf(
-                           ((String)Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(selfHomeYml2.getInt("Level") - 1)).split(",")[0]
+                           (Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(selfHomeYml2.getInt("Level") - 1)).split(",")[0]
                         );
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.HasAlreadyReachLevelMax");
@@ -1139,7 +1139,7 @@ public class API extends PlaceholderExpansion {
                   if (Variable.bungee) {
                      if (Main.JavaPlugin.getConfig().getInt("MaxLevel") != Integer.valueOf(MySQL.getLevel(selfHomeName))) {
                         result_check = String.valueOf(
-                           ((String)Main.JavaPlugin.getConfig().getStringList("ItemsChineseName").get(Integer.valueOf(MySQL.getLevel(selfHomeName)) - 1))
+                           (Main.JavaPlugin.getConfig().getStringList("ItemsChineseName").get(Integer.valueOf(MySQL.getLevel(selfHomeName)) - 1))
                               .split(",")[0]
                         );
                      } else {
@@ -1153,7 +1153,7 @@ public class API extends PlaceholderExpansion {
 
                      if (Main.JavaPlugin.getConfig().getInt("MaxLevel") != selfHomeYml3.getInt("Level")) {
                         result_check = String.valueOf(
-                           ((String)Main.JavaPlugin.getConfig().getStringList("ItemsChineseName").get(selfHomeYml3.getInt("Level") - 1)).split(",")[0]
+                           (Main.JavaPlugin.getConfig().getStringList("ItemsChineseName").get(selfHomeYml3.getInt("Level") - 1)).split(",")[0]
                         );
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.HasAlreadyReachLevelMax");
@@ -1169,7 +1169,7 @@ public class API extends PlaceholderExpansion {
                   if (Variable.bungee) {
                      if (Main.JavaPlugin.getConfig().getInt("MaxLevel") != Integer.valueOf(MySQL.getLevel(selfHomeName))) {
                         result_check = String.valueOf(
-                           ((String)Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(Integer.valueOf(MySQL.getLevel(selfHomeName)) - 1)).split(",")[1]
+                           (Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(Integer.valueOf(MySQL.getLevel(selfHomeName)) - 1)).split(",")[1]
                         );
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.HasAlreadyReachLevelMax");
@@ -1182,7 +1182,7 @@ public class API extends PlaceholderExpansion {
 
                      if (Main.JavaPlugin.getConfig().getInt("MaxLevel") != selfHomeYml4.getInt("Level")) {
                         result_check = String.valueOf(
-                           ((String)Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(selfHomeYml4.getInt("Level") - 1)).split(",")[1]
+                           (Main.JavaPlugin.getConfig().getStringList("ItemsNeed").get(selfHomeYml4.getInt("Level") - 1)).split(",")[1]
                         );
                      } else {
                         result_check = Variable.Lang_YML.getString("PlaceHolders.HasAlreadyReachLevelMax");

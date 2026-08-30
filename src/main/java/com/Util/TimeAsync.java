@@ -1,7 +1,6 @@
 package com.Util;
 
 import com.ErrorTown.Main;
-import com.ErrorTown.Variable;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;

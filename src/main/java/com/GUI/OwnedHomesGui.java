@@ -6,7 +6,6 @@ import com.Util.GuiSafe;
 import com.Util.HomeAPI;
 import java.util.ArrayList;
 import java.util.List;
-import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;

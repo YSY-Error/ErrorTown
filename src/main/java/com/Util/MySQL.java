@@ -2,7 +2,7 @@ package com.Util;
 
 import com.ErrorTown.Main;
 import com.ErrorTown.Variable;
-import com.ErrorTown.init;
+import com.ErrorTown.ScheduledTasks;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -82,13 +82,22 @@ public class MySQL {
    private static final String Update_lockweather = "UPDATE ErrorTown_Users Set lockweather = ? Where Name = ?";
    private static final String Update_time = "UPDATE ErrorTown_Users Set time = ? Where Name = ?";
    private static final String Update_Server = "UPDATE ErrorTown_Users Set Server = ? Where Name = ?";
-   private static final String Insert_Value = "INSERT INTO ErrorTown_Users VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+   private static final String Insert_Value = "INSERT INTO ErrorTown_Users VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
    private static final String Remove_Player = "DELETE From ErrorTown_Users Where Name = ?";
    private static final String Get_ALL = "SELECT * FROM ErrorTown_Users";
    private static final String Import_Check = "SELECT * FROM ErrorTown_Users WHERE Name = ?";
    private static final String DESC_LEVEL = "SELECT * FROM ErrorTown_Users Order by Level DESC";
    private static final String DESC_FLOWER = "SELECT * FROM ErrorTown_Users Order by flowers DESC";
    private static final String DESC_POPULARITY = "SELECT * FROM ErrorTown_Users Order by popularity DESC";
+   private static final String Find_Homes_By_OP = "SELECT * FROM ErrorTown_Users WHERE OP LIKE ?";
+   private static final String Find_Homes_By_Members = "SELECT * FROM ErrorTown_Users WHERE Members LIKE ?";
+   private static final String ALTER_Add_flowers = "alter table ErrorTown_Users add column flowers VARCHAR(100) default '0'";
+   private static final String ALTER_Add_popularity = "alter table ErrorTown_Users add column popularity VARCHAR(100) default '0'";
+   private static final String ALTER_Add_gifts = "alter table ErrorTown_Users add column gifts TEXT default NULL";
+   private static final String ALTER_Add_advertisement = "alter table ErrorTown_Users add column advertisement VARCHAR(255)";
+   private static final String ALTER_Add_icon = "alter table ErrorTown_Users add column icon VARCHAR(255)";
+   private static final String ALTER_Add_visittime = "alter table ErrorTown_Users add column visittime VARCHAR(255)";
+   private static final String ALTER_Add_limitblock = "alter table ErrorTown_Users add column limitblock VARCHAR(255)";
    static ConsoleCommandSender console = Bukkit.getConsoleSender();
 
    public static void autoUpdateServer() {
@@ -116,13 +125,13 @@ public class MySQL {
             int MaxID = yamlConfiguration.getInt("MaxID");
             if (nowID < MaxID) {
                try {
-                  ps = con.prepareStatement("Select * From ErrorTown_Servers Where Server = ?", 1004, 1007);
+                  ps = con.prepareStatement(Has_Already_Contain_The_Server, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                   ps.setString(1, Main.JavaPlugin.getConfig().getString("Server"));
                   res = ps.executeQuery();
                   res.last();
                   int amount = res.getRow();
                   if (amount == 0) {
-                     ps = con.prepareStatement("INSERT INTO ErrorTown_Servers VALUES(?,?)");
+                     ps = con.prepareStatement(Insert_Server);
                      ps.setString(1, Main.JavaPlugin.getConfig().getString("Server"));
                      if (Main.JavaPlugin.getConfig().getString("DecideBy").equalsIgnoreCase("Player")) {
                         ps.setDouble(2, Bukkit.getOnlinePlayers().size());
@@ -137,7 +146,7 @@ public class MySQL {
 
                      ps.executeUpdate();
                   } else {
-                     ps = con.prepareStatement("UPDATE ErrorTown_Servers Set Amount = ? Where Server = ?");
+                     ps = con.prepareStatement(Update_Server_Statistic);
                      if (Main.JavaPlugin.getConfig().getString("DecideBy").equalsIgnoreCase("Player")) {
                         ps.setDouble(1, Bukkit.getOnlinePlayers().size());
                      } else if (Bukkit.getVersion().contains("1.7.10")) {
@@ -183,7 +192,7 @@ public class MySQL {
       String result = null;
 
       try {
-         ps = con.prepareStatement("SELECT * From ErrorTown_Servers Order by Amount ASC");
+         ps = con.prepareStatement(Find_the_Lowest_Server);
          res = ps.executeQuery();
          if (res.next()) {
             result = res.getString("Server");
@@ -218,7 +227,7 @@ public class MySQL {
       String result = null;
 
       try {
-         ps = con.prepareStatement("SELECT * From ErrorTown_Servers Order by Amount DESC");
+         ps = con.prepareStatement(Find_the_Highest_Server);
          res = ps.executeQuery();
          if (res.next()) {
             result = res.getString("Server");
@@ -253,7 +262,7 @@ public class MySQL {
       double amount = 0.0;
 
       try {
-         ps = con.prepareStatement("SELECT Amount FROM ErrorTown_Servers WHERE Server = ?");
+         ps = con.prepareStatement(Get_Amount);
          ps.setString(1, server);
          res = ps.executeQuery();
          if (res.next()) {
@@ -289,7 +298,7 @@ public class MySQL {
       int ss = 0;
 
       try {
-         ps = con.prepareStatement("SELECT * FROM ErrorTown_Users Where Name = ?");
+         ps = con.prepareStatement(Already_has_the_player_home);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -325,7 +334,7 @@ public class MySQL {
       boolean check = false;
 
       try {
-         ps = con.prepareStatement("SELECT * FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Search_Home);
          ps.setString(1, name.replace(Variable.world_prefix, ""));
          res = ps.executeQuery();
          if (res.next()) {
@@ -361,7 +370,7 @@ public class MySQL {
       boolean check = false;
 
       try {
-         ps = con.prepareStatement("SELECT * FROM ErrorTown_Users WHERE OP LIKE ?");
+         ps = con.prepareStatement(Find_Homes_By_OP);
          ps.setString(1, "%" + name + "%");
          res = ps.executeQuery();
          if (res.next()) {
@@ -397,7 +406,7 @@ public class MySQL {
       String check = null;
 
       try {
-         ps = con.prepareStatement("SELECT * FROM ErrorTown_Users WHERE OP LIKE ?");
+         ps = con.prepareStatement(Find_Homes_By_OP);
          ps.setString(1, "%" + name + "%");
          res = ps.executeQuery();
 
@@ -450,7 +459,7 @@ public class MySQL {
       String Server = null;
 
       try {
-         ps = con.prepareStatement("SELECT * FROM ErrorTown_Users WHERE OP LIKE ?");
+         ps = con.prepareStatement(Find_Homes_By_OP);
          ps.setString(1, "%" + name + "%");
          res = ps.executeQuery();
          if (res.next()) {
@@ -486,7 +495,7 @@ public class MySQL {
       String Server = null;
 
       try {
-         ps = con.prepareStatement("SELECT * FROM ErrorTown_Users WHERE Name=?");
+         ps = con.prepareStatement(Search_Home);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -521,7 +530,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("alter table ErrorTown_Users add column flowers VARCHAR(100) default '0'");
+         ps = con.prepareStatement(ALTER_Add_flowers);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
          try {
@@ -564,7 +573,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("alter table ErrorTown_Users add column advertisement VARCHAR(255)");
+         ps = con.prepareStatement(ALTER_Add_advertisement);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
          try {
@@ -607,7 +616,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("alter table ErrorTown_Users add column limitblock VARCHAR(255)");
+         ps = con.prepareStatement(ALTER_Add_limitblock);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
          try {
@@ -650,7 +659,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("alter table ErrorTown_Users add column icon VARCHAR(255)");
+         ps = con.prepareStatement(ALTER_Add_icon);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
          try {
@@ -693,7 +702,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("alter table ErrorTown_Users add column visittime VARCHAR(255)");
+         ps = con.prepareStatement(ALTER_Add_visittime);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
          try {
@@ -736,7 +745,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("alter table ErrorTown_Users add column popularity VARCHAR(100) default '0'");
+         ps = con.prepareStatement(ALTER_Add_popularity);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
          try {
@@ -779,7 +788,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("alter table ErrorTown_Users add column gifts TEXT default NULL");
+         ps = con.prepareStatement(ALTER_Add_gifts);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
          try {
@@ -822,7 +831,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set flowers = ? Where Name = ?");
+         ps = con.prepareStatement(Update_Flowers);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -853,7 +862,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set popularity = ? Where Name = ?");
+         ps = con.prepareStatement(Update_Popularity);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -885,7 +894,7 @@ public class MySQL {
       Reader reader = new StringReader(value);
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set gifts = ? Where Name = ?");
+         ps = con.prepareStatement(Update_Gift);
          ps.setCharacterStream(1, reader);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -920,7 +929,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set icon = ? Where Name = ?");
+         ps = con.prepareStatement(Update_icon);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -965,7 +974,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set visittime = ? Where Name = ?");
+         ps = con.prepareStatement(Update_visittime);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -996,7 +1005,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set advertisement = ? Where Name = ?");
+         ps = con.prepareStatement(Update_advertisement);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -1027,7 +1036,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set limitblock = ? Where Name = ?");
+         ps = con.prepareStatement(Update_LimitBlock);
          if (value != null && value.length() != 0 && value.substring(0, 1).equals(",")) {
             value = value.substring(1, value.length());
          }
@@ -1062,7 +1071,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set X = ? Where Name = ?");
+         ps = con.prepareStatement(Update_X);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -1093,7 +1102,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set Y = ? Where Name = ?");
+         ps = con.prepareStatement(Update_Y);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -1124,7 +1133,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set Z = ? Where Name = ?");
+         ps = con.prepareStatement(Update_Z);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -1155,7 +1164,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set time = ? Where Name = ?");
+         ps = con.prepareStatement(Update_time);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -1186,7 +1195,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set lockweather = ? Where Name = ?");
+         ps = con.prepareStatement(Update_lockweather);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -1217,7 +1226,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set locktime = ? Where Name = ?");
+         ps = con.prepareStatement(Update_locktime);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -1248,7 +1257,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set dropitem = ? Where Name = ?");
+         ps = con.prepareStatement(Update_dropitem);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -1279,7 +1288,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set pickup = ? Where Name = ?");
+         ps = con.prepareStatement(Update_pickup);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -1310,7 +1319,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set pvp = ? Where Name = ?");
+         ps = con.prepareStatement(Update_pvp);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -1341,7 +1350,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set Level = ? Where Name = ?");
+         ps = con.prepareStatement(Update_Level);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -1372,7 +1381,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set Server = ? Where Name = ?");
+         ps = con.prepareStatement(Update_Server);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -1403,7 +1412,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set Public = ? Where Name = ?");
+         ps = con.prepareStatement(Update_Public);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -1434,7 +1443,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set Denys = ? Where Name = ?");
+         ps = con.prepareStatement(Update_Denys);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -1465,7 +1474,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set OP = ? Where Name = ?");
+         ps = con.prepareStatement(Update_OP);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -1496,7 +1505,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("UPDATE ErrorTown_Users Set Members = ? Where Name = ?");
+         ps = con.prepareStatement(Update_Members);
          ps.setString(1, value);
          ps.setString(2, name);
          ps.executeUpdate();
@@ -1528,7 +1537,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT flowers FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_Flowers);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -1568,7 +1577,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT popularity FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_Popularity);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -1608,7 +1617,7 @@ public class MySQL {
       List<String> list = new ArrayList<>();
 
       try {
-         ps = con.prepareStatement("SELECT gifts FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_Gifts);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -1668,7 +1677,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT icon FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_icon);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -1709,7 +1718,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT visittime FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_visittime);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -1750,7 +1759,7 @@ public class MySQL {
       List<String> list = new ArrayList<>();
 
       try {
-         ps = con.prepareStatement("SELECT advertisement FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_advertisement);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -1792,7 +1801,7 @@ public class MySQL {
       List<String> list = new ArrayList<>();
 
       try {
-         ps = con.prepareStatement("SELECT limitblock FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_LimitBlock);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (!res.next()) {
@@ -1841,7 +1850,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT X FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_X);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -1877,7 +1886,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT Y FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_Y);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -1913,7 +1922,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT Z FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_Z);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -1943,8 +1952,8 @@ public class MySQL {
    }
 
    public static List<String> getMembers(String name) {
-      if (init.MEMBERS_redis.containsKey(name)) {
-         return init.MEMBERS_redis.get(name);
+      if (ScheduledTasks.MEMBERS_redis.containsKey(name)) {
+         return ScheduledTasks.MEMBERS_redis.get(name);
       } else {
          Connection con = getConnection();
          PreparedStatement ps = null;
@@ -1952,7 +1961,7 @@ public class MySQL {
          List<String> list = new ArrayList<>();
 
          try {
-            ps = con.prepareStatement("SELECT Members FROM ErrorTown_Users WHERE Name = ?");
+            ps = con.prepareStatement(Get_Members);
             ps.setString(1, name);
             res = ps.executeQuery();
             if (res.next()) {
@@ -1987,8 +1996,8 @@ public class MySQL {
    }
 
    public static List<String> getOP(String name) {
-      if (init.OPS_redis.containsKey(name)) {
-         return init.OPS_redis.get(name);
+      if (ScheduledTasks.OPS_redis.containsKey(name)) {
+         return ScheduledTasks.OPS_redis.get(name);
       } else {
          Connection con = getConnection();
          PreparedStatement ps = null;
@@ -1996,7 +2005,7 @@ public class MySQL {
          List<String> list = new ArrayList<>();
 
          try {
-            ps = con.prepareStatement("SELECT OP FROM ErrorTown_Users WHERE Name = ?");
+            ps = con.prepareStatement(Get_OP);
             ps.setString(1, name);
             res = ps.executeQuery();
             if (res.next()) {
@@ -2037,7 +2046,7 @@ public class MySQL {
       List<String> list = new ArrayList<>();
 
       try {
-         ps = con.prepareStatement("SELECT Denys FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_Denys);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -2077,7 +2086,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT Public FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_Public);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -2113,7 +2122,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT Level FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_Level);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -2149,7 +2158,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT pvp FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_pvp);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -2185,7 +2194,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT pickup FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_pickup);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -2221,7 +2230,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT dropitem FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_dropitem);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -2257,7 +2266,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT locktime FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_locktime);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res == null) {
@@ -2313,7 +2322,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT lockweather FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_lockweather);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -2349,7 +2358,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT time FROM ErrorTown_Users WHERE Name = ?");
+         ps = con.prepareStatement(Get_time);
          ps.setString(1, name);
          res = ps.executeQuery();
          if (res.next()) {
@@ -2385,7 +2394,7 @@ public class MySQL {
       List<String> list = new ArrayList<>();
 
       try {
-         ps = con.prepareStatement("SELECT * FROM ErrorTown_Users");
+         ps = con.prepareStatement(Get_ALL);
          res = ps.executeQuery();
 
          while (res.next()) {
@@ -2421,7 +2430,7 @@ public class MySQL {
       int amount = 0;
 
       try {
-         ps = con.prepareStatement("SELECT * FROM ErrorTown_Users", 1004, 1007);
+         ps = con.prepareStatement(Get_ALL, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
          res = ps.executeQuery();
          res.last();
          amount = res.getRow();
@@ -2488,7 +2497,7 @@ public class MySQL {
       boolean success = false;
 
       try {
-         ps = con.prepareStatement("SELECT * FROM ErrorTown_Users WHERE OP LIKE ?");
+         ps = con.prepareStatement(Find_Homes_By_OP);
          ps.setString(1, "%" + name + "%");
          res = ps.executeQuery();
          if (res.next()) {
@@ -2553,7 +2562,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("INSERT INTO ErrorTown_Users VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+         ps = con.prepareStatement(Insert_Value);
          ps.setString(1, s1);
          ps.setString(2, s2);
          ps.setString(3, s3);
@@ -2605,7 +2614,7 @@ public class MySQL {
       ResultSet res = null;
 
       try {
-         ps = con.prepareStatement("DELETE From ErrorTown_Users Where Name = ?");
+         ps = con.prepareStatement(Remove_Player);
          ps.setString(1, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
@@ -2636,7 +2645,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT * FROM ErrorTown_Users Order by flowers DESC");
+         ps = con.prepareStatement(DESC_FLOWER);
          res = ps.executeQuery();
 
          for (int amount = 1; res.next(); amount++) {
@@ -2675,7 +2684,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT * FROM ErrorTown_Users Order by popularity DESC");
+         ps = con.prepareStatement(DESC_POPULARITY);
          res = ps.executeQuery();
 
          for (int amount = 1; res.next(); amount++) {
@@ -2714,7 +2723,7 @@ public class MySQL {
       String result = "";
 
       try {
-         ps = con.prepareStatement("SELECT * FROM ErrorTown_Users Order by Level DESC");
+         ps = con.prepareStatement(DESC_LEVEL);
          res = ps.executeQuery();
 
          for (int amount = 1; res.next(); amount++) {
@@ -2753,7 +2762,7 @@ public class MySQL {
       int amount = 1;
 
       try {
-         ps = con.prepareStatement("SELECT * FROM ErrorTown_Users Order by Level DESC");
+         ps = con.prepareStatement(DESC_LEVEL);
          res = ps.executeQuery();
 
          while (res.next() && !res.getString("Name").equalsIgnoreCase(name)) {
@@ -2789,7 +2798,7 @@ public class MySQL {
       List<String> members = new ArrayList<>();
 
       try {
-         ps = con.prepareStatement("SELECT * FROM ErrorTown_Users WHERE Members LIKE ?");
+         ps = con.prepareStatement(Find_Homes_By_Members);
          ps.setString(1, "%" + name + "%");
          res = ps.executeQuery();
 
@@ -2840,7 +2849,7 @@ public class MySQL {
          YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(temp);
 
          try {
-            ps = con.prepareStatement("SELECT * FROM ErrorTown_Users WHERE Name = ?");
+            ps = con.prepareStatement(Import_Check);
             ps.setString(1, want_to);
             res = ps.executeQuery();
             if (res.next()) {
@@ -2948,7 +2957,7 @@ public class MySQL {
       int amount = 0;
 
       try {
-         ps = con.prepareStatement("SELECT * FROM ErrorTown_Users");
+         ps = con.prepareStatement(Get_ALL);
          ResultSet rs = ps.executeQuery();
 
          while (rs.next()) {
@@ -3107,15 +3116,13 @@ public class MySQL {
       PreparedStatement ps = null;
 
       try {
-         ps = con.prepareStatement(
-            "CREATE TABLE IF NOT EXISTS ErrorTown_Users (Name VARCHAR(255),Members VARCHAR(255),OP VARCHAR(255),Denys VARCHAR(255),Public VARCHAR(255),Level VARCHAR(255),pvp VARCHAR(255),pickup VARCHAR(255),dropitem VARCHAR(255),Server VARCHAR(255),locktime VARCHAR(255),lockweather VARCHAR(255),time VARCHAR(255),X VARCHAR(255),Y VARCHAR(255),Z VARCHAR(255),flowers VARCHAR(100),popularity VARCHAR(100),gifts TEXT default null,advertisement VARCHAR(255),icon VARCHAR(255),visittime VARCHAR(255),limitblock varchar(255))"
-         );
+         ps = con.prepareStatement(CREATE_Users_TABLE);
          int ss = ps.executeUpdate();
          if (ss != 0) {
             Bukkit.getConsoleSender().sendMessage(Variable.Lang_YML.getString("CreateDataBaseTableSuccess"));
          }
 
-         PreparedStatement ps2 = getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS ErrorTown_Servers (Server VarChar(100),Amount double)");
+         PreparedStatement ps2 = getConnection().prepareStatement(CREATE_Servers_TABLE);
          ps2.executeUpdate();
          return;
       } catch (SQLException sqlFailure) {

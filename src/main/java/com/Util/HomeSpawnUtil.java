@@ -17,7 +17,7 @@ public class HomeSpawnUtil {
                   int minLimit = Math.max(1, Main.JavaPlugin.getConfig().getInt("HomeSpawnCompensation.MinMonsterSpawnLimit", 70));
                   int maxLimit = Math.max(minLimit, Main.JavaPlugin.getConfig().getInt("HomeSpawnCompensation.MaxMonsterSpawnLimit", 1024));
                   int borderChunks = estimateBorderChunkArea(world);
-                  int compensatedLimit = (int)Math.ceil(targetCap * 289.0 / Math.max(1, borderChunks));
+                  int compensatedLimit = (int)Math.ceil(targetCap * (double)VANILLA_SPAWN_CHUNK_AREA / Math.max(1, borderChunks));
                   compensatedLimit = Math.max(minLimit, Math.min(maxLimit, compensatedLimit));
                   world.setMonsterSpawnLimit(compensatedLimit);
                }
@@ -32,7 +32,7 @@ public class HomeSpawnUtil {
          int chunksWide = Math.max(1, (int)Math.ceil(border.getSize() / 16.0));
          return chunksWide * chunksWide;
       } catch (Throwable failure) {
-         return 289;
+         return VANILLA_SPAWN_CHUNK_AREA;
       }
    }
 }

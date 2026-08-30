@@ -30,11 +30,10 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class init implements Listener {
+public class ScheduledTasks {
    public static java.util.Map<String, Integer> border_redis = com.Util.Util.boundedCache(2048);
    public static HashMap<String, List<String>> OPS_redis = new HashMap<>();
    public static HashMap<String, List<String>> MEMBERS_redis = new HashMap<>();
@@ -142,7 +141,7 @@ public class init implements Listener {
       }
    }
 
-   public static void init() {
+   public static void start() {
       if (Main.JavaPlugin.getConfig().getBoolean("BorderSwitch")) {
          (new BukkitRunnable() {
                public void run() {
@@ -171,14 +170,14 @@ public class init implements Listener {
                               }
                            }
 
-                           if (init.border_redis.containsKey(home.getName())) {
-                              if (vip_add < init.border_redis.get(home.getName())) {
-                                 vip_add = init.border_redis.get(home.getName());
+                           if (ScheduledTasks.border_redis.containsKey(home.getName())) {
+                              if (vip_add < ScheduledTasks.border_redis.get(home.getName())) {
+                                 vip_add = ScheduledTasks.border_redis.get(home.getName());
                               } else {
-                                 init.border_redis.put(home.getName(), vip_add);
+                                 ScheduledTasks.border_redis.put(home.getName(), vip_add);
                               }
                            } else {
-                              init.border_redis.put(home.getName(), vip_add);
+                              ScheduledTasks.border_redis.put(home.getName(), vip_add);
                            }
 
                            try {
@@ -334,7 +333,7 @@ public class init implements Listener {
          && Main.JavaPlugin.getConfig().getBoolean("EnableTilesAndChunksAndDropItemsStatisticsTop")) {
          (new BukkitRunnable() {
             public void run() {
-               init.refreshWorldStatics(true);
+               ScheduledTasks.refreshWorldStatics(true);
             }
          }).runTaskTimer(Main.JavaPlugin, 0L, Main.JavaPlugin.getConfig().getLong("ShowTimes") * 20L);
       }
@@ -837,13 +836,13 @@ public class init implements Listener {
       if (!Main.JavaPlugin.getConfig().getBoolean("DisableFunctionButTeleport")) {
          (new BukkitRunnable() {
             public void run() {
-               init.OPS_redis.clear();
-               init.MEMBERS_redis.clear();
+               ScheduledTasks.OPS_redis.clear();
+               ScheduledTasks.MEMBERS_redis.clear();
                for (World world : Bukkit.getWorlds()) {
                   Home temp_home = HomeAPI.getHome(world.getName());
                   if (temp_home != null) {
-                     init.OPS_redis.put(world.getName().replace(Variable.world_prefix, ""), temp_home.getOPs());
-                     init.MEMBERS_redis.put(world.getName().replace(Variable.world_prefix, ""), temp_home.getMembers());
+                     ScheduledTasks.OPS_redis.put(world.getName().replace(Variable.world_prefix, ""), temp_home.getOPs());
+                     ScheduledTasks.MEMBERS_redis.put(world.getName().replace(Variable.world_prefix, ""), temp_home.getMembers());
                   }
                }
             }

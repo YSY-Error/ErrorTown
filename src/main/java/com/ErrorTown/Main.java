@@ -220,7 +220,7 @@ public class Main extends JavaPlugin implements PluginMessageListener {
          if (rsp == null) {
             return false;
          } else {
-            Variable.econ = (Economy)rsp.getProvider();
+            Variable.econ = rsp.getProvider();
             return Variable.econ != null;
          }
       }
@@ -377,7 +377,7 @@ public class Main extends JavaPlugin implements PluginMessageListener {
          Bukkit.getConsoleSender().sendMessage(com.Util.Lang.get("HookPlaceholderAPI", "[ErrorTown] HookPlaceholderAPI"));
       }
 
-      init.init();
+      ScheduledTasks.start();
       if (JavaPlugin.getConfig().getBoolean("CheckUpdate")) {
          CheckUpdate.checkUpdate();
       }
@@ -705,7 +705,7 @@ public class Main extends JavaPlugin implements PluginMessageListener {
       if (configuredSoil != null && !configuredSoil.trim().isEmpty()) {
          Variable.Soil = configuredSoil.trim();
       }
-      initHome.init();
+      HomeDataUpgrade.apply();
    }
 
    public void onPluginMessageReceived(String channel, Player player, byte[] message) {

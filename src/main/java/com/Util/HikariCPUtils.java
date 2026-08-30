@@ -1,7 +1,6 @@
 package com.Util;
 
 import com.ErrorTown.Main;
-import com.ErrorTown.Variable;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import java.sql.SQLException;

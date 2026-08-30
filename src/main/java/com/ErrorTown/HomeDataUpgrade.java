@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-public class initHome {
-   public static void init() {
+public class HomeDataUpgrade {
+   public static void apply() {
       if (Variable.bungee) {
          MySQL.addFlowersColumn();
          MySQL.addPopularityColumn();
@@ -35,13 +35,13 @@ public class initHome {
 
             if (!yamlConfiguration.isSet("gifts")) {
                yamlConfiguration.createSection("gifts");
-               yamlConfiguration.set("gifts", new ArrayList());
+               yamlConfiguration.set("gifts", new ArrayList<>());
                edit = true;
             }
 
             if (!yamlConfiguration.isSet("advertisement")) {
                yamlConfiguration.createSection("advertisement");
-               yamlConfiguration.set("advertisement", new ArrayList());
+               yamlConfiguration.set("advertisement", new ArrayList<>());
                edit = true;
             }
 

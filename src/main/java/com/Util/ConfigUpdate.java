@@ -625,7 +625,7 @@ public class ConfigUpdate {
          }
 
          if (Main.JavaPlugin.getConfig().getStringList("EntityList") == null) {
-            Main.JavaPlugin.getConfig().set("EntityList", new ArrayList());
+            Main.JavaPlugin.getConfig().set("EntityList", new ArrayList<>());
             config_check = true;
          }
 
@@ -642,7 +642,7 @@ public class ConfigUpdate {
          }
 
          if (Main.JavaPlugin.getConfig().getStringList("BlackItems") == null) {
-            Main.JavaPlugin.getConfig().set("BlackItems", new ArrayList());
+            Main.JavaPlugin.getConfig().set("BlackItems", new ArrayList<>());
             config_check = true;
          }
 

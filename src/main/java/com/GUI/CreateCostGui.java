@@ -3,8 +3,6 @@ package com.GUI;
 import com.ErrorTown.Main;
 import com.ErrorTown.Variable;
 import com.Util.GuiSafe;
-import com.Util.HomeAPI;
-import com.Util.MySQL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -126,12 +124,6 @@ public class CreateCostGui implements InventoryHolder {
       m.setDisplayName("§r");
       p.setItemMeta(m);
       return p;
-   }
-
-   private boolean canCreate(Player p) {
-      return !Main.JavaPlugin.getConfig().getBoolean("BungeeCord")
-         ? HomeAPI.getOwnedHomes(p.getName()).size() < Math.max(1, Main.JavaPlugin.getConfig().getInt("MaxOwnedHomes", 3))
-         : !MySQL.alreadyhastheplayerhome(p.getName()) && !MySQL.alreadyhastheplayerjoin(p.getName());
    }
 
    public Inventory getInventory() {

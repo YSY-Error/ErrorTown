@@ -11,7 +11,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
@@ -466,7 +465,7 @@ public class Util {
     * Highest {@code VIPAdd} radius bonus granted by any currently online owner or manager
     * of {@code home}.
     *
-    * <p>This same block was copy-pasted into seven places (Util, WBControl, init,
+    * <p>This same block was copy-pasted into seven places (Util, WBControl, ScheduledTasks,
     * BlockPlaceListener, PlayerMoveListener, PlayerTeleportListener, HomeWorldManager),
     * each with an unguarded {@code Integer.valueOf(ss[1])} that throws on a malformed
     * {@code VIPAdd} entry and an unguarded {@code ss[1]} that throws on a missing comma.
@@ -524,7 +523,7 @@ public class Util {
     *
     * <p>The {@code border_redis} caches were plain {@code HashMap}s with no eviction, so
     * they retained an entry for every home ever visited for the lifetime of the server.
-    * Six independent copies of that map exist (here, {@code WBControl}, {@code init},
+    * Six independent copies of that map exist (here, {@code WBControl}, {@code ScheduledTasks},
     * {@code BlockPlaceListener}, {@code PlayerMoveListener},
     * {@code PlayerTeleportListener}); bounding each of them stops the growth without
     * changing how any call site reads or writes them.</p>

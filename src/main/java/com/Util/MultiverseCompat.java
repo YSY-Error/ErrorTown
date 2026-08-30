@@ -135,14 +135,6 @@ public final class MultiverseCompat {
       return result != null && target.getClass().isInstance(result) ? result : target;
    }
 
-   private static boolean invokeBoolean(Object target, String name, Object... args) {
-      if (target == null) {
-         return false;
-      }
-      Object result = invoke(target, name, args);
-      return result != null && successfulResult(result);
-   }
-
    private static Object invoke(Object target, String name, Object... args) {
       if (target == null) {
          return null;
