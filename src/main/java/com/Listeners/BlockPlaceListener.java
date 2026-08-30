@@ -6,6 +6,7 @@ import com.Util.Home;
 import com.Util.HomeAPI;
 import com.Util.HomeTerrainPolicy;
 import com.Util.Util;
+import com.Util.VipBorderRatchet;
 import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -215,15 +216,7 @@ public class BlockPlaceListener implements Listener {
                   }
                }
 
-               if (border_redis.containsKey(home.getName())) {
-                  if (vip_add < border_redis.get(home.getName())) {
-                     vip_add = border_redis.get(home.getName());
-                  } else {
-                     border_redis.put(home.getName(), vip_add);
-                  }
-               } else {
-                  border_redis.put(home.getName(), vip_add);
-               }
+               vip_add = VipBorderRatchet.highWaterMark(border_redis, home.getName(), vip_add);
 
                double set_x = 0.0;
                double min_x = 0.0;

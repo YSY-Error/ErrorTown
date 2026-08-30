@@ -7,6 +7,7 @@ import com.Util.Home;
 import com.Util.HomeAPI;
 import com.Util.HomeTerrainPolicy;
 import com.Util.Util;
+import com.Util.VipBorderRatchet;
 import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.WorldBorder;
@@ -53,16 +54,7 @@ public class WBControl {
          return;
       }
 
-      int vip_add = highestVipBonus(home);
-      if (border_redis.containsKey(home.getName())) {
-         if (vip_add < border_redis.get(home.getName())) {
-            vip_add = border_redis.get(home.getName());
-         } else {
-            border_redis.put(home.getName(), vip_add);
-         }
-      } else {
-         border_redis.put(home.getName(), vip_add);
-      }
+      int vip_add = VipBorderRatchet.highWaterMark(border_redis, home.getName(), highestVipBonus(home));
 
       double size = HomeTerrainPolicy.configuredBorderSize(
          home.getLevel(),

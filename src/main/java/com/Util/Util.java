@@ -744,14 +744,7 @@ public class Util {
                      }
                   }
 
-                  Util.addExtra = vip_add;
-                  if (Util.border_redis.containsKey(h.getName())) {
-                     if (Util.addExtra < Util.border_redis.get(h.getName())) {
-                        Util.addExtra = Util.border_redis.get(h.getName());
-                     }
-                  } else {
-                     Util.border_redis.put(h.getName(), Util.addExtra);
-                  }
+                  Util.addExtra = VipBorderRatchet.highWaterMark(Util.border_redis, h.getName(), vip_add);
 
                   double halfSize = HomeTerrainPolicy.configuredBorderSize(
                      level,

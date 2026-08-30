@@ -11,6 +11,7 @@ import com.Util.HomeTerrainPolicy;
 import com.Util.MySQL;
 import com.Util.Platform;
 import com.Util.Util;
+import com.Util.VipBorderRatchet;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -90,15 +91,7 @@ public class PlayerTeleportListener implements Listener {
                }
             }
 
-            if (border_redis.containsKey(h.getName())) {
-               if (this.vip_add < border_redis.get(h.getName())) {
-                  this.vip_add = border_redis.get(h.getName());
-               } else {
-                  border_redis.put(h.getName(), this.vip_add);
-               }
-            } else {
-               border_redis.put(h.getName(), this.vip_add);
-            }
+            this.vip_add = VipBorderRatchet.highWaterMark(border_redis, h.getName(), this.vip_add);
 
             if (!Main.JavaPlugin.getConfig().getBoolean("KeepInventory")) {
                Platform.setGameRule(event.getTo().getWorld(), "keepInventory", "false");

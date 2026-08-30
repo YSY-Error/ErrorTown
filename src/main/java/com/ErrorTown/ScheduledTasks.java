@@ -10,6 +10,7 @@ import com.Util.R1_12_2;
 import com.Util.R1_7_10;
 import com.Util.StaticsTick;
 import com.Util.Util;
+import com.Util.VipBorderRatchet;
 import com.Util.ZIP;
 import java.io.File;
 import java.io.IOException;
@@ -170,15 +171,7 @@ public class ScheduledTasks {
                               }
                            }
 
-                           if (ScheduledTasks.border_redis.containsKey(home.getName())) {
-                              if (vip_add < ScheduledTasks.border_redis.get(home.getName())) {
-                                 vip_add = ScheduledTasks.border_redis.get(home.getName());
-                              } else {
-                                 ScheduledTasks.border_redis.put(home.getName(), vip_add);
-                              }
-                           } else {
-                              ScheduledTasks.border_redis.put(home.getName(), vip_add);
-                           }
+                           vip_add = VipBorderRatchet.highWaterMark(ScheduledTasks.border_redis, home.getName(), vip_add);
 
                            try {
                               world.getWorldBorder().setCenter(world.getSpawnLocation());

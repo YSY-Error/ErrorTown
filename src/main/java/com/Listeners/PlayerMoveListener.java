@@ -7,6 +7,7 @@ import com.Util.HomeAPI;
 import com.Util.HomeTerrainPolicy;
 import com.Util.MySQL;
 import com.Util.Util;
+import com.Util.VipBorderRatchet;
 import java.io.File;
 import java.util.ArrayList;
 import org.bukkit.Bukkit;
@@ -56,16 +57,7 @@ public class PlayerMoveListener implements Listener {
                         }
                      }
 
-                     PlayerMoveListener.this.addExtra = vip_add;
-                     if (PlayerMoveListener.border_redis.containsKey(h.getName())) {
-                        if (PlayerMoveListener.this.addExtra < PlayerMoveListener.border_redis.get(h.getName())) {
-                           PlayerMoveListener.this.addExtra = PlayerMoveListener.border_redis.get(h.getName());
-                        } else {
-                           PlayerMoveListener.border_redis.put(h.getName(), PlayerMoveListener.this.addExtra);
-                        }
-                     } else {
-                        PlayerMoveListener.border_redis.put(h.getName(), PlayerMoveListener.this.addExtra);
-                     }
+                     PlayerMoveListener.this.addExtra = VipBorderRatchet.highWaterMark(PlayerMoveListener.border_redis, h.getName(), vip_add);
 
                      double set_x = 0.0;
                      double min_x = 0.0;
