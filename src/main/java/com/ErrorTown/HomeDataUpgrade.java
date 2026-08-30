@@ -55,7 +55,7 @@ public class HomeDataUpgrade {
                try {
                   yamlConfiguration.save(temp);
                } catch (IOException ioFailure) {
-                  ioFailure.printStackTrace();
+                  com.Util.Diag.warnOnce("homedataupgrade-apply", "File I/O failed in HomeDataUpgrade.apply", ioFailure);
                }
             }
          }

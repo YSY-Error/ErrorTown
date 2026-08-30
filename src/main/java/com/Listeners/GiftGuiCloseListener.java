@@ -51,7 +51,7 @@ public class GiftGuiCloseListener implements Listener {
                      try {
                         str = ss.serializeItemStack(i);
                      } catch (Exception failure) {
-                        failure.printStackTrace();
+                        com.Util.Diag.warnOnce("giftguicloselistener-gift-serialize", "Serializing a gift item failed in GiftGuiCloseListener.onClose", failure);
                      }
 
                      gifts.add(str);
@@ -61,7 +61,7 @@ public class GiftGuiCloseListener implements Listener {
                try {
                   home.setGifts(gifts);
                } catch (IOException ioFailure) {
-                  ioFailure.printStackTrace();
+                  com.Util.Diag.warnOnce("giftguicloselistener-onClose", "File I/O failed in GiftGuiCloseListener.onClose", ioFailure);
                }
             }
          }).runTaskAsynchronously(Main.JavaPlugin);

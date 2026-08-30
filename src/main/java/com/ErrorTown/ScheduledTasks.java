@@ -442,7 +442,7 @@ public class ScheduledTasks {
                            try {
                               ZIP.zipFolder(OriginalBackup_location, zipFileName);
                            } catch (IOException ioFailure) {
-                              ioFailure.printStackTrace();
+                              com.Util.Diag.warnOnce("scheduledtasks-start", "File I/O failed in ScheduledTasks.start", ioFailure);
                            }
 
                            Util.deleteFile(new File(OriginalBackup_location));
@@ -494,7 +494,7 @@ public class ScheduledTasks {
                            try {
                               ZIP.zipFolder(OriginalBackup_locationx, zipFileName);
                            } catch (IOException ioFailure) {
-                              ioFailure.printStackTrace();
+                              com.Util.Diag.warnOnce("scheduledtasks-start-2", "File I/O failed in ScheduledTasks.start", ioFailure);
                            }
 
                            Util.deleteFile(new File(OriginalBackup_locationx));

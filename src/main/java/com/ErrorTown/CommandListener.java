@@ -410,7 +410,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                      home.setZ(center.getZ());
                   }
                } catch (IOException failure) {
-                  failure.printStackTrace();
+                  com.Util.Diag.warnOnce("commandlistener-applyHomeCenter", "File I/O failed in CommandListener.applyHomeCenter", failure);
                   return false;
                }
             }
@@ -981,7 +981,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
 
                      Channel.waitDelayToSomeWhere(p, MySQL.getJoinServer(p.getName()), "sh h");
                   } catch (IOException ioFailure) {
-                     ioFailure.printStackTrace();
+                     com.Util.Diag.warnOnce("commandlistener-onCommand", "File I/O failed in CommandListener.onCommand", ioFailure);
                   }
 
                   (new BukkitRunnable() {
@@ -1005,7 +1005,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
 
                      Channel.waitDelayToSomeWhere(p, MySQL.getServer(p.getName()), "sh h");
                   } catch (IOException ioFailure) {
-                     ioFailure.printStackTrace();
+                     com.Util.Diag.warnOnce("commandlistener-onCommand-2", "File I/O failed in CommandListener.onCommand", ioFailure);
                   }
 
                   (new BukkitRunnable() {
@@ -1111,7 +1111,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                   try {
                      yamlConfiguration.save(f2);
                   } catch (IOException ioFailure) {
-                     ioFailure.printStackTrace();
+                     com.Util.Diag.warnOnce("commandlistener-onCommand-3", "File I/O failed in CommandListener.onCommand", ioFailure);
                   }
                }
 
@@ -1142,7 +1142,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                   try {
                      yamlConfiguration.save(f2);
                   } catch (IOException ioFailure) {
-                     ioFailure.printStackTrace();
+                     com.Util.Diag.warnOnce("commandlistener-onCommand-4", "File I/O failed in CommandListener.onCommand", ioFailure);
                   }
                }
 
@@ -1184,7 +1184,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                         try {
                            Channel.waitToCommand(p, MySQL.getLowerstLagServer(), "sh create " + args[1]);
                         } catch (IOException ioFailure) {
-                           ioFailure.printStackTrace();
+                           com.Util.Diag.warnOnce("commandlistener-onCommand-5", "File I/O failed in CommandListener.onCommand", ioFailure);
                         }
 
                         p.sendMessage(Variable.Lang_YML.getString("StartLowestLagServer"));
@@ -1206,7 +1206,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                         try {
                            Channel.waitToCommand(p, MySQL.getHighestTPSServer(), "sh create " + args[1]);
                         } catch (IOException ioFailure) {
-                           ioFailure.printStackTrace();
+                           com.Util.Diag.warnOnce("commandlistener-onCommand-6", "File I/O failed in CommandListener.onCommand", ioFailure);
                         }
 
                         p.sendMessage(Variable.Lang_YML.getString("StartLowestLagServer"));
@@ -1306,7 +1306,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                            try {
                               Channel.waitDelayToSomeWhere(p, MySQL.getServer(args[1]), "sh visit " + args[1]);
                            } catch (IOException ioFailure) {
-                              ioFailure.printStackTrace();
+                              com.Util.Diag.warnOnce("commandlistener-onCommand-7", "File I/O failed in CommandListener.onCommand", ioFailure);
                            }
 
                            Channel.sendPlayerToServer(p, MySQL.getServer(args[1]));
@@ -1639,7 +1639,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                try {
                   yamlConfiguration.save(f2);
                } catch (IOException ioFailure) {
-                  ioFailure.printStackTrace();
+                  com.Util.Diag.warnOnce("commandlistener-onCommand-8", "File I/O failed in CommandListener.onCommand", ioFailure);
                }
             }
 
@@ -1666,7 +1666,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                try {
                   yamlConfiguration.save(f2);
                } catch (IOException ioFailure) {
-                  ioFailure.printStackTrace();
+                  com.Util.Diag.warnOnce("commandlistener-onCommand-9", "File I/O failed in CommandListener.onCommand", ioFailure);
                }
             }
 
@@ -1757,7 +1757,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                   try {
                      f2.createNewFile();
                   } catch (IOException ioFailure) {
-                     ioFailure.printStackTrace();
+                     com.Util.Diag.warnOnce("commandlistener-onCommand-10", "File I/O failed in CommandListener.onCommand", ioFailure);
                   }
 
                   YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(f2);
@@ -1799,7 +1799,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                   try {
                      yamlConfiguration.save(f2);
                   } catch (IOException ioFailure) {
-                     ioFailure.printStackTrace();
+                     com.Util.Diag.warnOnce("commandlistener-onCommand-11", "File I/O failed in CommandListener.onCommand", ioFailure);
                   }
 
                   if (has_set_Members && Trustlist != null) {
@@ -1822,7 +1822,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                   try {
                      yamlConfiguration.save(f2);
                   } catch (IOException ioFailure) {
-                     ioFailure.printStackTrace();
+                     com.Util.Diag.warnOnce("commandlistener-onCommand-12", "File I/O failed in CommandListener.onCommand", ioFailure);
                   }
 
                   sender.sendMessage("成功导出" + name + ".yml到本插件的数据文件夹");
@@ -1892,7 +1892,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
             try {
                yamlConfiguration.save(Variable.f_log);
             } catch (IOException ioFailure) {
-               ioFailure.printStackTrace();
+               com.Util.Diag.warnOnce("commandlistener-onCommand-13", "File I/O failed in CommandListener.onCommand", ioFailure);
             }
 
             Object f;
@@ -2087,7 +2087,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
             try {
                yamlConfiguration.save(Variable.f_log);
             } catch (IOException ioFailure) {
-               ioFailure.printStackTrace();
+               com.Util.Diag.warnOnce("commandlistener-onCommand-14", "File I/O failed in CommandListener.onCommand", ioFailure);
             }
 
             int nowID = yamlConfiguration.getInt("NowID");
@@ -2273,7 +2273,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                   try {
                      adminHomeFile.createNewFile();
                   } catch (IOException ioFailure) {
-                     ioFailure.printStackTrace();
+                     com.Util.Diag.warnOnce("commandlistener-onCommand-15", "File I/O failed in CommandListener.onCommand", ioFailure);
                   }
 
                   YamlConfiguration yamlConfiguration1 = YamlConfiguration.loadConfiguration(adminHomeFile);
@@ -2300,7 +2300,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                   try {
                      yamlConfiguration.save(Variable.f_log);
                   } catch (IOException ioFailure) {
-                     ioFailure.printStackTrace();
+                     com.Util.Diag.warnOnce("commandlistener-onCommand-16", "File I/O failed in CommandListener.onCommand", ioFailure);
                   }
 
                   yamlConfiguration1.set("Public", Main.JavaPlugin.getConfig().getBoolean("NormalPublic"));
@@ -2317,7 +2317,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                   try {
                      yamlConfiguration1.save(adminHomeFile);
                   } catch (IOException ioFailure) {
-                     ioFailure.printStackTrace();
+                     com.Util.Diag.warnOnce("commandlistener-onCommand-17", "File I/O failed in CommandListener.onCommand", ioFailure);
                   }
 
                   yamlConfiguration.set("NowID", nowID + 1);
@@ -2325,7 +2325,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                   try {
                      yamlConfiguration.save(Variable.f_log);
                   } catch (IOException ioFailure) {
-                     ioFailure.printStackTrace();
+                     com.Util.Diag.warnOnce("commandlistener-onCommand-18", "File I/O failed in CommandListener.onCommand", ioFailure);
                   }
 
                   yamlConfiguration1.createSection("flowers");
@@ -2351,7 +2351,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                   try {
                      yamlConfiguration1.save(adminHomeFile);
                   } catch (IOException ioFailure) {
-                     ioFailure.printStackTrace();
+                     com.Util.Diag.warnOnce("commandlistener-onCommand-19", "File I/O failed in CommandListener.onCommand", ioFailure);
                   }
 
                   if (Main.JavaPlugin.getConfig().getInt("MaxSpawnMonstersAmount") != -1) {
@@ -2855,7 +2855,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  currentHome.setExtraMemberSlots(currentHome.getExtraMemberSlots() + addMembers);
                                  currentHome.setExtraOpSlots(currentHome.getExtraOpSlots() + addMembers);
                               } catch (IOException ioFailure) {
-                                 ioFailure.printStackTrace();
+                                 com.Util.Diag.warnOnce("commandlistener-onCommandPlayer", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                  commandPlayer.sendMessage("§c扩容数据保存失败，请联系管理员查看后台");
                                  return false;
                               }
@@ -3386,7 +3386,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                         try {
                            _yml.save(_f);
                         } catch (IOException ioFailure) {
-                           ioFailure.printStackTrace();
+                           com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-2", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                         }
 
                         _yml = YamlConfiguration.loadConfiguration(_f);
@@ -3665,7 +3665,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  try {
                                     yamlConfigurationx.save(fx);
                                  } catch (IOException ioFailure) {
-                                    ioFailure.printStackTrace();
+                                    com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-3", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                  }
 
                                  yamlConfigurationx = YamlConfiguration.loadConfiguration(fx);
@@ -4032,7 +4032,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                               try {
                                  yamlConfigurationx.save(Variable.f_log);
                               } catch (IOException ioFailure) {
-                                 ioFailure.printStackTrace();
+                                 com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-4", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                               }
                            }
 
@@ -4081,7 +4081,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  try {
                                     yamlConfigurationx.save(Variable.f_log);
                                  } catch (IOException ioFailure) {
-                                    ioFailure.printStackTrace();
+                                    com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-5", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                  }
                                  break;
                               }
@@ -4094,7 +4094,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                               try {
                                  yamlConfigurationx.save(Variable.f_log);
                               } catch (IOException ioFailure) {
-                                 ioFailure.printStackTrace();
+                                 com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-6", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                               }
                            }
 
@@ -4110,7 +4110,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                            try {
                               yamlConfigurationx.save(Variable.f_log);
                            } catch (IOException ioFailure) {
-                              ioFailure.printStackTrace();
+                              com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-7", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                            }
 
                            yamlConfigurationx.set("NowID", yamlConfigurationx.getInt("NowID") - 1);
@@ -4118,7 +4118,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                            try {
                               yamlConfigurationx.save(Variable.f_log);
                            } catch (IOException ioFailure) {
-                              ioFailure.printStackTrace();
+                              com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-8", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                            }
 
                            String notEnoughMoneyMessage2 = Variable.Lang_YML.getString("WholeDeleteSuccess");
@@ -4273,13 +4273,13 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                               try {
                                  gifts.add(ss.serializeItemStack(giftStack));
                               } catch (Exception failure) {
-                                 failure.printStackTrace();
+                                 com.Util.Diag.warnOnce("commandlistener-gift-serialize", "Serializing a gift item failed in CommandListener.onCommandPlayer", failure);
                               }
 
                               try {
                                  homex.setGifts(gifts);
                               } catch (IOException ioFailure) {
-                                 ioFailure.printStackTrace();
+                                 com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-9", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                               }
 
                               String giftAddedMessage = Variable.Lang_YML.getString("GiftAdd");
@@ -4374,13 +4374,13 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  gifts.add(ssx.serializeItemStack(heldItem));
                                  commandPlayer.getInventory().remove(heldItem);
                               } catch (Exception failure) {
-                                 failure.printStackTrace();
+                                 com.Util.Diag.warnOnce("commandlistener-gift-serialize-held", "Serializing the held gift item failed in CommandListener.onCommandPlayer", failure);
                               }
 
                               try {
                                  homex.setGifts(gifts);
                               } catch (IOException ioFailure) {
-                                 ioFailure.printStackTrace();
+                                 com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-10", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                               }
 
                               String temp2x = Variable.Lang_YML.getString("GiftSuccess");
@@ -4418,9 +4418,9 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                         try {
                            homex.setPopularity(homex.getPopularity() + Integer.valueOf(args[3]));
                         } catch (NumberFormatException malformed) {
-                           malformed.printStackTrace();
+                           com.Util.Diag.warnOnce("commandlistener-popularity-amount", "/sh admin popularity add was given a non-numeric amount; nothing was changed", malformed);
                         } catch (IOException ioFailure) {
-                           ioFailure.printStackTrace();
+                           com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-11", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                         }
 
                         String popularityAddedMessage = Variable.Lang_YML.getString("PopularityAddSuccess");
@@ -4445,9 +4445,9 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                         try {
                            homex.setFlowers(homex.getFlowers() + Integer.valueOf(args[3]));
                         } catch (NumberFormatException malformed) {
-                           malformed.printStackTrace();
+                           com.Util.Diag.warnOnce("commandlistener-flower-amount", "/sh admin flower add was given a non-numeric amount; nothing was changed", malformed);
                         } catch (IOException ioFailure) {
-                           ioFailure.printStackTrace();
+                           com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-12", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                         }
 
                         String popularityAddedMessage = Variable.Lang_YML.getString("FlowerAddSuccess");
@@ -4518,7 +4518,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                            try {
                               targetHome.setFlowers(targetHome.getFlowers() + toSend);
                            } catch (IOException ioFailure) {
-                              ioFailure.printStackTrace();
+                              com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-13", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                            }
 
                            commandPlayer.sendMessage(
@@ -4591,7 +4591,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                         try {
                            homex.setIcon(heldItem.getType().toString() + ":" + heldItem.getDurability());
                         } catch (IOException ioFailure) {
-                           ioFailure.printStackTrace();
+                           com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-14", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                         }
 
                         if (heldItem.getAmount() == 1) {
@@ -4635,7 +4635,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                               try {
                                  homex.setLimitBlock(list2);
                               } catch (IOException ioFailure) {
-                                 ioFailure.printStackTrace();
+                                 com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-15", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                               }
 
                               String send_message = Variable.Lang_YML.getString("AddCustomBlockSuccess");
@@ -4670,7 +4670,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                            try {
                               homex.setLimitBlock(list2);
                            } catch (IOException ioFailure) {
-                              ioFailure.printStackTrace();
+                              com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-16", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                            }
 
                            String send_messagex = Variable.Lang_YML.getString("SetCustomBlockSuccess");
@@ -4724,7 +4724,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                         try {
                            homex.setLimitBlock(list2);
                         } catch (IOException ioFailure) {
-                           ioFailure.printStackTrace();
+                           com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-17", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                         }
 
                         String setBlockMessage = Variable.Lang_YML.getString("SetCustomBlockSuccess");
@@ -4781,7 +4781,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                            try {
                               homex.setLimitBlock(list2);
                            } catch (IOException ioFailure) {
-                              ioFailure.printStackTrace();
+                              com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-18", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                            }
 
                            String removeBlockMessage = Variable.Lang_YML.getString("RemoveCustomBlockSuccess");
@@ -4855,7 +4855,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                      try {
                         homex.setAdvertisement(adv);
                      } catch (IOException ioFailure) {
-                        ioFailure.printStackTrace();
+                        com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-19", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                      }
 
                      commandPlayer.sendMessage(Variable.Lang_YML.getString("SetInfoSuccess"));
@@ -4971,7 +4971,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     try {
                                        currentHomeYml.save(currentHomeFile);
                                     } catch (IOException ioFailure) {
-                                       ioFailure.printStackTrace();
+                                       com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-20", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                     }
 
                                     String notInHomeMessage2 = Variable.Lang_YML.getString("DisablePublic");
@@ -4997,7 +4997,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     try {
                                        currentHomeYml.save(currentHomeFile);
                                     } catch (IOException ioFailure) {
-                                       ioFailure.printStackTrace();
+                                       com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-21", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                     }
 
                                     String notInHomeMessage2 = Variable.Lang_YML.getString("EnablePublic");
@@ -5059,7 +5059,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                               try {
                                  currentHomeYml.save(currentHomeFile);
                               } catch (IOException ioFailure) {
-                                 ioFailure.printStackTrace();
+                                 com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-22", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                               }
 
                               String notInHomeMessage2 = Variable.Lang_YML.getString("TpSetSuccess");
@@ -5116,7 +5116,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  try {
                                     homex.setFlowers(homex.getFlowers() + 1);
                                  } catch (IOException ioFailure) {
-                                    ioFailure.printStackTrace();
+                                    com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-23", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                  }
 
                                  String notInHomeMessage2 = Variable.Lang_YML.getString("FlowersAdd");
@@ -5153,7 +5153,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  try {
                                     homex.setFlowers(1);
                                  } catch (IOException ioFailure) {
-                                    ioFailure.printStackTrace();
+                                    com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-24", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                  }
 
                                  String flowersAddedMessage = Variable.Lang_YML.getString("FlowersAdd");
@@ -5242,7 +5242,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  sender.sendMessage(Variable.Lang_YML.getString("BottomLineTtitle"));
                               } catch (Exception failure) {
                                  commandPlayer.sendMessage("§c切换刷怪规则失败: " + failure.getMessage());
-                                 failure.printStackTrace();
+                                 com.Util.Diag.warnOnce("commandlistener-mobspawn-toggle", "Toggling the mob-spawn rule failed in CommandListener.onCommandPlayer", failure);
                               }
 
                               return false;
@@ -5316,7 +5316,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     try {
                                        currentHomeYml.save(pvpHomeFile);
                                     } catch (IOException ioFailure) {
-                                       ioFailure.printStackTrace();
+                                       com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-25", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                     }
 
                                     if (Variable.hook_multiverseCore) {
@@ -5336,7 +5336,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     try {
                                        currentHomeYml.save(pvpHomeFile);
                                     } catch (IOException ioFailure) {
-                                       ioFailure.printStackTrace();
+                                       com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-26", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                     }
 
                                     if (Variable.hook_multiverseCore) {
@@ -5410,7 +5410,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     try {
                                        currentHomeYml.save(pickupHomeFile);
                                     } catch (IOException ioFailure) {
-                                       ioFailure.printStackTrace();
+                                       com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-27", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                     }
 
                                     String mobSpawnMessage = Variable.Lang_YML.getString("DisablePickup");
@@ -5423,7 +5423,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     try {
                                        currentHomeYml.save(pickupHomeFile);
                                     } catch (IOException ioFailure) {
-                                       ioFailure.printStackTrace();
+                                       com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-28", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                     }
 
                                     String mobSpawnMessage = Variable.Lang_YML.getString("EnablePickup");
@@ -5490,7 +5490,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     try {
                                        currentHomeYml.save(dropHomeFile);
                                     } catch (IOException ioFailure) {
-                                       ioFailure.printStackTrace();
+                                       com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-29", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                     }
 
                                     String mobSpawnMessage = Variable.Lang_YML.getString("DisableDrop");
@@ -5503,7 +5503,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     try {
                                        currentHomeYml.save(dropHomeFile);
                                     } catch (IOException ioFailure) {
-                                       ioFailure.printStackTrace();
+                                       com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-30", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                     }
 
                                     String mobSpawnMessage = Variable.Lang_YML.getString("EnableDrop");
@@ -5552,7 +5552,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  currentHome0.setRuleDifficulty(Difficulty.EASY);
                               }
                            } catch (IOException ioFailure) {
-                              ioFailure.printStackTrace();
+                              com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-31", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                            }
 
                            String mobSpawnMessage = Variable.Lang_YML.getString("DifficultyModify");
@@ -5583,7 +5583,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  currentHome0.setRuleDifficulty(Difficulty.NORMAL);
                               }
                            } catch (IOException ioFailure) {
-                              ioFailure.printStackTrace();
+                              com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-32", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                            }
 
                            String mobSpawnMessage = Variable.Lang_YML.getString("DifficultyModify");
@@ -5614,7 +5614,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  currentHome0.setRuleDifficulty(Difficulty.HARD);
                               }
                            } catch (IOException ioFailure) {
-                              ioFailure.printStackTrace();
+                              com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-33", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                            }
 
                            String mobSpawnMessage = Variable.Lang_YML.getString("DifficultyModify");
@@ -5645,7 +5645,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  currentHome0.setRuleDifficulty(Difficulty.PEACEFUL);
                               }
                            } catch (IOException ioFailure) {
-                              ioFailure.printStackTrace();
+                              com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-34", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                            }
 
                            String mobSpawnMessage = Variable.Lang_YML.getString("DifficultyModify");
@@ -6124,7 +6124,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                               try {
                                  inviteHomeYml.save(inviteHomeFile);
                               } catch (IOException ioFailure) {
-                                 ioFailure.printStackTrace();
+                                 com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-35", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                               }
 
                               String joinSuccessMessage2 = Variable.Lang_YML.getString("SuccessJoinOthers");
@@ -6302,7 +6302,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     }
                                  } catch (Exception failure) {
                                     commandPlayer.sendMessage("§c规则切换失败: " + failure.getMessage());
-                                    failure.printStackTrace();
+                                    com.Util.Diag.warnOnce("commandlistener-rule-toggle", "Toggling a home rule failed in CommandListener.onCommandPlayer", failure);
                                  }
 
                                  return false;
@@ -6340,7 +6340,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                        try {
                                           homeYml.save(homeFile);
                                        } catch (IOException ioFailure) {
-                                          ioFailure.printStackTrace();
+                                          com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-36", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                        }
 
                                        String noPendingInviteMessage = Variable.Lang_YML.getString("TimeUnLocked");
@@ -6354,7 +6354,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                        try {
                                           homeYml.save(homeFile);
                                        } catch (IOException ioFailure) {
-                                          ioFailure.printStackTrace();
+                                          com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-37", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                        }
 
                                        String noPendingInviteMessage = Variable.Lang_YML.getString("TimeLocked");
@@ -6400,7 +6400,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                        try {
                                           homeYml.save(homeFile);
                                        } catch (IOException ioFailure) {
-                                          ioFailure.printStackTrace();
+                                          com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-38", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                        }
 
                                        String noPendingInviteMessage = Variable.Lang_YML.getString("WeatherUnLocked");
@@ -6413,7 +6413,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                        try {
                                           homeYml.save(homeFile);
                                        } catch (IOException ioFailure) {
-                                          ioFailure.printStackTrace();
+                                          com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-39", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                        }
 
                                        String noPendingInviteMessage = Variable.Lang_YML.getString("WeatherLocked");
@@ -6440,7 +6440,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     try {
                                        HomeAPI.getHome(commandPlayer.getWorld().getName()).setLocktime(false);
                                     } catch (IOException ioFailure) {
-                                       ioFailure.printStackTrace();
+                                       com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-40", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                     }
                                  }
 
@@ -6464,7 +6464,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     try {
                                        HomeAPI.getHome(commandPlayer.getWorld().getName()).setLockweather(false);
                                     } catch (IOException ioFailure) {
-                                       ioFailure.printStackTrace();
+                                       com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-41", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                     }
                                  }
 
@@ -6592,7 +6592,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     try {
                                        HomeAPI.getHome(commandPlayer.getWorld().getName()).setLockweather(false);
                                     } catch (IOException ioFailure) {
-                                       ioFailure.printStackTrace();
+                                       com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-42", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                     }
                                  }
 
@@ -6701,7 +6701,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     try {
                                        HomeAPI.getHome(commandPlayer.getWorld().getName()).setLocktime(false);
                                     } catch (IOException ioFailure) {
-                                       ioFailure.printStackTrace();
+                                       com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-43", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                     }
                                  }
 
@@ -6859,7 +6859,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                        try {
                                           homeYml.save(homeFile);
                                        } catch (IOException ioFailure) {
-                                          ioFailure.printStackTrace();
+                                          com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-44", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                        }
 
                                        String noPendingInviteMessage = Variable.Lang_YML.getString("AddTrustSuccess");
@@ -7038,7 +7038,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                        try {
                                           denyHomeYml.save(homeFile);
                                        } catch (IOException ioFailure) {
-                                          ioFailure.printStackTrace();
+                                          com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-45", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                        }
                                        for (Player homeOccupant : Bukkit.getWorld(Variable.world_prefix + commandPlayer.getName()).getPlayers()) {
                                           if (homeOccupant.getName().equalsIgnoreCase(Name)) {
@@ -7149,7 +7149,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                           try {
                                              denyHomeYml2.save(homeFile);
                                           } catch (IOException ioFailure) {
-                                             ioFailure.printStackTrace();
+                                             com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-46", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                           }
 
                                           String noPendingInviteMessage = Variable.Lang_YML.getString("RemoveBlackSuccess");
@@ -7253,7 +7253,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                           try {
                                              memberHomeYml.save(homeFile);
                                           } catch (IOException ioFailure) {
-                                             ioFailure.printStackTrace();
+                                             com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-47", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                           }
 
                                           String noPendingInviteMessage = Variable.Lang_YML.getString("RemoveTrustPlayer");
@@ -7380,7 +7380,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                              try {
                                                 opHomeYml.save(homeFile);
                                              } catch (IOException ioFailure) {
-                                                ioFailure.printStackTrace();
+                                                com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-48", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                              }
 
                                              Player targetOnlinePlayer2 = Bukkit.getPlayer(Name);
@@ -7508,7 +7508,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                        try {
                                           Channel.waitToCommand(commandPlayer, MySQL.getLowerstLagServer(), "sh create " + args[1]);
                                        } catch (IOException ioFailure) {
-                                          ioFailure.printStackTrace();
+                                          com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-49", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                        }
 
                                        commandPlayer.sendMessage(Variable.Lang_YML.getString("StartLowestLagServer"));
@@ -7530,7 +7530,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                        try {
                                           Channel.waitToCommand(commandPlayer, MySQL.getHighestTPSServer(), "sh create " + args[1]);
                                        } catch (IOException ioFailure) {
-                                          ioFailure.printStackTrace();
+                                          com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-50", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                        }
 
                                        commandPlayer.sendMessage(Variable.Lang_YML.getString("StartLowestLagServer"));
@@ -7552,7 +7552,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                               try {
                                  logYml.save(Variable.f_log);
                               } catch (IOException ioFailure) {
-                                 ioFailure.printStackTrace();
+                                 com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-51", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                               }
 
                               int nowID = logYml.getInt("NowID");
@@ -7931,7 +7931,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                        try {
                                           createHomeFile.createNewFile();
                                        } catch (IOException ioFailure) {
-                                          ioFailure.printStackTrace();
+                                          com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-52", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                        }
 
                                        YamlConfiguration yamlConfiguration1x = YamlConfiguration.loadConfiguration(createHomeFile);
@@ -7959,7 +7959,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                        try {
                                           logYml.save(Variable.f_log);
                                        } catch (IOException ioFailure) {
-                                          ioFailure.printStackTrace();
+                                          com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-53", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                        }
 
                                        yamlConfiguration1x.set("Public", Main.JavaPlugin.getConfig().getBoolean("NormalPublic"));
@@ -7997,7 +7997,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                        try {
                                           yamlConfiguration1x.save(createHomeFile);
                                        } catch (IOException ioFailure) {
-                                          ioFailure.printStackTrace();
+                                          com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-54", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                        }
 
                                        logYml.set("NowID", nowID + 1);
@@ -8005,7 +8005,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                        try {
                                           logYml.save(Variable.f_log);
                                        } catch (IOException ioFailure) {
-                                          ioFailure.printStackTrace();
+                                          com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-55", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                        }
 
                                        if (Main.JavaPlugin.getConfig().getInt("MaxSpawnMonstersAmount") != -1) {
@@ -8053,7 +8053,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                        try {
                                           yamlConfiguration1x.save(createHomeFile);
                                        } catch (IOException ioFailure) {
-                                          ioFailure.printStackTrace();
+                                          com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-56", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                        }
 
                                        final World createdWorld = newHomeWorld;
@@ -8165,7 +8165,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                     try {
                                        scannedHomeYml.save(scannedHomeFile);
                                     } catch (IOException ioFailure) {
-                                       ioFailure.printStackTrace();
+                                       com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-57", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                     }
                                     break label6851;
                                  }
@@ -8215,7 +8215,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                        try {
                                           Channel.waitToLoad(commandPlayer, MySQL.getLowerstLagServer(), args[1]);
                                        } catch (IOException ioFailure) {
-                                          ioFailure.printStackTrace();
+                                          com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-58", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                        }
 
                                        commandPlayer.sendMessage(Variable.Lang_YML.getString("StartLowestLagServer"));
@@ -8237,7 +8237,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                        try {
                                           Channel.waitToLoad(commandPlayer, MySQL.getHighestTPSServer(), args[1]);
                                        } catch (IOException ioFailure) {
-                                          ioFailure.printStackTrace();
+                                          com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-59", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                        }
 
                                        commandPlayer.sendMessage(Variable.Lang_YML.getString("StartLowestLagServer"));
@@ -8263,7 +8263,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  try {
                                     Channel.waitDelayToSomeWhere(commandPlayer, MySQL.getServer(args[1]), "sh v " + args[1]);
                                  } catch (IOException ioFailure) {
-                                    ioFailure.printStackTrace();
+                                    com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-60", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                  }
 
                                  Channel.sendPlayerToServer(commandPlayer, MySQL.getServer(args[1]));
@@ -8352,7 +8352,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  try {
                                     Channel.waitToLoad(commandPlayer, MySQL.getLowerstLagServer(), MySQL.getJoinHome(commandPlayer.getName()));
                                  } catch (IOException ioFailure) {
-                                    ioFailure.printStackTrace();
+                                    com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-61", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                  }
 
                                  commandPlayer.sendMessage(Variable.Lang_YML.getString("StartLowestLagServer"));
@@ -8374,7 +8374,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  try {
                                     Channel.waitToLoad(commandPlayer, MySQL.getHighestTPSServer(), MySQL.getJoinHome(commandPlayer.getName()));
                                  } catch (IOException ioFailure) {
-                                    ioFailure.printStackTrace();
+                                    com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-62", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                  }
 
                                  commandPlayer.sendMessage(Variable.Lang_YML.getString("StartLowestLagServer"));
@@ -8388,7 +8388,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                            try {
                               Channel.waitDelayToSomeWhere(commandPlayer, MySQL.getJoinServer(commandPlayer.getName()), "sh h");
                            } catch (IOException ioFailure) {
-                              ioFailure.printStackTrace();
+                              com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-63", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                            }
 
                            Channel.sendPlayerToServer(commandPlayer, MySQL.getJoinServer(commandPlayer.getName()));
@@ -8421,7 +8421,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  try {
                                     Channel.waitToLoad(commandPlayer, MySQL.getLowerstLagServer(), commandPlayer.getName());
                                  } catch (IOException ioFailure) {
-                                    ioFailure.printStackTrace();
+                                    com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-64", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                  }
 
                                  commandPlayer.sendMessage(Variable.Lang_YML.getString("StartLowestLagServer"));
@@ -8443,7 +8443,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                                  try {
                                     Channel.waitToLoad(commandPlayer, MySQL.getHighestTPSServer(), commandPlayer.getName());
                                  } catch (IOException ioFailure) {
-                                    ioFailure.printStackTrace();
+                                    com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-65", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                                  }
 
                                  commandPlayer.sendMessage(Variable.Lang_YML.getString("StartLowestLagServer"));
@@ -8457,7 +8457,7 @@ public class CommandListener implements CommandExecutor, TabExecutor {
                            try {
                               Channel.waitDelayToSomeWhere(commandPlayer, MySQL.getServer(commandPlayer.getName()), "sh h");
                            } catch (IOException ioFailure) {
-                              ioFailure.printStackTrace();
+                              com.Util.Diag.warnOnce("commandlistener-onCommandPlayer-66", "File I/O failed in CommandListener.onCommandPlayer", ioFailure);
                            }
 
                            Channel.sendPlayerToServer(commandPlayer, MySQL.getServer(commandPlayer.getName()));

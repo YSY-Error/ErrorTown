@@ -56,7 +56,7 @@ public class Home {
          try {
             return MySQL.getGift(this.name);
          } catch (IOException ioFailure) {
-            ioFailure.printStackTrace();
+            Diag.warnOnce("home-getGifts", "File I/O failed in Home.getGifts", ioFailure);
             return null;
          }
       } else {

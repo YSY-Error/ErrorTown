@@ -608,7 +608,7 @@ public class Main extends JavaPlugin implements PluginMessageListener {
       try {
          Tempf0 = f.getCanonicalPath();
       } catch (IOException ioFailure) {
-         ioFailure.printStackTrace();
+         com.Util.Diag.warnOnce("main-init", "File I/O failed in Main.init", ioFailure);
       }
 
       Variable.Final = "";
@@ -695,7 +695,7 @@ public class Main extends JavaPlugin implements PluginMessageListener {
          try {
             Variable.f_log.createNewFile();
          } catch (IOException ioFailure) {
-            ioFailure.printStackTrace();
+            com.Util.Diag.warnOnce("main-init-2", "File I/O failed in Main.init", ioFailure);
          }
 
          Variable.f_log = new File(Variable.Log_All, "log.yml");
@@ -767,7 +767,7 @@ public class Main extends JavaPlugin implements PluginMessageListener {
                   }).runTaskLater(JavaPlugin, 20L);
                }
             } catch (IOException ioFailure) {
-               ioFailure.printStackTrace();
+               com.Util.Diag.warnOnce("main-onPluginMessageReceived", "File I/O failed in Main.onPluginMessageReceived", ioFailure);
             }
          }
       }

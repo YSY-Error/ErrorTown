@@ -1347,7 +1347,7 @@ public class ConfigUpdate {
                   )
                );
          } catch (IOException ioFailure) {
-            ioFailure.printStackTrace();
+            Diag.warnOnce("configupdate-update", "File I/O failed in ConfigUpdate.update", ioFailure);
          }
 
          Bukkit.getConsoleSender().sendMessage(Variable.Lang_YML.getString("UpdateLanguageMessage"));
@@ -1357,7 +1357,7 @@ public class ConfigUpdate {
          try {
             Variable.GUI_YML.save(new File(Main.JavaPlugin.getDataFolder() + Variable.file_loc_prefix + "GUI.yml"));
          } catch (IOException ioFailure) {
-            ioFailure.printStackTrace();
+            Diag.warnOnce("configupdate-update-2", "File I/O failed in ConfigUpdate.update", ioFailure);
          }
 
          Bukkit.getConsoleSender().sendMessage(Variable.Lang_YML.getString("UpdateGuiMessage"));

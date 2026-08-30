@@ -113,7 +113,7 @@ public class MySQL {
             try {
                yamlConfiguration.save(Variable.f_log);
             } catch (IOException ioFailure) {
-               ioFailure.printStackTrace();
+               Diag.warnOnce("mysql-autoUpdateServer-io", "Saving the file failed in MySQL.autoUpdateServer", ioFailure);
             }
 
             int nowID = yamlConfiguration.getInt("NowID");
@@ -157,7 +157,7 @@ public class MySQL {
                      ps.executeUpdate();
                   }
                } catch (SQLException sqlFailure) {
-                  sqlFailure.printStackTrace();
+                  Diag.warnOnce("mysql-autoUpdateServer", "Database operation failed in MySQL.autoUpdateServer", sqlFailure);
                } finally {
                   try {
                      if (res != null) {
@@ -172,7 +172,7 @@ public class MySQL {
                         con.close();
                      }
                   } catch (SQLException closeFailure) {
-                     closeFailure.printStackTrace();
+                     Diag.warnOnce("mysql-autoUpdateServer-close", "Closing database resources failed in MySQL.autoUpdateServer", closeFailure);
                   }
                }
             }
@@ -193,7 +193,7 @@ public class MySQL {
             result = res.getString("Server");
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getLowerstLagServer", "Database operation failed in MySQL.getLowerstLagServer", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -208,7 +208,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getLowerstLagServer-close", "Closing database resources failed in MySQL.getLowerstLagServer", closeFailure);
          }
       }
 
@@ -228,7 +228,7 @@ public class MySQL {
             result = res.getString("Server");
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getHighestTPSServer", "Database operation failed in MySQL.getHighestTPSServer", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -243,7 +243,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getHighestTPSServer-close", "Closing database resources failed in MySQL.getHighestTPSServer", closeFailure);
          }
       }
 
@@ -264,7 +264,7 @@ public class MySQL {
             amount = res.getDouble("Amount");
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getServerAmount", "Database operation failed in MySQL.getServerAmount", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -279,7 +279,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getServerAmount-close", "Closing database resources failed in MySQL.getServerAmount", closeFailure);
          }
       }
 
@@ -300,7 +300,7 @@ public class MySQL {
             ss++;
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-alreadyhastheplayerhome", "Database operation failed in MySQL.alreadyhastheplayerhome", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -315,7 +315,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-alreadyhastheplayerhome-close", "Closing database resources failed in MySQL.alreadyhastheplayerhome", closeFailure);
          }
       }
 
@@ -336,7 +336,7 @@ public class MySQL {
             check = true;
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-CheckIsAHome", "Database operation failed in MySQL.CheckIsAHome", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -351,7 +351,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-CheckIsAHome-close", "Closing database resources failed in MySQL.CheckIsAHome", closeFailure);
          }
       }
 
@@ -372,7 +372,7 @@ public class MySQL {
             check = true;
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-alreadyhastheplayerjoin", "Database operation failed in MySQL.alreadyhastheplayerjoin", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -387,7 +387,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-alreadyhastheplayerjoin-close", "Closing database resources failed in MySQL.alreadyhastheplayerjoin", closeFailure);
          }
       }
 
@@ -425,7 +425,7 @@ public class MySQL {
             }
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getJoinHome", "Database operation failed in MySQL.getJoinHome", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -440,7 +440,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getJoinHome-close", "Closing database resources failed in MySQL.getJoinHome", closeFailure);
          }
       }
 
@@ -461,7 +461,7 @@ public class MySQL {
             Server = res.getString("Server");
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getJoinServer", "Database operation failed in MySQL.getJoinServer", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -476,7 +476,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getJoinServer-close", "Closing database resources failed in MySQL.getJoinServer", closeFailure);
          }
       }
 
@@ -497,7 +497,7 @@ public class MySQL {
             Server = res.getString("Server");
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getServer", "Database operation failed in MySQL.getServer", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -512,7 +512,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getServer-close", "Closing database resources failed in MySQL.getServer", closeFailure);
          }
       }
 
@@ -541,7 +541,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-addFlowersColumn-close", "Closing database resources failed in MySQL.addFlowersColumn", closeFailure);
          }
       } finally {
          try {
@@ -557,7 +557,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-addFlowersColumn-close-2", "Closing database resources failed in MySQL.addFlowersColumn", closeFailure);
          }
       }
    }
@@ -584,7 +584,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-addAdvertisementColumn-close", "Closing database resources failed in MySQL.addAdvertisementColumn", closeFailure);
          }
       } finally {
          try {
@@ -600,7 +600,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-addAdvertisementColumn-close-2", "Closing database resources failed in MySQL.addAdvertisementColumn", closeFailure);
          }
       }
    }
@@ -627,7 +627,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-addLimitBlockColumn-close", "Closing database resources failed in MySQL.addLimitBlockColumn", closeFailure);
          }
       } finally {
          try {
@@ -643,7 +643,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-addLimitBlockColumn-close-2", "Closing database resources failed in MySQL.addLimitBlockColumn", closeFailure);
          }
       }
    }
@@ -670,7 +670,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-addIconColumn-close", "Closing database resources failed in MySQL.addIconColumn", closeFailure);
          }
       } finally {
          try {
@@ -686,7 +686,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-addIconColumn-close-2", "Closing database resources failed in MySQL.addIconColumn", closeFailure);
          }
       }
    }
@@ -713,7 +713,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-addVisitColumn-close", "Closing database resources failed in MySQL.addVisitColumn", closeFailure);
          }
       } finally {
          try {
@@ -729,7 +729,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-addVisitColumn-close-2", "Closing database resources failed in MySQL.addVisitColumn", closeFailure);
          }
       }
    }
@@ -756,7 +756,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-addPopularityColumn-close", "Closing database resources failed in MySQL.addPopularityColumn", closeFailure);
          }
       } finally {
          try {
@@ -772,7 +772,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-addPopularityColumn-close-2", "Closing database resources failed in MySQL.addPopularityColumn", closeFailure);
          }
       }
    }
@@ -799,7 +799,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-addGiftColumn-close", "Closing database resources failed in MySQL.addGiftColumn", closeFailure);
          }
       } finally {
          try {
@@ -815,7 +815,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-addGiftColumn-close-2", "Closing database resources failed in MySQL.addGiftColumn", closeFailure);
          }
       }
    }
@@ -831,7 +831,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setFlowers", "Database operation failed in MySQL.setFlowers", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -846,7 +846,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setFlowers-close", "Closing database resources failed in MySQL.setFlowers", closeFailure);
          }
       }
    }
@@ -862,7 +862,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setPopularity", "Database operation failed in MySQL.setPopularity", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -877,7 +877,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setPopularity-close", "Closing database resources failed in MySQL.setPopularity", closeFailure);
          }
       }
    }
@@ -894,7 +894,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setGifts", "Database operation failed in MySQL.setGifts", sqlFailure);
       } finally {
          try {
             if (reader != null) {
@@ -913,7 +913,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setGifts-close", "Closing database resources failed in MySQL.setGifts", closeFailure);
          }
       }
    }
@@ -929,7 +929,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setIcon", "Database operation failed in MySQL.setIcon", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -944,7 +944,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setIcon-close", "Closing database resources failed in MySQL.setIcon", closeFailure);
          }
       }
    }
@@ -974,7 +974,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setVisitTime", "Database operation failed in MySQL.setVisitTime", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -989,7 +989,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setVisitTime-close", "Closing database resources failed in MySQL.setVisitTime", closeFailure);
          }
       }
    }
@@ -1005,7 +1005,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setAdvertisement", "Database operation failed in MySQL.setAdvertisement", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1020,7 +1020,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setAdvertisement-close", "Closing database resources failed in MySQL.setAdvertisement", closeFailure);
          }
       }
    }
@@ -1040,7 +1040,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setLimitBlock", "Database operation failed in MySQL.setLimitBlock", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1055,7 +1055,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setLimitBlock-close", "Closing database resources failed in MySQL.setLimitBlock", closeFailure);
          }
       }
    }
@@ -1071,7 +1071,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setX", "Database operation failed in MySQL.setX", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1086,7 +1086,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setX-close", "Closing database resources failed in MySQL.setX", closeFailure);
          }
       }
    }
@@ -1102,7 +1102,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setY", "Database operation failed in MySQL.setY", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1117,7 +1117,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setY-close", "Closing database resources failed in MySQL.setY", closeFailure);
          }
       }
    }
@@ -1133,7 +1133,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setZ", "Database operation failed in MySQL.setZ", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1148,7 +1148,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setZ-close", "Closing database resources failed in MySQL.setZ", closeFailure);
          }
       }
    }
@@ -1164,7 +1164,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-settime", "Database operation failed in MySQL.settime", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1179,7 +1179,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-settime-close", "Closing database resources failed in MySQL.settime", closeFailure);
          }
       }
    }
@@ -1195,7 +1195,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setlockweather", "Database operation failed in MySQL.setlockweather", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1210,7 +1210,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setlockweather-close", "Closing database resources failed in MySQL.setlockweather", closeFailure);
          }
       }
    }
@@ -1226,7 +1226,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setlocktime", "Database operation failed in MySQL.setlocktime", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1241,7 +1241,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setlocktime-close", "Closing database resources failed in MySQL.setlocktime", closeFailure);
          }
       }
    }
@@ -1257,7 +1257,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setdropitem", "Database operation failed in MySQL.setdropitem", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1272,7 +1272,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setdropitem-close", "Closing database resources failed in MySQL.setdropitem", closeFailure);
          }
       }
    }
@@ -1288,7 +1288,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setpickup", "Database operation failed in MySQL.setpickup", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1303,7 +1303,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setpickup-close", "Closing database resources failed in MySQL.setpickup", closeFailure);
          }
       }
    }
@@ -1319,7 +1319,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setpvp", "Database operation failed in MySQL.setpvp", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1334,7 +1334,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setpvp-close", "Closing database resources failed in MySQL.setpvp", closeFailure);
          }
       }
    }
@@ -1350,7 +1350,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setLevel", "Database operation failed in MySQL.setLevel", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1365,7 +1365,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setLevel-close", "Closing database resources failed in MySQL.setLevel", closeFailure);
          }
       }
    }
@@ -1381,7 +1381,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setServer", "Database operation failed in MySQL.setServer", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1396,7 +1396,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setServer-close", "Closing database resources failed in MySQL.setServer", closeFailure);
          }
       }
    }
@@ -1412,7 +1412,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setPublic", "Database operation failed in MySQL.setPublic", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1427,7 +1427,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setPublic-close", "Closing database resources failed in MySQL.setPublic", closeFailure);
          }
       }
    }
@@ -1443,7 +1443,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setDenys", "Database operation failed in MySQL.setDenys", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1458,7 +1458,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setDenys-close", "Closing database resources failed in MySQL.setDenys", closeFailure);
          }
       }
    }
@@ -1474,7 +1474,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setOP", "Database operation failed in MySQL.setOP", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1489,7 +1489,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setOP-close", "Closing database resources failed in MySQL.setOP", closeFailure);
          }
       }
    }
@@ -1505,7 +1505,7 @@ public class MySQL {
          ps.setString(2, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-setMembers", "Database operation failed in MySQL.setMembers", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1520,7 +1520,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-setMembers-close", "Closing database resources failed in MySQL.setMembers", closeFailure);
          }
       }
    }
@@ -1543,7 +1543,7 @@ public class MySQL {
             result = result.split("\\.")[0];
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getFlowers", "Database operation failed in MySQL.getFlowers", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1558,7 +1558,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getFlowers-close", "Closing database resources failed in MySQL.getFlowers", closeFailure);
          }
       }
 
@@ -1583,7 +1583,7 @@ public class MySQL {
             result = result.split("\\.")[0];
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getPopularity", "Database operation failed in MySQL.getPopularity", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1598,7 +1598,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getPopularity-close", "Closing database resources failed in MySQL.getPopularity", closeFailure);
          }
       }
 
@@ -1628,7 +1628,7 @@ public class MySQL {
                      sb.append(line);
                   }
                } catch (IOException ioFailure) {
-                  ioFailure.printStackTrace();
+                  Diag.warnOnce("mysql-getGift-io", "Saving the file failed in MySQL.getGift", ioFailure);
                }
 
                str = sb.toString();
@@ -1643,7 +1643,7 @@ public class MySQL {
             }
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getGift", "Database operation failed in MySQL.getGift", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1658,7 +1658,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getGift-close", "Closing database resources failed in MySQL.getGift", closeFailure);
          }
       }
 
@@ -1684,7 +1684,7 @@ public class MySQL {
             }
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getIcon", "Database operation failed in MySQL.getIcon", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1699,7 +1699,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getIcon-close", "Closing database resources failed in MySQL.getIcon", closeFailure);
          }
       }
 
@@ -1725,7 +1725,7 @@ public class MySQL {
             }
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getVisitTime", "Database operation failed in MySQL.getVisitTime", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1740,7 +1740,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getVisitTime-close", "Closing database resources failed in MySQL.getVisitTime", closeFailure);
          }
       }
 
@@ -1767,7 +1767,7 @@ public class MySQL {
             }
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getAdvertisement", "Database operation failed in MySQL.getAdvertisement", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1782,7 +1782,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getAdvertisement-close", "Closing database resources failed in MySQL.getAdvertisement", closeFailure);
          }
       }
 
@@ -1817,7 +1817,7 @@ public class MySQL {
          list.add(value);
          return list;
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getLimitBlock", "Database operation failed in MySQL.getLimitBlock", sqlFailure);
          return list;
       } finally {
          try {
@@ -1833,7 +1833,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getLimitBlock-close", "Closing database resources failed in MySQL.getLimitBlock", closeFailure);
          }
       }
    }
@@ -1852,7 +1852,7 @@ public class MySQL {
             result = res.getString("X");
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getX", "Database operation failed in MySQL.getX", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1867,7 +1867,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getX-close", "Closing database resources failed in MySQL.getX", closeFailure);
          }
       }
 
@@ -1888,7 +1888,7 @@ public class MySQL {
             result = res.getString("Y");
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getY", "Database operation failed in MySQL.getY", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1903,7 +1903,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getY-close", "Closing database resources failed in MySQL.getY", closeFailure);
          }
       }
 
@@ -1924,7 +1924,7 @@ public class MySQL {
             result = res.getString("Z");
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getZ", "Database operation failed in MySQL.getZ", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -1939,7 +1939,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getZ-close", "Closing database resources failed in MySQL.getZ", closeFailure);
          }
       }
 
@@ -1967,7 +1967,7 @@ public class MySQL {
                }
             }
          } catch (SQLException sqlFailure) {
-            sqlFailure.printStackTrace();
+            Diag.warnOnce("mysql-getMembers", "Database operation failed in MySQL.getMembers", sqlFailure);
          } finally {
             try {
                if (res != null) {
@@ -1982,7 +1982,7 @@ public class MySQL {
                   con.close();
                }
             } catch (SQLException closeFailure) {
-               closeFailure.printStackTrace();
+               Diag.warnOnce("mysql-getMembers-close", "Closing database resources failed in MySQL.getMembers", closeFailure);
             }
          }
 
@@ -2011,7 +2011,7 @@ public class MySQL {
                }
             }
          } catch (SQLException sqlFailure) {
-            sqlFailure.printStackTrace();
+            Diag.warnOnce("mysql-getOP", "Database operation failed in MySQL.getOP", sqlFailure);
          } finally {
             try {
                if (res != null) {
@@ -2026,7 +2026,7 @@ public class MySQL {
                   con.close();
                }
             } catch (SQLException closeFailure) {
-               closeFailure.printStackTrace();
+               Diag.warnOnce("mysql-getOP-close", "Closing database resources failed in MySQL.getOP", closeFailure);
             }
          }
 
@@ -2052,7 +2052,7 @@ public class MySQL {
             }
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getDenys", "Database operation failed in MySQL.getDenys", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2067,7 +2067,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getDenys-close", "Closing database resources failed in MySQL.getDenys", closeFailure);
          }
       }
 
@@ -2088,7 +2088,7 @@ public class MySQL {
             result = res.getString("Public");
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getPublic", "Database operation failed in MySQL.getPublic", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2103,7 +2103,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getPublic-close", "Closing database resources failed in MySQL.getPublic", closeFailure);
          }
       }
 
@@ -2124,7 +2124,7 @@ public class MySQL {
             result = res.getString("Level");
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getLevel", "Database operation failed in MySQL.getLevel", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2139,7 +2139,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getLevel-close", "Closing database resources failed in MySQL.getLevel", closeFailure);
          }
       }
 
@@ -2160,7 +2160,7 @@ public class MySQL {
             result = res.getString("pvp");
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getPVP", "Database operation failed in MySQL.getPVP", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2175,7 +2175,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getPVP-close", "Closing database resources failed in MySQL.getPVP", closeFailure);
          }
       }
 
@@ -2196,7 +2196,7 @@ public class MySQL {
             result = res.getString("pickup");
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getpickup", "Database operation failed in MySQL.getpickup", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2211,7 +2211,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getpickup-close", "Closing database resources failed in MySQL.getpickup", closeFailure);
          }
       }
 
@@ -2232,7 +2232,7 @@ public class MySQL {
             result = res.getString("dropitem");
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getdropitem", "Database operation failed in MySQL.getdropitem", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2247,7 +2247,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getdropitem-close", "Closing database resources failed in MySQL.getdropitem", closeFailure);
          }
       }
 
@@ -2272,7 +2272,7 @@ public class MySQL {
             result = res.getString("locktime");
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getlocktime", "Database operation failed in MySQL.getlocktime", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2287,7 +2287,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getlocktime-close", "Closing database resources failed in MySQL.getlocktime", closeFailure);
          }
       }
 
@@ -2304,7 +2304,7 @@ public class MySQL {
             con.close();
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getlocktime-2", "Database operation failed in MySQL.getlocktime", sqlFailure);
       }
 
       return result;
@@ -2324,7 +2324,7 @@ public class MySQL {
             result = res.getString("lockweather");
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getlockweather", "Database operation failed in MySQL.getlockweather", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2339,7 +2339,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getlockweather-close", "Closing database resources failed in MySQL.getlockweather", closeFailure);
          }
       }
 
@@ -2360,7 +2360,7 @@ public class MySQL {
             result = res.getString("time");
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-gettime", "Database operation failed in MySQL.gettime", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2375,7 +2375,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-gettime-close", "Closing database resources failed in MySQL.gettime", closeFailure);
          }
       }
 
@@ -2396,7 +2396,7 @@ public class MySQL {
             list.add(res.getString("Name"));
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getAllWorlds", "Database operation failed in MySQL.getAllWorlds", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2411,7 +2411,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getAllWorlds-close", "Closing database resources failed in MySQL.getAllWorlds", closeFailure);
          }
       }
 
@@ -2430,7 +2430,7 @@ public class MySQL {
          res.last();
          amount = res.getRow();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getAllWorldsAmount", "Database operation failed in MySQL.getAllWorldsAmount", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2445,7 +2445,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getAllWorldsAmount-close", "Closing database resources failed in MySQL.getAllWorldsAmount", closeFailure);
          }
       }
 
@@ -2479,7 +2479,7 @@ public class MySQL {
             con.close();
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getListStringSpiltByDot", "Database operation failed in MySQL.getListStringSpiltByDot", sqlFailure);
       }
 
       return result;
@@ -2505,7 +2505,7 @@ public class MySQL {
             }
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-PlayerQuitHome", "Database operation failed in MySQL.PlayerQuitHome", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2520,7 +2520,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-PlayerQuitHome-close", "Closing database resources failed in MySQL.PlayerQuitHome", closeFailure);
          }
       }
 
@@ -2583,7 +2583,7 @@ public class MySQL {
          ps.setString(23, s23);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-insertvalue", "Database operation failed in MySQL.insertvalue", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2598,7 +2598,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-insertvalue-close", "Closing database resources failed in MySQL.insertvalue", closeFailure);
          }
       }
    }
@@ -2613,7 +2613,7 @@ public class MySQL {
          ps.setString(1, name);
          ps.executeUpdate();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-removePlayer", "Database operation failed in MySQL.removePlayer", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2628,7 +2628,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-removePlayer-close", "Closing database resources failed in MySQL.removePlayer", closeFailure);
          }
       }
    }
@@ -2650,7 +2650,7 @@ public class MySQL {
             }
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getFlowerTop", "Database operation failed in MySQL.getFlowerTop", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2665,7 +2665,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getFlowerTop-close", "Closing database resources failed in MySQL.getFlowerTop", closeFailure);
          }
       }
 
@@ -2689,7 +2689,7 @@ public class MySQL {
             }
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getPopularityTop", "Database operation failed in MySQL.getPopularityTop", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2704,7 +2704,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getPopularityTop-close", "Closing database resources failed in MySQL.getPopularityTop", closeFailure);
          }
       }
 
@@ -2728,7 +2728,7 @@ public class MySQL {
             }
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getLevelTop", "Database operation failed in MySQL.getLevelTop", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2743,7 +2743,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getLevelTop-close", "Closing database resources failed in MySQL.getLevelTop", closeFailure);
          }
       }
 
@@ -2764,7 +2764,7 @@ public class MySQL {
             amount++;
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-getMyLevelTop", "Database operation failed in MySQL.getMyLevelTop", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2779,7 +2779,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-getMyLevelTop-close", "Closing database resources failed in MySQL.getMyLevelTop", closeFailure);
          }
       }
 
@@ -2805,7 +2805,7 @@ public class MySQL {
             }
          }
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-CheckHasPermission", "Database operation failed in MySQL.CheckHasPermission", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -2820,7 +2820,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-CheckHasPermission-close", "Closing database resources failed in MySQL.CheckHasPermission", closeFailure);
          }
       }
 
@@ -2857,7 +2857,7 @@ public class MySQL {
                continue;
             }
          } catch (SQLException sqlFailure) {
-            sqlFailure.printStackTrace();
+            Diag.warnOnce("mysql-data_import", "Database operation failed in MySQL.data_import", sqlFailure);
          }
 
          List<String> Members = new ArrayList<>();
@@ -2941,7 +2941,7 @@ public class MySQL {
             con.close();
          }
       } catch (SQLException ioFailure) {
-         ioFailure.printStackTrace();
+         Diag.warnOnce("mysql-data_import-io", "Saving the file failed in MySQL.data_import", ioFailure);
       }
    }
 
@@ -2998,13 +2998,13 @@ public class MySQL {
                   try {
                      playerdata.createNewFile();
                   } catch (IOException ioFailure) {
-                     ioFailure.printStackTrace();
+                     Diag.warnOnce("mysql-data_export-io", "Saving the file failed in MySQL.data_export", ioFailure);
                   }
 
                   try {
                      playerdata.createNewFile();
                   } catch (IOException ioFailure) {
-                     ioFailure.printStackTrace();
+                     Diag.warnOnce("mysql-data_export-io-2", "Saving the file failed in MySQL.data_export", ioFailure);
                   }
 
                   YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(playerdata);
@@ -3055,7 +3055,7 @@ public class MySQL {
                   try {
                      yamlConfiguration.set("gifts", getGift(name));
                   } catch (IOException ioFailure) {
-                     ioFailure.printStackTrace();
+                     Diag.warnOnce("mysql-data_export-io-3", "Saving the file failed in MySQL.data_export", ioFailure);
                   }
 
                   yamlConfiguration.set("advertisement", getAdvertisement(name));
@@ -3065,7 +3065,7 @@ public class MySQL {
                   try {
                      yamlConfiguration.save(playerdata);
                   } catch (IOException ioFailure) {
-                     ioFailure.printStackTrace();
+                     Diag.warnOnce("mysql-data_export-io-4", "Saving the file failed in MySQL.data_export", ioFailure);
                   }
 
                   String tempx = Variable.Lang_YML.getString("ExportSuccess");
@@ -3086,7 +3086,7 @@ public class MySQL {
 
          p.sendMessage(tempx);
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-data_export", "Database operation failed in MySQL.data_export", sqlFailure);
       } finally {
          try {
             if (res != null) {
@@ -3101,7 +3101,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-data_export-close", "Closing database resources failed in MySQL.data_export", closeFailure);
          }
       }
    }
@@ -3122,7 +3122,7 @@ public class MySQL {
          return;
       } catch (SQLException sqlFailure) {
          Bukkit.getConsoleSender().sendMessage(Variable.Lang_YML.getString("CreateDataBaseTableError"));
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-init", "Database operation failed in MySQL.init", sqlFailure);
       } finally {
          try {
             if (ps != null) {
@@ -3133,7 +3133,7 @@ public class MySQL {
                con.close();
             }
          } catch (SQLException closeFailure) {
-            closeFailure.printStackTrace();
+            Diag.warnOnce("mysql-init-close", "Closing database resources failed in MySQL.init", closeFailure);
          }
       }
    }

@@ -82,7 +82,7 @@ public class Channel {
                msgout.writeUTF("waitToLoad," + p.getName() + "," + home_name + "," + f.getAbsolutePath());
                msgout.writeShort(123);
             } catch (IOException ioFailure) {
-               ioFailure.printStackTrace();
+               Diag.warnOnce("channel-waitToLoad", "File I/O failed in Channel.waitToLoad", ioFailure);
             }
 
             out.writeShort(msgbytes.toByteArray().length);

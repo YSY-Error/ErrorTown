@@ -392,7 +392,7 @@ public class Util {
 
             file.delete();
          } catch (Exception failure) {
-            failure.printStackTrace();
+            Diag.warnOnce("util-delete-file", "Deleting a file or directory failed in Util.deleteFile", failure);
          }
       }
    }
@@ -447,7 +447,7 @@ public class Util {
             try {
                bufferedInputStream.close();
             } catch (IOException closeFailure) {
-               closeFailure.printStackTrace();
+               Diag.warnOnce("util-copyFile-close", "Closing resources failed in Util.copyFile", closeFailure);
             }
          }
 
@@ -455,7 +455,7 @@ public class Util {
             try {
                bufferedOutputStream.close();
             } catch (IOException closeFailure) {
-               closeFailure.printStackTrace();
+               Diag.warnOnce("util-copyFile-close-2", "Closing resources failed in Util.copyFile", closeFailure);
             }
          }
       }

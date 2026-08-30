@@ -373,7 +373,7 @@ public class PlayerChatListener implements Listener {
                               try {
                                  home.setRuleDifficulty(finalChosen);
                               } catch (IOException ioFailure) {
-                                 ioFailure.printStackTrace();
+                                 com.Util.Diag.warnOnce("playerchatlistener-onChat", "File I/O failed in PlayerChatListener.onChat", ioFailure);
                               }
                            }
 

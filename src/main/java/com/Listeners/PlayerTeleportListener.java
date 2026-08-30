@@ -143,7 +143,7 @@ public class PlayerTeleportListener implements Listener {
                      try {
                         yml.save(f2);
                      } catch (IOException ioFailure) {
-                        ioFailure.printStackTrace();
+                        com.Util.Diag.warnOnce("playerteleportlistener-onTeleport", "File I/O failed in PlayerTeleportListener.onTeleport", ioFailure);
                      }
 
                      String temp = Variable.Lang_YML.getString("AutoUpdateHomeLevel");
@@ -481,7 +481,7 @@ public class PlayerTeleportListener implements Listener {
                   try {
                      yml.save(f2);
                   } catch (IOException ioFailure) {
-                     ioFailure.printStackTrace();
+                     com.Util.Diag.warnOnce("playerteleportlistener-onTeleport-2", "File I/O failed in PlayerTeleportListener.onTeleport", ioFailure);
                   }
 
                   if (!openborderx) {
