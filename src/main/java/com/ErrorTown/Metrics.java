@@ -492,7 +492,7 @@ public class Metrics {
             this.infoLogger.accept("Sent bStats metrics data: " + data.toString());
          }
 
-         String url = String.format("https://bStats.org/api/v2/data/%s", this.platform);
+         String url = String.format(REPORT_URL, this.platform);
          HttpsURLConnection connection = (HttpsURLConnection)new URL(url).openConnection();
          byte[] compressedData = compress(data.toString());
          connection.setRequestMethod("POST");

@@ -17,7 +17,7 @@ public class SetSpawnGui implements InventoryHolder {
    public static final String BTN_HERE = "§a设到脚下";
    public static final String BTN_COORDS = "§b输入坐标";
    public static final String BTN_BACK = "§8[§a返回§8]";
-   private final Inventory inventory = Bukkit.createInventory(this, com.Util.GuiSafe.size("SetSpawnSize", 27), com.Util.GuiSafe.title("SetSpawnTitle", "§8>>> §6移动家园中心"));
+   private final Inventory inventory = Bukkit.createInventory(this, com.Util.GuiSafe.size("SetSpawnSize", 27), com.Util.GuiSafe.title("SetSpawnTitle", TITLE));
 
    public SetSpawnGui(Player p) {
       this.fill(p);
@@ -67,7 +67,7 @@ public class SetSpawnGui implements InventoryHolder {
 
       ItemStack hereBtn = new ItemStack(Material.LODESTONE);
       ItemMeta hereMeta = hereBtn.getItemMeta();
-      hereMeta.setDisplayName("§a设到脚下");
+      hereMeta.setDisplayName(BTN_HERE);
       hereMeta.setLore(
          Arrays.asList(
             "§7把庄园中心移动到你当前脚下的位置",
@@ -84,13 +84,13 @@ public class SetSpawnGui implements InventoryHolder {
       this.inventory.setItem(11, hereBtn);
       ItemStack coordsBtn = new ItemStack(Material.MAP);
       ItemMeta coordsMeta = coordsBtn.getItemMeta();
-      coordsMeta.setDisplayName("§b输入坐标");
+      coordsMeta.setDisplayName(BTN_COORDS);
       coordsMeta.setLore(Arrays.asList("§7先输入目标坐标，再移动家园中心", "§7输入格式: §ex y z", "§7例如: §e128 75 -64", "§8-----------", "§7输入完成后再进入支付方式选择", "§b点击后进入聊天输入模式"));
       coordsBtn.setItemMeta(coordsMeta);
       this.inventory.setItem(15, coordsBtn);
       ItemStack back = new ItemStack(Material.FEATHER);
       ItemMeta backMeta = back.getItemMeta();
-      backMeta.setDisplayName("§8[§a返回§8]");
+      backMeta.setDisplayName(BTN_BACK);
       backMeta.setLore(Arrays.asList("§7返回上一页"));
       back.setItemMeta(backMeta);
       this.inventory.setItem(22, back);

@@ -113,7 +113,7 @@ public class ServiceCostGui implements InventoryHolder {
       boolean canAffordMoney = haveMoney >= moneyCost;
       ItemStack moneyBtn = new ItemStack(canAffordMoney ? Material.GOLD_INGOT : Material.IRON_INGOT);
       ItemMeta moneyMeta = moneyBtn.getItemMeta();
-      moneyMeta.setDisplayName("§6§l金币支付");
+      moneyMeta.setDisplayName(BTN_MONEY);
       List<String> moneyLore = new ArrayList<>();
       moneyLore.add("§7功能: " + serviceName);
       moneyLore.add("§8§m-----------");
@@ -133,7 +133,7 @@ public class ServiceCostGui implements InventoryHolder {
       boolean canAffordPoints = havePoints >= pointsCost;
       ItemStack pointsBtn = new ItemStack(canAffordPoints ? Material.DIAMOND : Material.LAPIS_LAZULI);
       ItemMeta pointsMeta = pointsBtn.getItemMeta();
-      pointsMeta.setDisplayName("§b§l点券支付");
+      pointsMeta.setDisplayName(BTN_POINTS);
       List<String> pointsLore = new ArrayList<>();
       pointsLore.add("§7功能: " + serviceName);
       pointsLore.add("§8§m-----------");
@@ -150,7 +150,7 @@ public class ServiceCostGui implements InventoryHolder {
       this.inventory.setItem(15, pointsBtn);
       ItemStack back = new ItemStack(Material.FEATHER);
       ItemMeta backMeta = back.getItemMeta();
-      backMeta.setDisplayName("§8[§a返回§8]");
+      backMeta.setDisplayName(BTN_BACK);
       backMeta.setLore(Arrays.asList("§7返回上一步"));
       back.setItemMeta(backMeta);
       this.inventory.setItem(22, back);

@@ -71,7 +71,7 @@ public class CreateCostGui implements InventoryHolder {
       boolean canAffordMoney = haveMoney >= moneyCost;
       ItemStack moneyBtn = new ItemStack(canAffordMoney ? Material.GOLD_INGOT : Material.IRON_INGOT);
       ItemMeta moneyMeta = moneyBtn.getItemMeta();
-      moneyMeta.setDisplayName("§6§l金币创建");
+      moneyMeta.setDisplayName(BTN_MONEY);
       List<String> moneyLore = new ArrayList<>();
       moneyLore.add("§7创建方式: " + seedLabel);
       moneyLore.add("§8§m-----------");
@@ -91,7 +91,7 @@ public class CreateCostGui implements InventoryHolder {
       boolean canAffordPts = havePts >= pointsCost;
       ItemStack ptsBtn = new ItemStack(canAffordPts ? Material.DIAMOND : Material.LAPIS_LAZULI);
       ItemMeta ptsMeta = ptsBtn.getItemMeta();
-      ptsMeta.setDisplayName("§b§l点券创建");
+      ptsMeta.setDisplayName(BTN_POINTS);
       List<String> ptsLore = new ArrayList<>();
       ptsLore.add("§7创建方式: " + seedLabel);
       ptsLore.add("§8§m-----------");
@@ -112,7 +112,7 @@ public class CreateCostGui implements InventoryHolder {
    private void setBackButton(int slot) {
       ItemStack back = new ItemStack(Material.FEATHER);
       ItemMeta m = back.getItemMeta();
-      m.setDisplayName("§8[§a返回§8]");
+      m.setDisplayName(BTN_BACK);
       m.setLore(Arrays.asList("§7返回创建菜单"));
       back.setItemMeta(m);
       this.MainGui.setItem(slot, back);

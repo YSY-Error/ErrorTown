@@ -245,7 +245,7 @@ public class UpgradeGui implements InventoryHolder {
    private void setBackButton(int slot) {
       ItemStack back = new ItemStack(Material.FEATHER);
       ItemMeta m = back.getItemMeta();
-      m.setDisplayName("§8[§a返回§8]");
+      m.setDisplayName(BTN_BACK);
       back.setItemMeta(m);
       this.MainGui.setItem(slot, back);
    }

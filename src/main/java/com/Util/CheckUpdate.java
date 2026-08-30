@@ -12,7 +12,7 @@ public class CheckUpdate {
          String msg = Variable.Lang_YML.getString("NowIsTheLatestPlugin");
          if (msg != null) {
             if (msg.contains("<Now>")) {
-               msg = msg.replace("<Now>", "V2.1.6.0");
+               msg = msg.replace("<Now>", NOW_VERSION);
             }
 
             Bukkit.getConsoleSender().sendMessage(msg);

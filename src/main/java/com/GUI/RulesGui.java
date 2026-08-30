@@ -27,7 +27,7 @@ public class RulesGui implements InventoryHolder {
    public static final String BTN_BREED = "§6动物繁殖";
    public static final String BTN_MOBCAP = "§6刷怪数量上限";
    public static final String BTN_BACK = "§8[§a返回§8]";
-   public Inventory MainGui = Bukkit.createInventory(this, com.Util.GuiSafe.size("RulesSize", 45), com.Util.GuiSafe.title("RulesTitle", "§8>>> §6庄园规则设置"));
+   public Inventory MainGui = Bukkit.createInventory(this, com.Util.GuiSafe.size("RulesSize", 45), com.Util.GuiSafe.title("RulesTitle", TITLE));
 
    public RulesGui(final Player p) {
       (new BukkitRunnable() {
@@ -115,7 +115,7 @@ public class RulesGui implements InventoryHolder {
                   RulesGui.this.MainGui.setItem(25, RulesGui.makeMobCap(home.getRuleMaxMobCount()));
                   ItemStack back = new ItemStack(Material.FEATHER);
                   ItemMeta meta = back.getItemMeta();
-                  meta.setDisplayName("§8[§a返回§8]");
+                  meta.setDisplayName(BTN_BACK);
                   meta.setLore(Arrays.asList("§7返回上一页"));
                   back.setItemMeta(meta);
                   RulesGui.this.MainGui.setItem(40, back);
@@ -146,7 +146,7 @@ public class RulesGui implements InventoryHolder {
       int step = Math.max(1, Main.JavaPlugin.getConfig().getInt("HomeRulesDefaults.MaxMobCountStep", 8));
       ItemStack item = new ItemStack(Material.COMPARATOR);
       ItemMeta meta = item.getItemMeta();
-      meta.setDisplayName("§6刷怪数量上限");
+      meta.setDisplayName(BTN_MOBCAP);
       String capLine = "§7当前上限: §e" + cap;
       if (cap == 0) {
          capLine = capLine + " §c(禁刷怪)";
