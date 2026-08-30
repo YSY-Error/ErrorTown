@@ -34,8 +34,6 @@ public class WBControl {
     */
    private static final double HIDDEN_BORDER_SIZE = 5.9999968E7;
 
-   public static java.util.Map<String, Integer> border_redis = com.Util.Util.boundedCache(2048);
-
    /** Hides the home border for {@code p} by overriding it with a personal border of maximum size. */
    public static void setEnable(Player p) {
       if (Variable.not_adopt_nms || p == null || !Util.CheckIsHome(p.getWorld().getName())) {
@@ -54,7 +52,7 @@ public class WBControl {
          return;
       }
 
-      int vip_add = VipBorderRatchet.highWaterMark(border_redis, home.getName(), highestVipBonus(home));
+      int vip_add = VipBorderRatchet.highWaterMark(Util.border_redis, home.getName(), highestVipBonus(home));
 
       double size = HomeTerrainPolicy.configuredBorderSize(
          home.getLevel(),

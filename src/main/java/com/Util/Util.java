@@ -26,7 +26,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Util {
-   public static java.util.Map<String, Integer> border_redis = com.Util.Util.boundedCache(2048);
+   /**
+    * The single shared high-water-mark cache for VIP border bonuses. Every border call site
+    * (Util.refreshBorder, WBControl, ScheduledTasks, BlockPlaceListener, PlayerMoveListener,
+    * PlayerTeleportListener) feeds the same map: a home's remembered bonus is server-wide state,
+    * and six separate maps meant six separate ratchets that only saw part of the traffic.
+    */
+   public static final java.util.Map<String, Integer> border_redis = com.Util.Util.boundedCache(2048);
 
 
    public static void forceClearCache(String p, String papi_name) {
@@ -520,12 +526,10 @@ public class Util {
    /**
     * Creates a bounded, least-recently-used map for caches keyed by home or player name.
     *
-    * <p>The {@code border_redis} caches were plain {@code HashMap}s with no eviction, so
-    * they retained an entry for every home ever visited for the lifetime of the server.
-    * Six independent copies of that map exist (here, {@code WBControl}, {@code ScheduledTasks},
-    * {@code BlockPlaceListener}, {@code PlayerMoveListener},
-    * {@code PlayerTeleportListener}); bounding each of them stops the growth without
-    * changing how any call site reads or writes them.</p>
+    * <p>The VIP border ratchet used to be held in plain {@code HashMap}s with no eviction, one
+    * per call-site class, so they retained an entry for every home ever visited for the lifetime
+    * of the server. Bounding the single shared map stops that growth without changing how any
+    * call site reads or writes it.</p>
     */
    public static <K, V> java.util.Map<K, V> boundedCache(final int maxEntries) {
       return java.util.Collections.synchronizedMap(new java.util.LinkedHashMap<K, V>(16, 0.75F, true) {

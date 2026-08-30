@@ -32,7 +32,6 @@ a server without the plugin.
 | Vault (`Economy`) | `Variable.econ != null` | all economy operations |
 | PlayerPoints | `Variable.PlyaerPointsModule && Variable.playerPoints != null` | all point operations |
 | FastAsyncWorldEdit | `Variable.hook_FastAsyncWorldEdit` (set in `Main`, requires the plugin **and** `FaweSwitch: true`) | `FirstBorderShaped` |
-| WorldEdit | `Schematics.isAvailable()` | `Schematics` |
 | ProtocolLib | plugin present check before use | `GiftGui`, `GiftGuiCloseListener` |
 | NBT-API | shipped as a hard requirement | `Util` NBT helpers |
 | PlaceholderAPI | hard requirement, declared in `plugin.yml` | GUI and `API` |

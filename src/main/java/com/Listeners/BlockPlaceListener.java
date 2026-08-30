@@ -19,7 +19,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 public class BlockPlaceListener implements Listener {
-   public static java.util.Map<String, Integer> border_redis = com.Util.Util.boundedCache(2048);
 
    /**
     * Applies the per-area limit to a CraftEngine custom block.
@@ -216,7 +215,7 @@ public class BlockPlaceListener implements Listener {
                   }
                }
 
-               vip_add = VipBorderRatchet.highWaterMark(border_redis, home.getName(), vip_add);
+               vip_add = VipBorderRatchet.highWaterMark(com.Util.Util.border_redis, home.getName(), vip_add);
 
                double set_x = 0.0;
                double min_x = 0.0;

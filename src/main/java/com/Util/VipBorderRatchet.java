@@ -22,8 +22,9 @@ import java.util.Map;
  * authoritative {@code WorldBorder} stayed at the high-water mark, leaving the markers inside the
  * real border.</p>
  *
- * <p>The caller still supplies the map, so the six caches stay independent and consolidating them
- * remains a separate decision. This class is deliberately free of Bukkit types so it can be tested
+ * <p>The callers all share {@link Util#border_redis}: a home's remembered bonus is server-wide
+ * state, not per-call-site state, so six separate maps were six separate ratchets each seeing
+ * only part of the traffic. This class is deliberately free of Bukkit types so it can be tested
  * without a running server.</p>
  */
 public final class VipBorderRatchet {

@@ -35,7 +35,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class ScheduledTasks {
-   public static java.util.Map<String, Integer> border_redis = com.Util.Util.boundedCache(2048);
    public static HashMap<String, List<String>> OPS_redis = new HashMap<>();
    public static HashMap<String, List<String>> MEMBERS_redis = new HashMap<>();
 
@@ -171,7 +170,7 @@ public class ScheduledTasks {
                               }
                            }
 
-                           vip_add = VipBorderRatchet.highWaterMark(ScheduledTasks.border_redis, home.getName(), vip_add);
+                           vip_add = VipBorderRatchet.highWaterMark(Util.border_redis, home.getName(), vip_add);
 
                            try {
                               world.getWorldBorder().setCenter(world.getSpawnLocation());

@@ -51,7 +51,7 @@ public class PlayerJoinListener implements Listener {
       if (Main.JavaPlugin.getConfig().getBoolean("CheckUpdate") && event.getPlayer().isOp() && CheckUpdate.new_Version != null) {
          for (String temp : Variable.Lang_YML.getStringList("CheckHasNewPlugin")) {
             if (temp.contains("<Now>")) {
-               temp = temp.replace("<Now>", "V2.1.6.0");
+               temp = temp.replace("<Now>", CheckUpdate.NOW_VERSION);
             }
 
             if (temp.contains("<New>")) {

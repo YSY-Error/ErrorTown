@@ -28,7 +28,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerTeleportListener implements Listener {
    int vip_add = 0;
-   public static java.util.Map<String, Integer> border_redis = com.Util.Util.boundedCache(2048);
 
    @EventHandler(
       priority = EventPriority.HIGHEST,
@@ -91,7 +90,7 @@ public class PlayerTeleportListener implements Listener {
                }
             }
 
-            this.vip_add = VipBorderRatchet.highWaterMark(border_redis, h.getName(), this.vip_add);
+            this.vip_add = VipBorderRatchet.highWaterMark(com.Util.Util.border_redis, h.getName(), this.vip_add);
 
             if (!Main.JavaPlugin.getConfig().getBoolean("KeepInventory")) {
                Platform.setGameRule(event.getTo().getWorld(), "keepInventory", "false");
