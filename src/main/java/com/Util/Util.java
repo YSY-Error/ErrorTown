@@ -26,7 +26,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Util {
-   static int addExtra = 0;
    public static java.util.Map<String, Integer> border_redis = com.Util.Util.boundedCache(2048);
 
 
@@ -718,7 +717,6 @@ public class Util {
                      level = yamlConfiguration.getInt("Level");
                   }
 
-                  Util.addExtra = 0;
                   Home h = HomeAPI.getHome(world.getName());
                   int vip_add = 0;
                   ArrayList<String> players = new ArrayList<>();
@@ -744,7 +742,7 @@ public class Util {
                      }
                   }
 
-                  Util.addExtra = VipBorderRatchet.highWaterMark(Util.border_redis, h.getName(), vip_add);
+                  int addExtra = VipBorderRatchet.highWaterMark(Util.border_redis, h.getName(), vip_add);
 
                   double halfSize = HomeTerrainPolicy.configuredBorderSize(
                      level,
@@ -752,7 +750,7 @@ public class Util {
                      Main.JavaPlugin.getConfig().getIntegerList("HomeUpgrade.LevelSizes"),
                      Main.JavaPlugin.getConfig().getInt("WorldBoard"),
                      Main.JavaPlugin.getConfig().getInt("UpdateRadius"),
-                     Util.addExtra
+                     addExtra
                   ) / 2.0;
                   Location loc = world.getSpawnLocation();
                   Location loc1 = loc.clone();

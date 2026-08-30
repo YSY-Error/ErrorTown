@@ -21,7 +21,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 public class PlayerMoveListener implements Listener {
-   int addExtra = 0;
    public static java.util.Map<String, Integer> border_redis = com.Util.Util.boundedCache(2048);
 
    @EventHandler
@@ -31,7 +30,6 @@ public class PlayerMoveListener implements Listener {
                final Player p = event.getPlayer();
                if (!p.isOp()) {
                   if (Util.CheckIsHome(p.getWorld().getName().replace(Variable.world_prefix, ""))) {
-                     PlayerMoveListener.this.addExtra = 0;
                      Home h = HomeAPI.getHome(event.getTo().getWorld().getName());
                      int vip_add = 0;
                      ArrayList<String> players = new ArrayList<>();
@@ -57,7 +55,11 @@ public class PlayerMoveListener implements Listener {
                         }
                      }
 
-                     PlayerMoveListener.this.addExtra = VipBorderRatchet.highWaterMark(PlayerMoveListener.border_redis, h.getName(), vip_add);
+                     // Local, not a field: Bukkit registers one listener instance, this task runs
+                     // asynchronously for every moving player, and the level lookup below blocks on
+                     // MySQL or a YAML load. A shared field would let one player's bonus be read
+                     // into another player's border across that window.
+                     int addExtra = VipBorderRatchet.highWaterMark(PlayerMoveListener.border_redis, h.getName(), vip_add);
 
                      double set_x = 0.0;
                      double min_x = 0.0;
@@ -77,7 +79,7 @@ public class PlayerMoveListener implements Listener {
                         Main.JavaPlugin.getConfig().getIntegerList("HomeUpgrade.LevelSizes"),
                         Main.JavaPlugin.getConfig().getInt("WorldBoard"),
                         Main.JavaPlugin.getConfig().getInt("UpdateRadius"),
-                        PlayerMoveListener.this.addExtra
+                        addExtra
                      ) / 2.0;
                      set_x = p.getWorld().getSpawnLocation().getX() + halfSize;
                      min_x = p.getWorld().getSpawnLocation().getX() - halfSize;
