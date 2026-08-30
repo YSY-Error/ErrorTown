@@ -3,6 +3,7 @@ package com.Util;
 import com.ErrorTown.Main;
 import com.ErrorTown.Variable;
 import com.ErrorTown.ScheduledTasks;
+import com.zaxxer.hikari.HikariDataSource;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -23,12 +24,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class MySQL {
-   public static String type = Main.JavaPlugin.getConfig().getString("Type");
-   public static String host = Main.JavaPlugin.getConfig().getString("Host");
-   public static String port = String.valueOf(Main.JavaPlugin.getConfig().getInt("Port"));
-   public static String database = Main.JavaPlugin.getConfig().getString("Database");
-   public static String username = Main.JavaPlugin.getConfig().getString("Username");
-   public static String password = Main.JavaPlugin.getConfig().getString("Password");
    private static final String CREATE_Users_TABLE = "CREATE TABLE IF NOT EXISTS ErrorTown_Users (Name VARCHAR(255),Members VARCHAR(255),OP VARCHAR(255),Denys VARCHAR(255),Public VARCHAR(255),Level VARCHAR(255),pvp VARCHAR(255),pickup VARCHAR(255),dropitem VARCHAR(255),Server VARCHAR(255),locktime VARCHAR(255),lockweather VARCHAR(255),time VARCHAR(255),X VARCHAR(255),Y VARCHAR(255),Z VARCHAR(255),flowers VARCHAR(100),popularity VARCHAR(100),gifts TEXT default null,advertisement VARCHAR(255),icon VARCHAR(255),visittime VARCHAR(255),limitblock varchar(255))";
    private static final String CREATE_Servers_TABLE = "CREATE TABLE IF NOT EXISTS ErrorTown_Servers (Server VarChar(100),Amount double)";
    private static final String Find_the_Lowest_Server = "SELECT * From ErrorTown_Servers Order by Amount ASC";
@@ -3144,10 +3139,18 @@ public class MySQL {
    }
 
    public static Connection getConnection() {
+      // Null before the pool is built, in single-server mode where it never is, and between
+      // HikariCPUtils.shutdown() and the next setSqlConnectionPool(). Callers already handle a
+      // null Connection, so keep returning that instead of throwing from a field dereference.
+      HikariDataSource pool = HikariCPUtils.sqlConnectionPool;
+      if (pool == null) {
+         return null;
+      }
+
       try {
-         return HikariCPUtils.sqlConnectionPool.getConnection();
+         return pool.getConnection();
       } catch (SQLException sqlFailure) {
-         sqlFailure.printStackTrace();
+         Diag.warnOnce("mysql-get-connection", "Could not borrow a database connection from the pool", sqlFailure);
          return null;
       }
    }

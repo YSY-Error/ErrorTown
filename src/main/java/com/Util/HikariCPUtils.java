@@ -53,6 +53,10 @@ public class HikariCPUtils {
       hikariConfig.setUsername(username);
       hikariConfig.setPassword(password);
       hikariConfig.setAutoCommit(true);
+      // `/sh reload` runs Main.init() again, which calls this method again. Without closing the
+      // previous pool first its connections are never released, so every reload strands a whole
+      // maximumPoolSize worth of them (30 by default) until the server restarts.
+      shutdown();
       sqlConnectionPool = new HikariDataSource(hikariConfig);
 
       try {
@@ -66,6 +70,24 @@ public class HikariCPUtils {
       } catch (SQLException sqlFailure) {
          Bukkit.getConsoleSender().sendMessage(Lang.get("DataBaseConnectionError", "§c[ErrorTown] 数据库连接失败"));
          Diag.warn("Database connection failed; cross-server features will not work", sqlFailure);
+      }
+   }
+
+   /**
+    * Closes the connection pool if one is open, leaving {@link #sqlConnectionPool} null.
+    *
+    * <p>Safe to call when no pool was ever created (single-server mode never opens one) and
+    * safe to call twice. {@link MySQL#getConnection()} tolerates the null in between.
+    */
+   public static void shutdown() {
+      HikariDataSource pool = sqlConnectionPool;
+      sqlConnectionPool = null;
+      if (pool != null && !pool.isClosed()) {
+         try {
+            pool.close();
+         } catch (Throwable closeFailure) {
+            Diag.warn("Closing the database connection pool failed", closeFailure);
+         }
       }
    }
 }

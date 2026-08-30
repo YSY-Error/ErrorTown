@@ -110,9 +110,12 @@ plugin GUIs, delete holograms, save worlds, and **last** `HomeAudit.flushForShut
 `flush()` — `flush()` returns without writing when the async writer holds the single-writer token,
 and that writer dies with the plugin). `MainLifecycleSourceTest` pins this ordering.
 
-`/sh reload` calls `Main.init()` again. Note that `MySQL`'s credential fields
-(`MySQL.java:26-31`) are initialised at class-load time from the config and are never
-reassigned, so a reload does not pick up changed database settings.
+`/sh reload` calls `Main.init()` again, which re-runs `HikariCPUtils.setSqlConnectionPool()` in
+BungeeCord mode. That method reads every credential from the config on each call, so a reload does
+pick up changed database settings. It closes the previous pool first (`HikariCPUtils.shutdown()`)
+because a replaced `HikariDataSource` otherwise keeps its connections — one `maximumPoolSize` worth
+per reload — until the server restarts. `shutdown()` leaves the field null, which is why
+`MySQL.getConnection()` null-checks the pool instead of dereferencing it.
 
 ### Global mutable state: `Variable`
 

@@ -202,6 +202,11 @@ public class Main extends JavaPlugin implements PluginMessageListener {
       Bukkit.getConsoleSender().sendMessage(com.Util.Lang.get("AutoSaveSuccess", "§a[ErrorTown] 世界保存完成"));
       Bukkit.getConsoleSender().sendMessage(com.Util.Lang.get("DisablePlugin", "§c[ErrorTown] 插件已卸载"));
 
+      // After the world saves, which do not touch the database, and before the audit flush,
+      // which writes to audit.log rather than SQL. Leaving the pool open holds its connections
+      // past disable; HikariCP's own threads are not daemons.
+      com.Util.HikariCPUtils.shutdown();
+
       // Last statement in onDisable on purpose: the audit queue is normally drained by an
       // async task, which no longer runs once the plugin is disabled. flushForShutdown()
       // (not flush()) is required here — flush() returns without writing when the async
