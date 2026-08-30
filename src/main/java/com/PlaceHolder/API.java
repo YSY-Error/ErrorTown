@@ -8,7 +8,6 @@ import com.Util.HomeTerrainPolicy;
 import com.Util.BukkitCompat;
 import com.Util.MySQL;
 import com.Util.Platform;
-import com.Util.StaticsTick;
 import com.Util.Util;
 import java.io.File;
 import java.util.ArrayList;
@@ -33,8 +32,6 @@ public class API extends PlaceholderExpansion {
 
    /** Prefix used before the rename, kept working by {@link LegacyAPI}. */
    public static final String LEGACY_IDENTIFIER = "SummerTown";
-
-   public static List<StaticsTick> world_StaticsTick = new ArrayList<>();
 
    public boolean canRegister() {
       return true;
